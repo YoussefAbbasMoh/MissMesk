@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:miss_misq/core/routing/app_router.dart';
+import 'package:miss_misq/core/theming/app_pallete.dart';
 
 class MissMisqApp extends StatelessWidget {
   const MissMisqApp({super.key});
@@ -9,6 +10,9 @@ class MissMisqApp extends StatelessWidget {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       routerConfig: AppRouter.router,
+      theme: ThemeData(
+        scaffoldBackgroundColor: AppPallete.scaffoldBackgroundColor,
+      ),
     );
   }
 }

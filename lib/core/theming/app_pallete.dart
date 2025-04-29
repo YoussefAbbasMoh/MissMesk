@@ -6,4 +6,6 @@ class AppPallete {
   static const Color whiteColor = Color(0xFFFFFFFF);
   static const Color greyColor = Color(0xFF4A4A4A);
   static const Color lightGreyColor = Color(0xFFD1D1D1);
+
+  static const Color scaffoldBackgroundColor = lightGreyColor;
 }
