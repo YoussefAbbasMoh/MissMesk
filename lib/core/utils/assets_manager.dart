@@ -13,4 +13,7 @@ class AssetsManager {
   static final String production = 'assets/svgs/production.svg';
   static final String supplieres = 'assets/svgs/supplieres.svg';
   static final String clients = 'assets/svgs/clients.svg';
+  static final String receipt = 'assets/svgs/receipt.svg';
+  static final String info = 'assets/svgs/info.svg';
+  static final String check = 'assets/svgs/check.svg';
 }
