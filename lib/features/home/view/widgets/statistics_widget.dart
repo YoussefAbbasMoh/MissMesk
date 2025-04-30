@@ -43,7 +43,7 @@ class StatisticsWidget extends StatelessWidget {
                     amount: '30,000 جنية',
                   ),
                   StatisticCard(title: 'أوامر الإنتاج الحالية', amount: '15'),
-                  StatisticCard(title: 'الفواتير المستحقة للدفع', amount: '4'),
+                  StatisticCard(title: 'الفواتير المستحقة', amount: '4'),
                 ],
               ),
             ],
