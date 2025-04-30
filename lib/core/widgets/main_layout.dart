@@ -13,13 +13,15 @@ class MainLayout extends StatelessWidget {
       textDirection: TextDirection.rtl,
       child: Scaffold(
         appBar: const CustomAppBar(),
-        body: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Row(
-            spacing: 20,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [const SideMenu(), Expanded(child: child)],
-          ),
+        body: Row(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const IntrinsicWidth(
+              stepWidth: 1,
+              child: Padding(padding: EdgeInsets.all(16.0), child: SideMenu()),
+            ),
+            Expanded(child: child),
+          ],
         ),
       ),
     );

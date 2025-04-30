@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:miss_misq/core/theming/app_pallete.dart';
 import 'package:miss_misq/core/theming/app_text_styles.dart';
 import 'package:miss_misq/core/utils/assets_manager.dart';
+import 'package:miss_misq/core/widgets/breadcrumbs.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({super.key});
@@ -14,6 +15,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: AppPallete.whiteColor,
+      scrolledUnderElevation: 0,
       leadingWidth: 0,
       title: Row(
         spacing: 20,
@@ -41,7 +43,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             padding: const EdgeInsets.all(8),
             child: SvgPicture.asset(AssetsManager.notification),
           ),
-          const Text('إدارة المخزون/', style: AppTextStyles.font16BlackRegular),
+          const Breadcrumbs(),
         ],
       ),
     );
