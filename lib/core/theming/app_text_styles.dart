@@ -48,4 +48,28 @@ class AppTextStyles {
     fontWeight: FontWeight.w400,
     color: Colors.black,
   );
+
+  static const TextStyle font18WhiteSemiBold = TextStyle(
+    fontSize: 18,
+    fontWeight: FontWeight.w700,
+    color: Colors.white,
+  );
+
+  static const TextStyle font14WhiteSemiBold = TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.w700,
+    color: Colors.white,
+  );
+
+  static const TextStyle font16WhiteSemiBold = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w700,
+    color: Colors.white,
+  );
+
+  static const TextStyle font16BlackSemiBold = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w700,
+    color: Colors.black,
+  );
 }
