@@ -20,7 +20,7 @@ class MainLayout extends StatelessWidget {
               stepWidth: 1,
               child: Padding(padding: EdgeInsets.all(16.0), child: SideMenu()),
             ),
-            Expanded(child: child),
+            Flexible(child: child),
           ],
         ),
       ),
