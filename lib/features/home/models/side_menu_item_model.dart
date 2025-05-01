@@ -4,12 +4,14 @@ import 'package:miss_misq/core/utils/assets_manager.dart';
 class SideMenuButtonModel {
   final String title;
   final String iconPath;
-  final List<SideMenuSubItemModel> subItems;
+  final List<SideMenuSubItemModel>? subItems;
+  final String route;
 
   SideMenuButtonModel({
     required this.title,
     required this.iconPath,
-    required this.subItems,
+    this.subItems,
+    required this.route,
   });
 }
 
@@ -24,12 +26,13 @@ List<SideMenuButtonModel> menuItems = [
   SideMenuButtonModel(
     title: 'الصفحة الرئيسية',
     iconPath: AssetsManager.home,
-    subItems: [],
+    route: AppRoutes.home,
   ),
 
   SideMenuButtonModel(
     title: 'إدارة المخزون والمنتجات',
     iconPath: AssetsManager.management,
+    route: AppRoutes.inventory,
     subItems: [
       SideMenuSubItemModel(title: 'المخزون', route: AppRoutes.inventory),
       SideMenuSubItemModel(
@@ -46,6 +49,7 @@ List<SideMenuButtonModel> menuItems = [
   SideMenuButtonModel(
     title: 'الأصول الثابتة',
     iconPath: AssetsManager.assets,
+    route: AppRoutes.assetsGroups,
     subItems: [
       SideMenuSubItemModel(
         title: 'مجموعات الأصول',
@@ -57,6 +61,7 @@ List<SideMenuButtonModel> menuItems = [
   SideMenuButtonModel(
     title: 'سجل الموردين',
     iconPath: AssetsManager.supplieres,
+    route: AppRoutes.suppliersServices,
     subItems: [
       SideMenuSubItemModel(
         title: 'خدمات الموردين',
@@ -67,6 +72,7 @@ List<SideMenuButtonModel> menuItems = [
   SideMenuButtonModel(
     title: 'سجل العملاء',
     iconPath: AssetsManager.clients,
+    route: AppRoutes.clientsAccounts,
     subItems: [
       SideMenuSubItemModel(
         title: 'حسابات العملاء',
@@ -77,6 +83,7 @@ List<SideMenuButtonModel> menuItems = [
   SideMenuButtonModel(
     title: 'متابعة الإنتاج',
     iconPath: AssetsManager.production,
+    route: AppRoutes.production,
     subItems: [
       SideMenuSubItemModel(
         title: 'متابعة الإنتاج',
@@ -87,11 +94,11 @@ List<SideMenuButtonModel> menuItems = [
   SideMenuButtonModel(
     title: 'دفتر اليومية',
     iconPath: AssetsManager.daily,
-    subItems: [],
+    route: AppRoutes.journal,
   ),
   SideMenuButtonModel(
     title: 'الإعدادات',
     iconPath: AssetsManager.settings,
-    subItems: [],
+    route: AppRoutes.settings,
   ),
 ];

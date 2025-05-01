@@ -24,21 +24,14 @@ class Breadcrumbs extends StatelessWidget {
             onTap: () => context.go(accumulatedPath),
             child: Text(
               arabicBreadcrumbTitles[accumulatedPath]!,
-              style: AppTextStyles.font16BlackRegular.copyWith(
-                color:
-                    i == validSegments.length - 1 ? Colors.black : Colors.blue,
-              ),
+              style: AppTextStyles.font16BlackRegular,
             ),
           ),
         );
 
         if (i < validSegments.length - 1) {
-          breadcrumbWidgets.add(const Text(' > '));
+          breadcrumbWidgets.add(const Text(' / '));
         }
-      }
-
-      if (i < validSegments.length - 1) {
-        breadcrumbWidgets.add(const Text(' > '));
       }
     }
 

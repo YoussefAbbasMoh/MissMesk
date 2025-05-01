@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:miss_misq/core/theming/app_pallete.dart';
 import 'package:miss_misq/core/utils/assets_manager.dart';
 import 'package:miss_misq/core/widgets/side_menu_item.dart';
@@ -13,10 +14,18 @@ class SideMenu extends StatefulWidget {
 
 class _SideMenuState extends State<SideMenu> {
   int? _selectedIndex = 0;
+  final Map<int, int> _selectedSubIndices = {};
 
   void _handleMenuItemTap(int index) {
     setState(() {
+      _selectedSubIndices[index] = 0;
       _selectedIndex = index;
+    });
+  }
+
+  void _handleSubItemTap(int mainIndex, int subIndex) {
+    setState(() {
+      _selectedSubIndices[mainIndex] = subIndex;
     });
   }
 
@@ -63,17 +72,30 @@ class _SideMenuState extends State<SideMenu> {
                 ),
               ),
             ),
-            ...menuItems.map(
-              (item) => SideMenuMainItem(
+            ...menuItems.asMap().entries.map((entry) {
+              final item = entry.value;
+              final index = entry.key;
+
+              return SideMenuMainItem(
                 model: item,
-                isSelected: _selectedIndex == menuItems.indexOf(item),
+                isSelected: _selectedIndex == index,
                 onTap: () {
-                  _handleMenuItemTap(menuItems.indexOf(item));
+                  _handleMenuItemTap(index);
+                  if (item.subItems?.isNotEmpty ?? false) {
+                    context.go(item.subItems!.first.route);
+                  } else {
+                    context.go(item.route);
+                  }
                 },
-                subItems: item.subItems,
-                isExpanded: _selectedIndex == menuItems.indexOf(item),
-              ),
-            ),
+                subItems: item.subItems ?? [],
+                isExpanded: _selectedIndex == index,
+                selectedSubIndex: _selectedSubIndices[index] ?? 0,
+                onSubItemSelected: (subIndex) {
+                  _handleSubItemTap(index, subIndex);
+                  context.go(item.subItems![subIndex].route);
+                },
+              );
+            }),
           ],
         ),
       ),

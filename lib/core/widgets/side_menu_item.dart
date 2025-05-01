@@ -5,7 +5,7 @@ import 'package:miss_misq/core/theming/app_text_styles.dart';
 import 'package:miss_misq/core/widgets/spacing.dart';
 import 'package:miss_misq/features/home/models/side_menu_item_model.dart';
 
-class SideMenuMainItem extends StatefulWidget {
+class SideMenuMainItem extends StatelessWidget {
   const SideMenuMainItem({
     super.key,
     required this.model,
@@ -13,6 +13,8 @@ class SideMenuMainItem extends StatefulWidget {
     required this.onTap,
     required this.subItems,
     required this.isExpanded,
+    this.selectedSubIndex = 0,
+    this.onSubItemSelected,
   });
 
   final SideMenuButtonModel model;
@@ -20,36 +22,30 @@ class SideMenuMainItem extends StatefulWidget {
   final VoidCallback onTap;
   final List<SideMenuSubItemModel> subItems;
   final bool isExpanded;
-
-  @override
-  State<SideMenuMainItem> createState() => _SideMenuMainItemState();
-}
-
-class _SideMenuMainItemState extends State<SideMenuMainItem> {
-  int selectedIndex = 0;
+  final int selectedSubIndex;
+  final ValueChanged<int>? onSubItemSelected;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         _SideMenuButton(
-          model: widget.model,
-          isSelected: widget.isSelected,
-          onTap: widget.onTap,
+          model: model,
+          isSelected: isSelected,
+          onTap: onTap,
         ),
         const VerticalSpacing(height: 5),
-        if (widget.isExpanded)
-          ...widget.subItems.map(
+        if (isExpanded && subItems.isNotEmpty)
+          ...subItems.map(
             (item) => GestureDetector(
               onTap: () {
-                setState(() {
-                  selectedIndex = widget.subItems.indexOf(item);
-                });
+                final index = subItems.indexOf(item);
+                onSubItemSelected?.call(index);
               },
               child: Container(
                 width: double.infinity,
                 color:
-                    selectedIndex == widget.subItems.indexOf(item)
+                    selectedSubIndex == subItems.indexOf(item)
                         ? AppPallete.primaryColor.withAlpha(50)
                         : Colors.white,
                 margin: const EdgeInsets.only(bottom: 5),
