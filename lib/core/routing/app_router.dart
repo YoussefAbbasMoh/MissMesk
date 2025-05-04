@@ -5,7 +5,9 @@ import 'package:miss_misq/core/widgets/main_layout.dart';
 import 'package:miss_misq/features/home/view/home_view.dart';
 import 'package:miss_misq/features/inventory/view/inventory_adjustments_view.dart';
 import 'package:miss_misq/features/inventory/view/inventory_records_view.dart';
+import 'package:miss_misq/features/inventory/view/inventory_transactions_view.dart';
 import 'package:miss_misq/features/inventory/view/inventory_view.dart';
+import 'package:miss_misq/features/inventory/view/item_card_view.dart';
 import 'package:miss_misq/features/inventory/view/reports_view.dart';
 import 'package:miss_misq/features/login/view/login_view.dart';
 
@@ -32,6 +34,7 @@ class AppRouter {
               ),
             ],
           ),
+
           StatefulShellBranch(
             routes: [
               GoRoute(
@@ -49,6 +52,17 @@ class AppRouter {
               GoRoute(
                 path: AppRoutes.inventoryAdjustments,
                 builder: (context, state) => const InventoryAdjustmentsView(),
+              ),
+              GoRoute(
+                path: AppRoutes.inventoryTransactions,
+                builder: (context, state) => const InventoryTransactionsView(),
+              ),
+              GoRoute(
+                path: '${AppRoutes.itemCardBase}/:id',
+                builder: (context, state) {
+                  final id = state.pathParameters['id'];
+                  return ItemCardView(itemId: id ?? '');
+                },
               ),
             ],
           ),

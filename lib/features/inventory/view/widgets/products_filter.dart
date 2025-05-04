@@ -4,7 +4,7 @@ import 'package:miss_misq/core/theming/app_text_styles.dart';
 
 class ProductsFilter extends StatefulWidget {
   final List<String> filters;
-  final void Function(String)? onFilterSelected; // optional callback
+  final void Function(String)? onFilterSelected;
 
   const ProductsFilter({
     super.key,
@@ -27,50 +27,46 @@ class _ProductsFilterState extends State<ProductsFilter> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children:
-            widget.filters.map((filter) {
-              final isSelected = filter == selectedFilter;
-
-              return Padding(
-                padding: const EdgeInsets.only(right: 12.0),
-                child: ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      selectedFilter = filter;
-                    });
-                    if (widget.onFilterSelected != null) {
-                      widget.onFilterSelected!(filter);
-                    }
-                  },
-                  style: ElevatedButton.styleFrom(
-                    splashFactory: NoSplash.splashFactory,
-                    minimumSize: const Size(40, 73),
-                    padding: const EdgeInsets.symmetric(horizontal: 40),
-                    backgroundColor:
-                        isSelected
-                            ? const Color(0XFFF9F5EE)
-                            : const Color(0XFFFFFFFF),
-                    side:
-                        isSelected
-                            ? const BorderSide(color: AppPallete.brownColor)
-                            : BorderSide.none,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                  ),
-                  child: Text(
-                    filter,
-                    style: AppTextStyles.font18BlackRegular.copyWith(
-                      color: Colors.black,
-                    ),
+    return Row(
+      children:
+          widget.filters.map((filter) {
+            final isSelected = filter == selectedFilter;
+            return Padding(
+              padding: const EdgeInsets.only(right: 12.0),
+              child: ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    selectedFilter = filter;
+                  });
+                  if (widget.onFilterSelected != null) {
+                    widget.onFilterSelected!(filter);
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  splashFactory: NoSplash.splashFactory,
+                  minimumSize: const Size(40, 73),
+                  padding: const EdgeInsets.symmetric(horizontal: 40),
+                  backgroundColor:
+                      isSelected
+                          ? const Color(0XFFF9F5EE)
+                          : const Color(0XFFFFFFFF),
+                  side:
+                      isSelected
+                          ? const BorderSide(color: AppPallete.brownColor)
+                          : BorderSide.none,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
                   ),
                 ),
-              );
-            }).toList(),
-      ),
+                child: Text(
+                  filter,
+                  style: AppTextStyles.font18BlackRegular.copyWith(
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+            );
+          }).toList(),
     );
   }
 }

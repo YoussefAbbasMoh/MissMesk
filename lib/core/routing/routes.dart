@@ -2,9 +2,13 @@ class AppRoutes {
   static const String home = '/home';
   static const String login = '/login';
   static const String inventory = '/inventory';
+  static String itemCard(String id) => '$itemCardBase/$id';
+  static const String itemCardBase = '/inventory/itemcard';
   static const String inventoryRecords = '/inventory/inventoryrecords';
   static const String reports = '/inventory/reports';
   static const String inventoryAdjustments = '/inventory/inventoryadjustments';
+  static const String inventoryTransactions =
+      '$itemCardBase/inventorytransactions';
   static const String assetsGroups = '/assetsgroups';
   static const String assetsHistory = '/assetsgroups/assetshistory';
   static const String suppliersServices = '/supplierservices';
@@ -13,7 +17,6 @@ class AppRoutes {
   static const String journal = '/journal';
   static const String settings = '/settings';
 }
-
 
 final Map<String, String> arabicBreadcrumbTitles = {
   AppRoutes.home: 'الرئيسية',
@@ -29,4 +32,6 @@ final Map<String, String> arabicBreadcrumbTitles = {
   AppRoutes.production: 'متابعة الإنتاج',
   AppRoutes.journal: 'دفتر اليومية',
   AppRoutes.settings: 'الإعدادات',
+  AppRoutes.itemCardBase: 'بطاقة مخزون صنف',
+  AppRoutes.inventoryTransactions: 'سجل الحركات المخزنية',
 };
