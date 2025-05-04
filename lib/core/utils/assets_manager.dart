@@ -18,4 +18,5 @@ class AssetsManager {
   static final String check = 'assets/svgs/check.svg';
   static final String download = 'assets/svgs/download.svg';
   static final String filter = 'assets/svgs/filter.svg';
+  static final String linkOut = 'assets/svgs/link_out.svg';
 }

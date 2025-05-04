@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:miss_misq/core/theming/app_pallete.dart';
 
 class AppTextStyles {
   static const TextStyle font29BlackSemiBold = TextStyle(
@@ -71,5 +72,11 @@ class AppTextStyles {
     fontSize: 16,
     fontWeight: FontWeight.w700,
     color: Colors.black,
+  );
+
+  static TextStyle font12GreyRegular = const TextStyle(
+    fontSize: 12,
+    fontWeight: FontWeight.w400,
+    color: AppPallete.greyColor,
   );
 }
