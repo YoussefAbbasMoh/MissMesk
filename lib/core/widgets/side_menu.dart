@@ -32,6 +32,7 @@ class _SideMenuState extends State<SideMenu> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      clipBehavior: Clip.antiAliasWithSaveLayer,
       decoration: BoxDecoration(
         color: AppPallete.whiteColor,
         borderRadius: BorderRadius.circular(15),

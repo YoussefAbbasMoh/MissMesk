@@ -14,13 +14,14 @@ class MainLayout extends StatelessWidget {
       child: Scaffold(
         appBar: const CustomAppBar(),
         body: Row(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const IntrinsicWidth(
-              stepWidth: 1,
+            const Flexible(
+              flex: 1,
+              fit: FlexFit.loose,
               child: Padding(padding: EdgeInsets.all(16.0), child: SideMenu()),
             ),
-            Flexible(child: child),
+            Flexible(fit: FlexFit.loose, flex: 4, child: child),
           ],
         ),
       ),

@@ -10,6 +10,8 @@ class AppCustomTextField extends StatelessWidget {
   final bool obscureText;
   final TextInputType keyboardType;
   final bool isRequired;
+  final Color? fillColor;
+  final int? minLines;
 
   const AppCustomTextField({
     super.key,
@@ -20,6 +22,8 @@ class AppCustomTextField extends StatelessWidget {
     this.obscureText = false,
     this.keyboardType = TextInputType.text,
     this.isRequired = true,
+    this.fillColor,
+    this.minLines,
   });
 
   @override
@@ -46,8 +50,10 @@ class AppCustomTextField extends StatelessWidget {
         SizedBox(
           width: width,
           child: TextFormField(
+            minLines: minLines ?? 1,
+            maxLines: minLines != null ? minLines! + 2 : 1,
             validator: (value) {
-              if (value == null || value.isEmpty) {
+              if (isRequired && value == null || value == '') {
                 return '* $label الذي أدخلته غير صحيح ';
               }
               return null;
@@ -57,8 +63,10 @@ class AppCustomTextField extends StatelessWidget {
             keyboardType: keyboardType,
             cursorColor: AppPallete.primaryColor,
             decoration: InputDecoration(
-              focusedBorder: _border(),
-              enabledBorder: _border(),
+              fillColor: fillColor,
+              filled: fillColor != null,
+              focusedBorder: _border(fillColor ?? AppPallete.primaryColor),
+              enabledBorder: _border(fillColor ?? AppPallete.primaryColor),
               errorStyle: AppTextStyles.font16BlackRegular.copyWith(
                 color: Colors.red,
               ),

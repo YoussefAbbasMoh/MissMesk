@@ -5,13 +5,11 @@ import 'package:miss_misq/core/theming/app_text_styles.dart';
 import 'package:miss_misq/core/utils/assets_manager.dart';
 
 class SearchWithActions extends StatelessWidget {
-  const SearchWithActions({
-    super.key,
-  });
+  const SearchWithActions({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Wrap(
       spacing: 10,
       children: [
         SizedBox(
@@ -30,15 +28,11 @@ class SearchWithActions extends StatelessWidget {
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
-                borderSide: const BorderSide(
-                  color: AppPallete.whiteColor,
-                ),
+                borderSide: const BorderSide(color: AppPallete.whiteColor),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
-                borderSide: const BorderSide(
-                  color: AppPallete.whiteColor,
-                ),
+                borderSide: const BorderSide(color: AppPallete.whiteColor),
               ),
               hintText: 'بحث سريع',
               hintStyle: AppTextStyles.font14BlackRegular.copyWith(

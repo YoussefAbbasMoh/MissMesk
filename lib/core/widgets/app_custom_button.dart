@@ -10,6 +10,8 @@ class AppCustomButton extends StatelessWidget {
     this.borderColor,
     this.color,
     this.titleColor,
+    this.icon,
+    this.borderRadius,
   });
 
   final String title;
@@ -17,6 +19,8 @@ class AppCustomButton extends StatelessWidget {
   final Color? color;
   final Color? borderColor;
   final Color? titleColor;
+  final IconData? icon;
+  final double? borderRadius;
 
   @override
   Widget build(BuildContext context) {
@@ -25,14 +29,23 @@ class AppCustomButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         side: BorderSide(color: borderColor ?? Colors.transparent),
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
-        backgroundColor: AppPallete.primaryColor,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-      ),
-      child: Text(
-        title,
-        style: AppTextStyles.font18BlackRegular.copyWith(
-          color: titleColor ?? Colors.white,
+        backgroundColor: color ?? AppPallete.primaryColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(borderRadius ?? 15),
         ),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        spacing: 20,
+        children: [
+          Text(
+            title,
+            style: AppTextStyles.font18BlackRegular.copyWith(
+              color: titleColor ?? Colors.white,
+            ),
+          ),
+          if (icon != null) Icon(icon, color: Colors.white),
+        ],
       ),
     );
   }
