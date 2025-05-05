@@ -7,6 +7,7 @@ import 'package:miss_misq/core/widgets/app_custom_button.dart';
 import 'package:miss_misq/core/widgets/dynamic_table.dart';
 import 'package:miss_misq/core/widgets/search_with_actions.dart';
 import 'package:miss_misq/core/widgets/spacing.dart';
+import 'package:miss_misq/features/inventory/view/widgets/add_item_dialog.dart';
 import 'package:miss_misq/features/inventory/view/widgets/drop_down_filter.dart';
 import 'package:miss_misq/features/inventory/view/widgets/products_filter.dart';
 
@@ -92,7 +93,12 @@ class InventoryView extends StatelessWidget {
             ),
             AppCustomButton(
               title: 'اضافة صنف',
-              onPressed: () {},
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (_) => const AddItemDialog(),
+                );
+              },
               icon: Icons.add,
             ),
           ],

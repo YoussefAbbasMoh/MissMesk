@@ -9,6 +9,7 @@ import 'package:miss_misq/core/widgets/dynamic_table.dart';
 import 'package:miss_misq/core/widgets/search_with_actions.dart';
 import 'package:miss_misq/core/widgets/spacing.dart';
 import 'package:miss_misq/features/inventory/view/widgets/item_card_custom_text_feild.dart';
+import 'package:miss_misq/features/inventory/view/widgets/quantity_disbrusement_dialog.dart';
 
 class ItemCardView extends StatelessWidget {
   const ItemCardView({super.key, required this.itemId});
@@ -109,7 +110,7 @@ class ItemCardView extends StatelessWidget {
               'سعر الوحدة',
               'قام بالتسجيل',
             ],
-            rowData: [row, row, row, row, row, row, row, row],
+            rowData: [row, row, row, row, row, row, row, row, row],
           ),
           const VerticalSpacing(height: 30),
           Row(
@@ -118,7 +119,12 @@ class ItemCardView extends StatelessWidget {
               AppCustomButton(title: 'إضافة كمية', onPressed: () {}),
               AppCustomButton(
                 title: 'صرف كمية',
-                onPressed: () {},
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (_) => const QuantityDisbrusementDialog(),
+                  );
+                },
                 color: AppPallete.whiteColor,
                 titleColor: AppPallete.blackColor,
               ),

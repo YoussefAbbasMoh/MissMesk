@@ -22,7 +22,7 @@ class _ProductsFilterState extends State<ProductsFilter> {
   @override
   void initState() {
     super.initState();
-    selectedFilter = widget.filters.first; // default to first filter
+    selectedFilter = widget.filters.first;
   }
 
   @override
@@ -43,7 +43,6 @@ class _ProductsFilterState extends State<ProductsFilter> {
                   }
                 },
                 style: ElevatedButton.styleFrom(
-                  splashFactory: NoSplash.splashFactory,
                   minimumSize: const Size(40, 73),
                   padding: const EdgeInsets.symmetric(horizontal: 40),
                   backgroundColor:
