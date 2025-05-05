@@ -79,4 +79,10 @@ class AppTextStyles {
     fontWeight: FontWeight.w400,
     color: AppPallete.greyColor,
   );
+
+  static TextStyle font14GreyRegular = const TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.w400,
+    color: AppPallete.greyColor,
+  );
 }
