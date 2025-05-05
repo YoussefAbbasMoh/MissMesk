@@ -12,6 +12,8 @@ class AppCustomTextField extends StatelessWidget {
   final bool isRequired;
   final Color? fillColor;
   final int? minLines;
+  final double? titleFontSize;
+  final TextStyle? hintTextStyle;
 
   const AppCustomTextField({
     super.key,
@@ -24,6 +26,8 @@ class AppCustomTextField extends StatelessWidget {
     this.isRequired = true,
     this.fillColor,
     this.minLines,
+    this.titleFontSize,
+    this.hintTextStyle,
   });
 
   @override
@@ -35,7 +39,9 @@ class AppCustomTextField extends StatelessWidget {
         RichText(
           text: TextSpan(
             text: label,
-            style: AppTextStyles.font18BlackRegular,
+            style: AppTextStyles.font18BlackRegular.copyWith(
+              fontSize: titleFontSize,
+            ),
             children: [
               if (isRequired)
                 TextSpan(
@@ -72,9 +78,12 @@ class AppCustomTextField extends StatelessWidget {
               ),
               errorBorder: _border(Colors.red),
               hintText: hintText,
-              hintStyle: AppTextStyles.font18BlackRegular.copyWith(
-                color: AppPallete.lightGreyColor,
-              ),
+              hintStyle:
+                  hintTextStyle ??
+                  AppTextStyles.font18BlackRegular.copyWith(
+                    color: AppPallete.lightGreyColor,
+                    fontSize: titleFontSize,
+                  ),
             ),
           ),
         ),

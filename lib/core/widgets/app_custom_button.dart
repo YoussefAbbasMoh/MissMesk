@@ -12,6 +12,7 @@ class AppCustomButton extends StatelessWidget {
     this.titleColor,
     this.icon,
     this.borderRadius,
+    this.fontSize,
   });
 
   final String title;
@@ -21,6 +22,7 @@ class AppCustomButton extends StatelessWidget {
   final Color? titleColor;
   final IconData? icon;
   final double? borderRadius;
+  final double? fontSize;
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +44,7 @@ class AppCustomButton extends StatelessWidget {
             title,
             style: AppTextStyles.font18BlackRegular.copyWith(
               color: titleColor ?? Colors.white,
+              fontSize: fontSize,
             ),
           ),
           if (icon != null) Icon(icon, color: Colors.white),
