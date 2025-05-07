@@ -8,6 +8,7 @@ class InventoryAndProductionSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       spacing: 20,
       children: [
         Expanded(
@@ -26,14 +27,22 @@ class InventoryAndProductionSection extends StatelessWidget {
                   ],
                 ),
               ),
-              const DynamicTable(
-                columnNames: [
+              DynamicTable(
+                columnNames: const [
                   'كود الصنف',
                   'اسم الصنف',
                   'الوحدة',
                   'الكمية الدفترية',
                 ],
-                rowData: [
+                rowData: const [
+                  DataRow(
+                    cells: [
+                      DataCell(Center(child: Text('1'))),
+                      DataCell(Center(child: Text('اسم الصنف'))),
+                      DataCell(Center(child: Text('الوحدة'))),
+                      DataCell(Center(child: Text('الكمية الدفترية'))),
+                    ],
+                  ),
                   DataRow(
                     cells: [
                       DataCell(Center(child: Text('1'))),
@@ -67,7 +76,6 @@ class InventoryAndProductionSection extends StatelessWidget {
                     ],
                   ),
                 ],
-                tableHeight: 260,
               ),
             ],
           ),
@@ -88,14 +96,14 @@ class InventoryAndProductionSection extends StatelessWidget {
                   ],
                 ),
               ),
-              const DynamicTable(
-                columnNames: [
+              DynamicTable(
+                columnNames: const [
                   'كود الصنف',
                   'اسم الصنف',
                   'الوحدة',
                   'الكمية الدفترية',
                 ],
-                rowData: [
+                rowData: const [
                   DataRow(
                     cells: [
                       DataCell(Center(child: Text('1'))),
@@ -129,7 +137,6 @@ class InventoryAndProductionSection extends StatelessWidget {
                     ],
                   ),
                 ],
-                tableHeight: 260,
               ),
             ],
           ),
