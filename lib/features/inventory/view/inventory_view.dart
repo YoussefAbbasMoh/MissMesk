@@ -42,7 +42,6 @@ class InventoryView extends StatelessWidget {
       child: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
-          spacing: 30,
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -55,7 +54,7 @@ class InventoryView extends StatelessWidget {
                 SearchWithActions(),
               ],
             ),
-            const VerticalSpacing(height: 20),
+            const VerticalSpacing(height: 40),
             const Wrap(
               spacing: 40,
               runSpacing: 20,
@@ -79,6 +78,7 @@ class InventoryView extends StatelessWidget {
                 ),
               ],
             ),
+            const VerticalSpacing(height: 40),
             DynamicTable(
               columnNames: const [
                 'الرقم التسلسلي',
@@ -88,9 +88,9 @@ class InventoryView extends StatelessWidget {
                 'الكمية الدفترية',
                 '',
               ],
-              tableHeight: 500,
-              rowData: [row, row, row, row, row, row, row, row, row],
+              rowData: [row, row, row, row, row, row, row, row],
             ),
+            const VerticalSpacing(height: 20),
             AppCustomButton(
               title: 'اضافة صنف',
               onPressed: () {

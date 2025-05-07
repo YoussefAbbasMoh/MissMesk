@@ -8,6 +8,7 @@ import 'package:miss_misq/core/widgets/app_custom_text_field.dart';
 import 'package:miss_misq/core/widgets/dynamic_table.dart';
 import 'package:miss_misq/core/widgets/search_with_actions.dart';
 import 'package:miss_misq/core/widgets/spacing.dart';
+import 'package:miss_misq/features/inventory/view/widgets/add_quantity_dialog.dart';
 import 'package:miss_misq/features/inventory/view/widgets/item_card_custom_text_feild.dart';
 import 'package:miss_misq/features/inventory/view/widgets/quantity_disbrusement_dialog.dart';
 
@@ -112,11 +113,19 @@ class ItemCardView extends StatelessWidget {
             ],
             rowData: [row, row, row, row, row, row, row, row, row],
           ),
-          const VerticalSpacing(height: 30),
+          const VerticalSpacing(height: 20),
           Row(
             spacing: 30,
             children: [
-              AppCustomButton(title: 'إضافة كمية', onPressed: () {}),
+              AppCustomButton(
+                title: 'إضافة كمية',
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (_) => const AddQuantityDialog(),
+                  );
+                },
+              ),
               AppCustomButton(
                 title: 'صرف كمية',
                 onPressed: () {
