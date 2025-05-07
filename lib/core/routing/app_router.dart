@@ -4,10 +4,12 @@ import 'package:miss_misq/core/routing/routes.dart';
 import 'package:miss_misq/core/widgets/main_layout.dart';
 import 'package:miss_misq/features/home/view/home_view.dart';
 import 'package:miss_misq/features/inventory/view/inventory_adjustments_view.dart';
+import 'package:miss_misq/features/inventory/view/inventory_details_view.dart';
 import 'package:miss_misq/features/inventory/view/inventory_records_view.dart';
 import 'package:miss_misq/features/inventory/view/inventory_transactions_view.dart';
 import 'package:miss_misq/features/inventory/view/inventory_view.dart';
 import 'package:miss_misq/features/inventory/view/item_card_view.dart';
+import 'package:miss_misq/features/inventory/view/new_inventory_process_view.dart';
 import 'package:miss_misq/features/inventory/view/reports_view.dart';
 import 'package:miss_misq/features/login/view/login_view.dart';
 
@@ -63,6 +65,14 @@ class AppRouter {
                   final id = state.pathParameters['id'];
                   return ItemCardView(itemId: id ?? '');
                 },
+              ),
+              GoRoute(
+                path: AppRoutes.newInventoryProcess,
+                builder: (context, state) => const NewInventoryProcessView(),
+              ),
+              GoRoute(
+                path: AppRoutes.inventoryDetails,
+                builder: (context, state) => const InventoryDetailsView(),
               ),
             ],
           ),

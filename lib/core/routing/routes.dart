@@ -16,6 +16,8 @@ class AppRoutes {
   static const String production = '/production';
   static const String journal = '/journal';
   static const String settings = '/settings';
+  static const String newInventoryProcess = '/inventory/newInventoryProcess';
+  static const String inventoryDetails = '/inventory/inventorydetails';
 }
 
 final Map<String, String> arabicBreadcrumbTitles = {
@@ -34,4 +36,6 @@ final Map<String, String> arabicBreadcrumbTitles = {
   AppRoutes.settings: 'الإعدادات',
   AppRoutes.itemCardBase: 'بطاقة مخزون صنف',
   AppRoutes.inventoryTransactions: 'سجل الحركات المخزنية',
+  AppRoutes.newInventoryProcess: 'عملية جرد جديدة',
+  AppRoutes.inventoryDetails: 'تفاصيل الجرد',
 };
