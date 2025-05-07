@@ -14,6 +14,8 @@ class AppCustomTextField extends StatelessWidget {
   final int? minLines;
   final double? titleFontSize;
   final TextStyle? hintTextStyle;
+  final Widget? suffixIcon;
+  final Widget? prefixIcon;
 
   const AppCustomTextField({
     super.key,
@@ -28,6 +30,8 @@ class AppCustomTextField extends StatelessWidget {
     this.minLines,
     this.titleFontSize,
     this.hintTextStyle,
+    this.prefixIcon,
+    this.suffixIcon,
   });
 
   @override
@@ -56,6 +60,7 @@ class AppCustomTextField extends StatelessWidget {
         SizedBox(
           width: width,
           child: TextFormField(
+            textAlignVertical: TextAlignVertical.top,
             minLines: minLines ?? 1,
             maxLines: minLines != null ? minLines! + 2 : 1,
             validator: (value) {
@@ -69,6 +74,9 @@ class AppCustomTextField extends StatelessWidget {
             keyboardType: keyboardType,
             cursorColor: AppPallete.primaryColor,
             decoration: InputDecoration(
+              suffixIcon: suffixIcon,
+              prefixIcon: prefixIcon,
+
               fillColor: fillColor,
               filled: fillColor != null,
               focusedBorder: _border(fillColor ?? AppPallete.primaryColor),

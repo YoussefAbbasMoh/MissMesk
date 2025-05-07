@@ -12,6 +12,8 @@ class DropdownTextFieldWithTitle extends StatelessWidget {
     this.onChanged,
     required this.hintText,
     required this.value,
+    this.isRequired = false,
+    this.fillColor,
   });
 
   final String title;
@@ -19,23 +21,45 @@ class DropdownTextFieldWithTitle extends StatelessWidget {
   final void Function(dynamic)? onChanged;
   final String value;
   final String hintText;
+  final bool isRequired;
+  final Color? fillColor;
   @override
   Widget build(BuildContext context) {
     return Column(
-      spacing: 10,
+      spacing: 5,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(title, style: AppTextStyles.font14BlackRegular),
+        RichText(
+          text: TextSpan(
+            text: title,
+            style: AppTextStyles.font14GreyRegular.copyWith(),
+            children: [
+              if (isRequired)
+                TextSpan(
+                  text: ' *',
+                  style: AppTextStyles.font14GreyRegular.copyWith(
+                    color: Colors.red,
+                  ),
+                ),
+            ],
+          ),
+        ),
         DropdownButtonFormField(
           icon: SvgPicture.asset(AssetsManager.arrowDown, height: 20),
           decoration: InputDecoration(
+            fillColor: fillColor,
+            filled: fillColor != null,
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(5),
-              borderSide: const BorderSide(color: AppPallete.primaryColor),
+              borderSide: BorderSide(
+                color: fillColor ?? AppPallete.primaryColor,
+              ),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(5),
-              borderSide: const BorderSide(color: AppPallete.primaryColor),
+              borderSide: BorderSide(
+                color: fillColor ?? AppPallete.primaryColor,
+              ),
             ),
           ),
           items: List.generate(

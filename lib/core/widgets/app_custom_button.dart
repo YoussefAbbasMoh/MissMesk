@@ -13,6 +13,7 @@ class AppCustomButton extends StatelessWidget {
     this.icon,
     this.borderRadius,
     this.fontSize,
+    this.width,
   });
 
   final String title;
@@ -23,32 +24,36 @@ class AppCustomButton extends StatelessWidget {
   final IconData? icon;
   final double? borderRadius;
   final double? fontSize;
+  final double? width;
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: onPressed,
-      style: ElevatedButton.styleFrom(
-        side: BorderSide(color: borderColor ?? Colors.transparent),
-        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
-        backgroundColor: color ?? AppPallete.primaryColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(borderRadius ?? 15),
-        ),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        spacing: 20,
-        children: [
-          Text(
-            title,
-            style: AppTextStyles.font18BlackRegular.copyWith(
-              color: titleColor ?? Colors.white,
-              fontSize: fontSize,
-            ),
+    return SizedBox(
+      width: width,
+      child: ElevatedButton(
+        onPressed: onPressed,
+        style: ElevatedButton.styleFrom(
+          side: BorderSide(color: borderColor ?? Colors.transparent),
+          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+          backgroundColor: color ?? AppPallete.primaryColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(borderRadius ?? 15),
           ),
-          if (icon != null) Icon(icon, color: Colors.white),
-        ],
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          spacing: 20,
+          children: [
+            Text(
+              title,
+              style: AppTextStyles.font18BlackRegular.copyWith(
+                color: titleColor ?? Colors.white,
+                fontSize: fontSize,
+              ),
+            ),
+            if (icon != null) Icon(icon, color: Colors.white),
+          ],
+        ),
       ),
     );
   }

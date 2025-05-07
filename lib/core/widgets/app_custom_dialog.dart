@@ -27,13 +27,15 @@ class AppCustomDialog extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         child: SizedBox(
           width: MediaQuery.sizeOf(context).width * 0.5,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _DialogHeader(title: title, iconPath: iconPath, onSave: onSave),
-              Padding(padding: const EdgeInsets.all(24), child: child),
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _DialogHeader(title: title, iconPath: iconPath, onSave: onSave),
+                Padding(padding: const EdgeInsets.all(24), child: child),
+              ],
+            ),
           ),
         ),
       ),
