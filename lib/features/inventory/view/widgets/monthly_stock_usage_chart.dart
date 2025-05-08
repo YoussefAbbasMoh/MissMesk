@@ -1,5 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:miss_misq/core/theming/app_pallete.dart';
 import 'package:miss_misq/core/theming/app_text_styles.dart';
 import 'package:miss_misq/core/utils/extensions.dart';
 import 'package:miss_misq/core/widgets/spacing.dart';
@@ -11,7 +12,7 @@ class MonthlyStockUsageChart extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+      padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 46),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(15),
@@ -19,11 +20,57 @@ class MonthlyStockUsageChart extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'تحليل أداء صرف الأصناف خلال أخر شهر',
-            style: AppTextStyles.font16BlackSemiBold,
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'تحليل أداء صرف الأصناف خلال أخر شهر',
+                style: AppTextStyles.font16BlackSemiBold,
+              ),
+              const Spacer(),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                spacing: 20,
+                children: [
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    spacing: 10,
+                    children: [
+                      Container(
+                        height: 10,
+                        width: 60,
+                        color: AppPallete.lightBrownColor,
+                      ),
+                      const Flexible(
+                        child: Text(
+                          'صرف للبيع',
+                          style: AppTextStyles.font18BlackRegular,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    spacing: 10,
+                    children: [
+                      Container(
+                        height: 10,
+                        width: 60,
+                        color: AppPallete.darkBrownColor,
+                      ),
+                      const Flexible(
+                        child: Text(
+                          'صرف للتشغيل ',
+                          style: AppTextStyles.font18BlackRegular,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ],
           ),
-          const VerticalSpacing(height: 50),
+          const VerticalSpacing(height: 20),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 60),
             child: Column(
