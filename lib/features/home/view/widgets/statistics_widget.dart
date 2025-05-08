@@ -12,7 +12,6 @@ class StatisticsWidget extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          width: double.infinity,
           padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 46),
           decoration: BoxDecoration(
             color: Colors.white,

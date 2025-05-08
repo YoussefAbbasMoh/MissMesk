@@ -11,6 +11,7 @@ class DynamicTable<T> extends StatelessWidget {
   final double? tableWidth;
   final Color? headerColor;
   final Color? rowColor;
+  final bool? isOutsideBorder;
 
   DynamicTable({
     super.key,
@@ -20,6 +21,7 @@ class DynamicTable<T> extends StatelessWidget {
     this.headerColor,
     this.rowColor,
     this.tableWidth,
+    this.isOutsideBorder = false,
   });
 
   double rowHeight = 60;
@@ -87,8 +89,15 @@ class DynamicTable<T> extends StatelessWidget {
           dataRowColor: WidgetStateProperty.all<Color>(
             rowColor ?? AppPallete.whiteColor,
           ),
-          border: const TableBorder.symmetric(
-            inside: BorderSide(color: AppPallete.lightGreyColor, width: 2),
+          border: TableBorder.symmetric(
+            inside: const BorderSide(
+              color: AppPallete.lightGreyColor,
+              width: 2,
+            ),
+            outside: BorderSide(
+              color: AppPallete.lightGreyColor,
+              width: isOutsideBorder ?? false ? 0 : 2,
+            ),
           ),
           headingTextStyle: AppTextStyles.font14WhiteSemiBold,
           columns: _buildColumns(),
