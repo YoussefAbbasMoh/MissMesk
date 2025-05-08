@@ -20,4 +20,6 @@ class AssetsManager {
   static final String filter = 'assets/svgs/filter.svg';
   static final String linkOut = 'assets/svgs/link_out.svg';
   static final String arrowDown = 'assets/svgs/arrow_down.svg';
+  static final String upload = 'assets/svgs/upload.svg';
+  static final String uploadCloud = 'assets/svgs/upload_cloud.svg';
 }

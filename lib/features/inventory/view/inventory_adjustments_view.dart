@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:miss_misq/core/theming/app_text_styles.dart';
 import 'package:miss_misq/core/utils/extensions.dart';
 import 'package:miss_misq/core/widgets/app_custom_button.dart';
 import 'package:miss_misq/core/widgets/dynamic_table.dart';
 import 'package:miss_misq/core/widgets/spacing.dart';
 import 'package:miss_misq/core/widgets/table_custom_text.dart';
+import 'package:miss_misq/features/inventory/view/widgets/add_new_inventory_dialog.dart';
+import 'package:miss_misq/features/inventory/view/widgets/add_storekeeper_dialog.dart';
+import 'package:miss_misq/features/inventory/view/widgets/add_unit_dialog.dart';
+import 'package:miss_misq/features/inventory/view/widgets/upload_new_products_dialog.dart';
 
 class InventoryAdjustmentsView extends StatelessWidget {
   const InventoryAdjustmentsView({super.key});
@@ -22,7 +25,12 @@ class InventoryAdjustmentsView extends StatelessWidget {
       'الرفوف': const TableCustomText('100'),
       '': InkWell(
         child: const Icon(Icons.edit, color: Colors.black),
-        onTap: () {},
+        onTap: () {
+          showDialog(
+            context: context,
+            builder: (context) => const AddNewInventoryDialog(),
+          );
+        },
       ),
       ' ': InkWell(
         child: const Icon(Icons.delete_outline, color: Colors.black),
@@ -32,12 +40,15 @@ class InventoryAdjustmentsView extends StatelessWidget {
     final row2 = {
       'الرقم التسلسلي': const TableCustomText('1'),
       'اسم الأمين': const TableCustomText('اسم الأمين'),
-
       'اسم المخزن': const TableCustomText('اسم المخزن'),
-
       '': InkWell(
         child: const Icon(Icons.edit, color: Colors.black),
-        onTap: () {},
+        onTap: () {
+          showDialog(
+            context: context,
+            builder: (context) => const AddStorekeeperDialog(),
+          );
+        },
       ),
       ' ': InkWell(
         child: const Icon(Icons.delete_outline, color: Colors.black),
@@ -49,7 +60,12 @@ class InventoryAdjustmentsView extends StatelessWidget {
       'الوحدة': const TableCustomText('الوحدة'),
       '': InkWell(
         child: const Icon(Icons.edit, color: Colors.black),
-        onTap: () {},
+        onTap: () {
+          showDialog(
+            context: context,
+            builder: (context) => const AddUnitDialog(),
+          );
+        },
       ),
       ' ': InkWell(
         child: const Icon(Icons.delete_outline, color: Colors.black),
@@ -70,12 +86,17 @@ class InventoryAdjustmentsView extends StatelessWidget {
           const Text('سجل المخازن', style: AppTextStyles.font16BlackSemiBold),
           const VerticalSpacing(height: 10),
           DynamicTable(rowData: [row, row, row, row]),
-          const VerticalSpacing(height: 20),
+          const VerticalSpacing(height: 10),
           Align(
             alignment: Alignment.centerLeft,
             child: AppCustomButton(
               title: 'إضافة مخزن',
-              onPressed: () {},
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => const AddNewInventoryDialog(),
+                );
+              },
               icon: Icons.add,
             ),
           ),
@@ -91,12 +112,17 @@ class InventoryAdjustmentsView extends StatelessWidget {
                 ),
                 const VerticalSpacing(height: 10),
                 DynamicTable(rowData: [row2, row2, row2, row2]),
-                const VerticalSpacing(height: 20),
+                const VerticalSpacing(height: 10),
                 Align(
                   alignment: Alignment.centerLeft,
                   child: AppCustomButton(
                     title: 'إضافة أمين',
-                    onPressed: () {},
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) => const AddStorekeeperDialog(),
+                      );
+                    },
                     icon: Icons.add,
                   ),
                 ),
@@ -115,12 +141,17 @@ class InventoryAdjustmentsView extends StatelessWidget {
                 ),
                 const VerticalSpacing(height: 10),
                 DynamicTable(rowData: [row3, row3, row3, row3]),
-                const VerticalSpacing(height: 20),
+                const VerticalSpacing(height: 10),
                 Align(
                   alignment: Alignment.centerLeft,
                   child: AppCustomButton(
                     title: 'إضافة وحدة',
-                    onPressed: () {},
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) => const AddUnitDialog(),
+                      );
+                    },
                     icon: Icons.add,
                   ),
                 ),
@@ -132,10 +163,16 @@ class InventoryAdjustmentsView extends StatelessWidget {
             'التحكم بالمخزن',
             style: AppTextStyles.font16BlackSemiBold,
           ),
-          const VerticalSpacing(height: 20),
+          const VerticalSpacing(height: 10),
           AppCustomButton(
             title: 'رفع أصناف جديدة',
-            onPressed: () {},
+
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) => const UploadNewProductsDialog(),
+              );
+            },
             icon: Icons.upload_outlined,
           ),
         ],
