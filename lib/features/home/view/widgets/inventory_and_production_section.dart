@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:miss_misq/core/theming/app_text_styles.dart';
 import 'package:miss_misq/core/widgets/dynamic_table.dart';
+import 'package:miss_misq/core/widgets/table_custom_text.dart';
 
 class InventoryAndProductionSection extends StatelessWidget {
   const InventoryAndProductionSection({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final row = {
+      'كود الصنف': const TableCustomText('كود الصنف'),
+      'اسم الصنف': const TableCustomText('اسم الصنف'),
+      'الوحدة': const TableCustomText('الوحدة'),
+      'الكمية الدفترية': const TableCustomText('الكمية الدفترية'),
+    };
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       spacing: 20,
@@ -27,56 +34,7 @@ class InventoryAndProductionSection extends StatelessWidget {
                   ],
                 ),
               ),
-              DynamicTable(
-                columnNames: const [
-                  'كود الصنف',
-                  'اسم الصنف',
-                  'الوحدة',
-                  'الكمية الدفترية',
-                ],
-                rowData: const [
-                  DataRow(
-                    cells: [
-                      DataCell(Center(child: Text('1'))),
-                      DataCell(Center(child: Text('اسم الصنف'))),
-                      DataCell(Center(child: Text('الوحدة'))),
-                      DataCell(Center(child: Text('الكمية الدفترية'))),
-                    ],
-                  ),
-                  DataRow(
-                    cells: [
-                      DataCell(Center(child: Text('1'))),
-                      DataCell(Center(child: Text('اسم الصنف'))),
-                      DataCell(Center(child: Text('الوحدة'))),
-                      DataCell(Center(child: Text('الكمية الدفترية'))),
-                    ],
-                  ),
-                  DataRow(
-                    cells: [
-                      DataCell(Center(child: Text('1'))),
-                      DataCell(Center(child: Text('اسم الصنف'))),
-                      DataCell(Center(child: Text('الوحدة'))),
-                      DataCell(Center(child: Text('الكمية الدفترية'))),
-                    ],
-                  ),
-                  DataRow(
-                    cells: [
-                      DataCell(Center(child: Text('1'))),
-                      DataCell(Center(child: Text('اسم الصنف'))),
-                      DataCell(Center(child: Text('الوحدة'))),
-                      DataCell(Center(child: Text('الكمية الدفترية'))),
-                    ],
-                  ),
-                  DataRow(
-                    cells: [
-                      DataCell(Center(child: Text('1'))),
-                      DataCell(Center(child: Text('اسم الصنف'))),
-                      DataCell(Center(child: Text('الوحدة'))),
-                      DataCell(Center(child: Text('الكمية الدفترية'))),
-                    ],
-                  ),
-                ],
-              ),
+              DynamicTable(rowData: [row, row, row, row]),
             ],
           ),
         ),
@@ -96,48 +54,7 @@ class InventoryAndProductionSection extends StatelessWidget {
                   ],
                 ),
               ),
-              DynamicTable(
-                columnNames: const [
-                  'كود الصنف',
-                  'اسم الصنف',
-                  'الوحدة',
-                  'الكمية الدفترية',
-                ],
-                rowData: const [
-                  DataRow(
-                    cells: [
-                      DataCell(Center(child: Text('1'))),
-                      DataCell(Center(child: Text('اسم الصنف'))),
-                      DataCell(Center(child: Text('الوحدة'))),
-                      DataCell(Center(child: Text('الكمية الدفترية'))),
-                    ],
-                  ),
-                  DataRow(
-                    cells: [
-                      DataCell(Center(child: Text('1'))),
-                      DataCell(Center(child: Text('اسم الصنف'))),
-                      DataCell(Center(child: Text('الوحدة'))),
-                      DataCell(Center(child: Text('الكمية الدفترية'))),
-                    ],
-                  ),
-                  DataRow(
-                    cells: [
-                      DataCell(Center(child: Text('1'))),
-                      DataCell(Center(child: Text('اسم الصنف'))),
-                      DataCell(Center(child: Text('الوحدة'))),
-                      DataCell(Center(child: Text('الكمية الدفترية'))),
-                    ],
-                  ),
-                  DataRow(
-                    cells: [
-                      DataCell(Center(child: Text('1'))),
-                      DataCell(Center(child: Text('اسم الصنف'))),
-                      DataCell(Center(child: Text('الوحدة'))),
-                      DataCell(Center(child: Text('الكمية الدفترية'))),
-                    ],
-                  ),
-                ],
-              ),
+              DynamicTable(rowData: [row, row, row, row]),
             ],
           ),
         ),

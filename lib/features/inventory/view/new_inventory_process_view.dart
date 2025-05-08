@@ -6,6 +6,7 @@ import 'package:miss_misq/core/widgets/app_custom_button.dart';
 import 'package:miss_misq/core/widgets/dropdown_text_field_with_title.dart';
 import 'package:miss_misq/core/widgets/dynamic_table.dart';
 import 'package:miss_misq/core/widgets/spacing.dart';
+import 'package:miss_misq/core/widgets/table_custom_text.dart';
 import 'package:miss_misq/features/inventory/view/widgets/new_item_inventory_dialog.dart';
 
 class NewInventoryProcessView extends StatelessWidget {
@@ -13,34 +14,25 @@ class NewInventoryProcessView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final row = DataRow(
-      cells: [
-        const DataCell(Center(child: Text('1'))),
-        const DataCell(Center(child: Text('11010234'))),
-        const DataCell(
-          Center(
-            child: Text(
-              'أتواب حرير مزركش ورد - أصفر كناري',
-              textAlign: TextAlign.center,
-            ),
-          ),
-        ),
-        const DataCell(Center(child: Text('متر'))),
-        const DataCell(Center(child: Text('350'))),
-        const DataCell(Center(child: Text('324'))),
-        const DataCell(Center(child: Text('12350'))),
-        const DataCell(Center(child: Text('بواقي'))),
-        DataCell(
-          onTap: () {
-            showDialog(
-              context: context,
-              builder: (context) => const NewItemInventoryDialog(),
-            );
-          },
-          const Center(child: Icon(Icons.edit)),
-        ),
-      ],
-    );
+    final row = {
+      'الرقم التسلسلي': const TableCustomText('1'),
+      'رقم كود الصنف': const TableCustomText('11010234'),
+      'أسم الصنف': const TableCustomText('اسم الصنف'),
+      'الوحدة': const TableCustomText('متر'),
+      'الكمية الدفترية': const TableCustomText('350'),
+      'الكمية الفعلية': const TableCustomText('324'),
+      'الفروق + -': const TableCustomText('12350'),
+      'الحالة': const TableCustomText('بواقي'),
+      '': InkWell(
+        onTap: () {
+          showDialog(
+            context: context,
+            builder: (context) => const NewItemInventoryDialog(),
+          );
+        },
+        child: const Center(child: Icon(Icons.edit)),
+      ),
+    };
     return SingleChildScrollView(
       padding: const EdgeInsets.all(16),
 
@@ -112,20 +104,7 @@ class NewInventoryProcessView extends StatelessWidget {
           const VerticalSpacing(height: 20),
           const Text('عملية الجرد', style: AppTextStyles.font16BlackSemiBold),
           const VerticalSpacing(height: 20),
-          DynamicTable(
-            columnNames: const [
-              'الرقم التسلسلي',
-              'رقم كود الصنف',
-              'أسم الصنف',
-              'الوحدة',
-              'الكمية الدفترية',
-              'الكمية الفعلية',
-              'الفروق + -',
-              'الحالة',
-              '',
-            ],
-            rowData: [row, row, row, row, row],
-          ),
+          DynamicTable(rowData: [row, row, row, row, row]),
           const VerticalSpacing(height: 20),
           AppCustomButton(
             title: 'جرد صنف جديد',

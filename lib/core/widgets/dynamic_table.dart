@@ -4,9 +4,8 @@ import 'package:miss_misq/core/theming/app_pallete.dart';
 import 'package:miss_misq/core/theming/app_text_styles.dart';
 
 // ignore: must_be_immutable
-class DynamicTable extends StatelessWidget {
-  final List<String> columnNames;
-  final List<DataRow> rowData;
+class DynamicTable<T> extends StatelessWidget {
+  final List<T> rowData;
   final VoidCallback? onHeaderTap;
   final double? tableHeight;
   final double? tableWidth;
@@ -15,7 +14,6 @@ class DynamicTable extends StatelessWidget {
 
   DynamicTable({
     super.key,
-    required this.columnNames,
     required this.rowData,
     this.onHeaderTap,
     this.tableHeight = 400,
@@ -29,6 +27,47 @@ class DynamicTable extends StatelessWidget {
 
   double tableHeightCal() {
     return rowData.length * rowHeight + headerHeight;
+  }
+
+  List<DataColumn> _buildColumns() {
+    return _getColumnsNames(rowData[0])
+        .map(
+          (name) => DataColumn(
+            label: Text(
+              name,
+              style: AppTextStyles.font14WhiteSemiBold,
+              textAlign: TextAlign.center,
+              overflow: TextOverflow.visible,
+              softWrap: true,
+            ),
+            headingRowAlignment: MainAxisAlignment.center,
+          ),
+        )
+        .toList();
+  }
+
+  List<DataRow> _buildRows() {
+    return rowData
+        .map(
+          (e) => DataRow(
+            cells: [..._getFields(e).map((e) => DataCell(Center(child: e)))],
+          ),
+        )
+        .toList();
+  }
+
+  List<dynamic> _getFields(T item) {
+    if (item is Map) {
+      return item.values.toList();
+    }
+    return [];
+  }
+
+  List<dynamic> _getColumnsNames(T item) {
+    if (item is Map) {
+      return item.keys.toList();
+    }
+    return [];
   }
 
   @override
@@ -52,22 +91,8 @@ class DynamicTable extends StatelessWidget {
             inside: BorderSide(color: AppPallete.lightGreyColor, width: 2),
           ),
           headingTextStyle: AppTextStyles.font14WhiteSemiBold,
-          columns:
-              columnNames
-                  .map(
-                    (name) => DataColumn(
-                      label: Text(
-                        name,
-                        style: AppTextStyles.font14WhiteSemiBold,
-                        textAlign: TextAlign.center,
-                        overflow: TextOverflow.visible,
-                        softWrap: true,
-                      ),
-                      headingRowAlignment: MainAxisAlignment.center,
-                    ),
-                  )
-                  .toList(),
-          rows: rowData,
+          columns: _buildColumns(),
+          rows: _buildRows(),
         ),
       ),
     );

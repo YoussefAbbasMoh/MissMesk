@@ -14,29 +14,26 @@ class InventoryRecordsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final row = DataRow(
-      cells: [
-        const DataCell(Center(child: Text('1'))),
-        const DataCell(Center(child: Text('12345'))),
-        const DataCell(Center(child: Text('اسم المورد'))),
-        const DataCell(Center(child: Text('100'))),
-        const DataCell(Center(child: Text('21/07/2023'))),
-        const DataCell(Center(child: Text('بواقي'))),
-        const DataCell(Center(child: Text('100'))),
-        DataCell(
-          onTap: () {
-            context.go(AppRoutes.inventoryDetails);
-          },
-          Center(
-            child: SvgPicture.asset(
-              AssetsManager.linkOut,
-              height: 30,
-              fit: BoxFit.fill,
-            ),
-          ),
+    final row = {
+      'الرقم التسلسلي': const Text('1'),
+      'رقم المخزن': const Text('12345'),
+      'اسم المخزن': const Text('اسم المخزن'),
+      'اسم أمين المخزن': const Text('اسم أمين المخزن'),
+      'الموظف القائم بالجرد': const Text('الموظف القائم بالجرد'),
+      'تاريخ الجرد': const Text('21/07/2023'),
+      'إجمالي الفروقات (أعداد)': const Text('بواقي'),
+      '': InkWell(
+        onTap: () {
+          context.go(AppRoutes.inventoryDetails);
+        },
+        child: SvgPicture.asset(
+          AssetsManager.linkOut,
+          height: 30,
+          fit: BoxFit.fill,
         ),
-      ],
-    );
+      ),
+    };
+
     return SingleChildScrollView(
       padding: const EdgeInsets.all(16),
       child: Column(
@@ -59,19 +56,7 @@ class InventoryRecordsView extends StatelessWidget {
             ],
           ),
           const VerticalSpacing(height: 40),
-          DynamicTable(
-            columnNames: const [
-              'الرقم التسلسلي',
-              'رقم المخزن',
-              'اسم المخزن',
-              'اسم أمين المخزن',
-              'الموظف القائم بالجرد',
-              'تاريخ الجرد',
-              'إجمالي الفروقات (أعداد)',
-              '',
-            ],
-            rowData: [row, row, row, row, row, row],
-          ),
+          DynamicTable(rowData: [row, row, row, row, row, row]),
           const VerticalSpacing(height: 20),
           AppCustomButton(
             title: 'عملية جرد جديدة',
