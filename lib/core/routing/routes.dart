@@ -26,7 +26,7 @@ final Map<String, String> arabicBreadcrumbTitles = {
   AppRoutes.inventory: 'إدارة المخزون والمنتجات',
   AppRoutes.inventoryRecords: 'سجلات الجرد',
   AppRoutes.reports: 'التقارير',
-  AppRoutes.inventoryAdjustments: 'ضبط المخزن',
+  AppRoutes.inventoryAdjustments: 'إعدادات المخازن',
   AppRoutes.assetsGroups: 'الأصول الثابتة',
   AppRoutes.assetsHistory: 'سجل الأصول',
   AppRoutes.suppliersServices: 'خدمات الموردين',
