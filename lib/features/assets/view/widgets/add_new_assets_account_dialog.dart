@@ -148,7 +148,6 @@ class AddNewAssetsAccountDialog extends StatelessWidget {
                   hintText: 'معدل الإستهلاك اليومي',
                   isRequired: false,
                   titleFontSize: 14,
-
                   suffixIcon: Padding(
                     padding: const EdgeInsets.only(left: 4),
                     child: TextButton(

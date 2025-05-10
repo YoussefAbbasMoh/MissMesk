@@ -94,7 +94,7 @@ List<SideMenuButtonModel> menuItems = [
   SideMenuButtonModel(
     title: 'دفتر اليومية',
     iconPath: AssetsManager.daily,
-    route: AppRoutes.journal,
+    route: AppRoutes.dailyLog,
   ),
   SideMenuButtonModel(
     title: 'الإعدادات',
