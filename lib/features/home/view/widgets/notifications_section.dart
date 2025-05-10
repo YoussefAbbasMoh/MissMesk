@@ -16,7 +16,7 @@ class NotificationsSection extends StatelessWidget {
       ),
       child: ListView.separated(
         itemCount: 3,
-        separatorBuilder: (context, index) => const VerticalSpacing(height: 10),
+        separatorBuilder: (context, index) => const VerticalSpacing(10),
         itemBuilder:
             (context, index) => NotificationItem(
               title: 'تنبيه: كمية القماش منخفضة (50 متر متبقي).',

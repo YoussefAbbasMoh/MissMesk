@@ -61,7 +61,7 @@ class ItemCardView extends StatelessWidget {
               const SearchWithActions(),
             ],
           ),
-          const VerticalSpacing(height: 30),
+          const VerticalSpacing(30),
           const AppCustomTextField(
             label: 'بيان الصنف',
             hintText: 'لا يوجد وصف',
@@ -70,9 +70,9 @@ class ItemCardView extends StatelessWidget {
             fillColor: Colors.white,
             minLines: 3,
           ),
-          const VerticalSpacing(height: 30),
+          const VerticalSpacing(30),
           const Text('بيانات المخزن', style: AppTextStyles.font16BlackSemiBold),
-          const VerticalSpacing(height: 10),
+          const VerticalSpacing(10),
           const Wrap(
             spacing: 20,
             runSpacing: 20,
@@ -87,21 +87,21 @@ class ItemCardView extends StatelessWidget {
               ItemCardCustomTextFeild(label: 'نوع المنتج '),
             ],
           ),
-          const VerticalSpacing(height: 30),
+          const VerticalSpacing(30),
           AppCustomButton(
             title: 'سجل الحركات المخزنية',
             onPressed: () {
               context.go(AppRoutes.inventoryTransactions);
             },
           ),
-          const VerticalSpacing(height: 30),
+          const VerticalSpacing(30),
           const Text(
             'سجل الكميات والأسعار',
             style: AppTextStyles.font16BlackSemiBold,
           ),
-          const VerticalSpacing(height: 10),
+          const VerticalSpacing(10),
           DynamicTable(rowData: [row, row, row, row, row, row, row, row, row]),
-          const VerticalSpacing(height: 20),
+          const VerticalSpacing(20),
           Row(
             spacing: 30,
             children: [

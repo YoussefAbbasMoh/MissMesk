@@ -70,7 +70,7 @@ class MonthlyStockUsageChart extends StatelessWidget {
               ),
             ],
           ),
-          const VerticalSpacing(height: 20),
+          const VerticalSpacing( 20),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 60),
             child: Column(

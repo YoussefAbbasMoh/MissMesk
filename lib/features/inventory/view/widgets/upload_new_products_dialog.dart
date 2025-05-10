@@ -21,7 +21,7 @@ class UploadNewProductsDialog extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text('حدد المخزن', style: AppTextStyles.font16BlackRegular),
-          const VerticalSpacing(height: 10),
+          const VerticalSpacing(10),
           Row(
             spacing: 10,
             children: [
@@ -43,7 +43,7 @@ class UploadNewProductsDialog extends StatelessWidget {
               ),
             ],
           ),
-          const VerticalSpacing(height: 30),
+          const VerticalSpacing(30),
           const Text('رفع الملف', style: AppTextStyles.font16BlackSemiBold),
           Divider(
             color: AppPallete.lightGreyColor.withAlpha(100),
@@ -75,7 +75,7 @@ class UploadNewProductsDialog extends StatelessWidget {
               ),
             ),
           ),
-          const VerticalSpacing(height: 10),
+          const VerticalSpacing(10),
           Text(
             'أنواع الملفات المقبولة هي .csv و.xlsx',
             style: AppTextStyles.font14GreyRegular.copyWith(color: Colors.grey),
@@ -105,7 +105,7 @@ class UploadNewProductsDialog extends StatelessWidget {
               ),
             ],
           ),
-          const VerticalSpacing(height: 40),
+          const VerticalSpacing(40),
           const Text(
             'تنبيه: إذا كان المخزن يحتوي على أصناف مسبقة فسيتم دمج الأصناف الجديدة مع الأصناف المخزنة سابقاً.',
             style: AppTextStyles.font14BlackRegular,

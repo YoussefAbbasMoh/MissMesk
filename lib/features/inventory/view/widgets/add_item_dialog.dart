@@ -42,9 +42,9 @@ class _AddItemDialogState extends State<AddItemDialog> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text('بيانات المخزن', style: AppTextStyles.font16BlackSemiBold),
-          const VerticalSpacing(height: 20),
+          const VerticalSpacing(20),
           const Text('نوع المخزن', style: AppTextStyles.font16BlackRegular),
-          const VerticalSpacing(height: 10),
+          const VerticalSpacing( 10),
           Row(
             spacing: 10,
             children: [
@@ -52,7 +52,7 @@ class _AddItemDialogState extends State<AddItemDialog> {
               _buildDialogButton('منتجات مكتملة'),
             ],
           ),
-          const VerticalSpacing(height: 20),
+          const VerticalSpacing( 20),
           Row(
             spacing: 20,
             children: [
@@ -85,9 +85,9 @@ class _AddItemDialogState extends State<AddItemDialog> {
               const Flexible(child: SizedBox()),
             ],
           ),
-          const VerticalSpacing(height: 20),
+          const VerticalSpacing(20),
           const Text('بيانات الصنف', style: AppTextStyles.font16BlackSemiBold),
-          const VerticalSpacing(height: 10),
+          const VerticalSpacing( 10),
           Row(
             spacing: 20,
             crossAxisAlignment: CrossAxisAlignment.baseline,

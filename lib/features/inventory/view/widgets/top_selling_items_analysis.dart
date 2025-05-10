@@ -25,7 +25,7 @@ class TopSellingItemsAnalysis extends StatelessWidget {
             'تحليل الأصناف المباعة خلال آخر شهر',
             style: AppTextStyles.font16BlackSemiBold,
           ),
-          const VerticalSpacing(height: 100),
+          const VerticalSpacing(100),
 
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 60),

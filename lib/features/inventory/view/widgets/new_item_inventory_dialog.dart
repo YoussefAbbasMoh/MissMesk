@@ -20,7 +20,7 @@ class NewItemInventoryDialog extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text('بيانات الصنف', style: AppTextStyles.font16BlackSemiBold),
-          const VerticalSpacing(height: 20),
+          const VerticalSpacing(20),
           AppCustomTextField(
             width: context.width * 0.3,
             label: 'كود الصنف',
@@ -43,7 +43,7 @@ class NewItemInventoryDialog extends StatelessWidget {
               ),
             ),
           ),
-          const VerticalSpacing(height: 20),
+          const VerticalSpacing(20),
           const Row(
             spacing: 20,
             crossAxisAlignment: CrossAxisAlignment.baseline,
@@ -75,7 +75,7 @@ class NewItemInventoryDialog extends StatelessWidget {
               ),
             ],
           ),
-          const VerticalSpacing(height: 20),
+          const VerticalSpacing( 20),
           const Row(
             spacing: 20,
             crossAxisAlignment: CrossAxisAlignment.baseline,

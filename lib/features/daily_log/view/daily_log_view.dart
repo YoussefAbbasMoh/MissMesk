@@ -27,7 +27,7 @@ class DailyLogView extends StatelessWidget {
             ],
           ),
 
-          const VerticalSpacing(height: 40),
+          const VerticalSpacing(40),
           DynamicTable(
             rowData: List.generate(
               6,
@@ -44,7 +44,7 @@ class DailyLogView extends StatelessWidget {
               },
             ),
           ),
-          const VerticalSpacing(height: 20),
+          const VerticalSpacing(20),
           AppCustomButton(
             title: 'إنشاء معاملة جديدة',
             onPressed: () {

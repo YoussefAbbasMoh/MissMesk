@@ -51,7 +51,7 @@ class InventoryView extends StatelessWidget {
                 SearchWithActions(),
               ],
             ),
-            const VerticalSpacing(height: 40),
+            const VerticalSpacing(40),
             const Wrap(
               spacing: 40,
               runSpacing: 20,
@@ -75,9 +75,9 @@ class InventoryView extends StatelessWidget {
                 ),
               ],
             ),
-            const VerticalSpacing(height: 40),
+            const VerticalSpacing(40),
             DynamicTable(rowData: [row, row, row, row, row, row, row, row]),
-            const VerticalSpacing(height: 20),
+            const VerticalSpacing(20),
             AppCustomButton(
               title: 'اضافة صنف',
               onPressed: () {

@@ -37,7 +37,7 @@ class _AddNewInventoryDialogState extends State<AddNewInventoryDialog> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text('بيانات المخزن', style: AppTextStyles.font16BlackSemiBold),
-          const VerticalSpacing(height: 20),
+          const VerticalSpacing(20),
           const Row(
             spacing: 20,
             children: [
@@ -67,9 +67,9 @@ class _AddNewInventoryDialogState extends State<AddNewInventoryDialog> {
               ),
             ],
           ),
-          const VerticalSpacing(height: 20),
+          const VerticalSpacing(20),
           const Text('بيانات الرفوف', style: AppTextStyles.font16BlackSemiBold),
-          const VerticalSpacing(height: 20),
+          const VerticalSpacing(20),
           Row(
             spacing: 20,
             children: [
@@ -107,7 +107,7 @@ class _AddNewInventoryDialogState extends State<AddNewInventoryDialog> {
               ),
             ),
           ),
-          const VerticalSpacing(height: 10),
+          const VerticalSpacing(10),
           Wrap(
             spacing: 10,
             runSpacing: 10,

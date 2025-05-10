@@ -27,12 +27,12 @@ class _AddQuantityDialogState extends State<AddQuantityDialog> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const _ItemInfoSection(),
-          const VerticalSpacing(height: 20),
+          const VerticalSpacing(20),
           const Text(
             'بيانات عملية الإضافة',
             style: AppTextStyles.font20BlackSemiBold,
           ),
-          const VerticalSpacing(height: 20),
+          const VerticalSpacing(20),
           Row(
             spacing: 20,
             crossAxisAlignment: CrossAxisAlignment.baseline,
@@ -66,7 +66,7 @@ class _AddQuantityDialogState extends State<AddQuantityDialog> {
               ),
             ],
           ),
-          const VerticalSpacing(height: 10),
+          const VerticalSpacing(10),
           Row(
             spacing: 20,
             crossAxisAlignment: CrossAxisAlignment.baseline,
@@ -84,7 +84,7 @@ class _AddQuantityDialogState extends State<AddQuantityDialog> {
               const Flexible(child: SizedBox()),
             ],
           ),
-          const VerticalSpacing(height: 20),
+          const VerticalSpacing(20),
           AppCustomTextField(
             titleFontSize: 14,
             label: 'ملاحظات',
@@ -93,7 +93,7 @@ class _AddQuantityDialogState extends State<AddQuantityDialog> {
             hintTextStyle: AppTextStyles.font14GreyRegular,
             minLines: 2,
           ),
-          const VerticalSpacing(height: 20),
+          const VerticalSpacing(20),
           _SwitchRow(
             label: 'كمية مرتجعة',
             value: isReturnedItem,
@@ -103,7 +103,7 @@ class _AddQuantityDialogState extends State<AddQuantityDialog> {
               });
             },
           ),
-          const VerticalSpacing(height: 20),
+          const VerticalSpacing(20),
           if (isReturnedItem) const _ReturnedItemFields(),
           _SwitchRow(
             label: 'كمية جديدة',
@@ -114,7 +114,7 @@ class _AddQuantityDialogState extends State<AddQuantityDialog> {
               });
             },
           ),
-          const VerticalSpacing(height: 20),
+          const VerticalSpacing(20),
           if (isNewItem) const _NewItemFields(),
         ],
       ),
@@ -131,7 +131,7 @@ class _ItemInfoSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text('بيانات الصنف', style: AppTextStyles.font16BlackSemiBold),
-        VerticalSpacing(height: 20),
+        VerticalSpacing(20),
         Row(
           spacing: 10,
           children: [
@@ -204,12 +204,12 @@ class _ReturnedItemFields extends StatelessWidget {
           hintText: 'أضف كود الكمية المرتجعة',
           hintTextStyle: AppTextStyles.font14GreyRegular,
         ),
-        const VerticalSpacing(height: 10),
+        const VerticalSpacing(10),
         Text(
           'كود الكمية المرتجعة يتكون من: 019910XX',
           style: AppTextStyles.font12GreyRegular,
         ),
-        const VerticalSpacing(height: 30),
+        const VerticalSpacing(30),
       ],
     );
   }

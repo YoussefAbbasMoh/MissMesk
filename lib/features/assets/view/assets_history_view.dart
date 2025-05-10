@@ -39,7 +39,7 @@ class AssetsHistoryView extends StatelessWidget {
               const SearchWithActions(),
             ],
           ),
-          const VerticalSpacing(height: 40),
+          const VerticalSpacing(40),
           DynamicTable(
             rowData: List.generate(
               7,
@@ -63,7 +63,7 @@ class AssetsHistoryView extends StatelessWidget {
               },
             ),
           ),
-          const VerticalSpacing(height: 30),
+          const VerticalSpacing(30),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             spacing: 5,
@@ -90,7 +90,7 @@ class AssetsHistoryView extends StatelessWidget {
               ),
             ],
           ),
-          const VerticalSpacing(height: 20),
+          const VerticalSpacing( 20),
           AppCustomButton(
             title: 'إضافة حساب',
             onPressed: () {

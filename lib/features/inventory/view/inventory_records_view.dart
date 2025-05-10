@@ -55,9 +55,9 @@ class InventoryRecordsView extends StatelessWidget {
               SearchWithActions(),
             ],
           ),
-          const VerticalSpacing(height: 40),
+          const VerticalSpacing(40),
           DynamicTable(rowData: [row, row, row, row, row, row]),
-          const VerticalSpacing(height: 20),
+          const VerticalSpacing(20),
           AppCustomButton(
             title: 'عملية جرد جديدة',
             icon: Icons.add,

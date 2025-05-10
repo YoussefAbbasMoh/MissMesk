@@ -52,12 +52,12 @@ class InventoryTransactionsView extends StatelessWidget {
               const SearchWithActions(),
             ],
           ),
-          const VerticalSpacing(height: 30),
+          const VerticalSpacing(30),
           const Text(
             'سجل الحركات المخزنية',
             style: AppTextStyles.font16BlackSemiBold,
           ),
-          const VerticalSpacing(height: 10),
+          const VerticalSpacing(10),
           DynamicTable(
             tableHeight: 500,
             rowData: [row, row, row, row, row, row, row, row, row, row],

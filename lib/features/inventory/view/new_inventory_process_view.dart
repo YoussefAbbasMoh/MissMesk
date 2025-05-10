@@ -44,14 +44,14 @@ class NewInventoryProcessView extends StatelessWidget {
             'عملية جرد جديدة',
             style: AppTextStyles.font20BlackSemiBold,
           ),
-          const VerticalSpacing(height: 10),
+          const VerticalSpacing( 10),
           Text(
             'تاريخ بدأ الجرد: 21/07/2023',
             style: AppTextStyles.font12GreyRegular,
           ),
-          const VerticalSpacing(height: 40),
+          const VerticalSpacing(40),
           const Text('بيانات المخزن', style: AppTextStyles.font16BlackSemiBold),
-          const VerticalSpacing(height: 20),
+          const VerticalSpacing(20),
           SizedBox(
             width: context.width * 0.5,
             child: Row(
@@ -94,18 +94,18 @@ class NewInventoryProcessView extends StatelessWidget {
               ],
             ),
           ),
-          const VerticalSpacing(height: 10),
+          const VerticalSpacing(10),
           AppCustomButton(
             title: 'حفظ',
             onPressed: () {},
             width: context.width * 0.1,
           ),
 
-          const VerticalSpacing(height: 20),
+          const VerticalSpacing(20),
           const Text('عملية الجرد', style: AppTextStyles.font16BlackSemiBold),
-          const VerticalSpacing(height: 20),
+          const VerticalSpacing(20),
           DynamicTable(rowData: [row, row, row, row, row]),
-          const VerticalSpacing(height: 20),
+          const VerticalSpacing(20),
           AppCustomButton(
             title: 'جرد صنف جديد',
             onPressed: () {
@@ -115,7 +115,7 @@ class NewInventoryProcessView extends StatelessWidget {
               );
             },
           ),
-          const VerticalSpacing(height: 60),
+          const VerticalSpacing(60),
           Row(
             spacing: 30,
             children: [

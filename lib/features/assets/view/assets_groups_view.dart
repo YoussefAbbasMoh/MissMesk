@@ -28,7 +28,7 @@ class AssetsGroupsView extends StatelessWidget {
             ],
           ),
 
-          const VerticalSpacing(height: 40),
+          const VerticalSpacing(40),
           DynamicTable(
             tableWidth: context.width * 0.7,
             rowData: List.generate(
@@ -56,7 +56,7 @@ class AssetsGroupsView extends StatelessWidget {
               },
             ),
           ),
-          const VerticalSpacing(height: 20),
+          const VerticalSpacing(20),
           AppCustomButton(
             title: 'إضافة مجموعة أصول جديدة',
             onPressed: () {

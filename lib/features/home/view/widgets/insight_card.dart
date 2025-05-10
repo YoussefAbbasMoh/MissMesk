@@ -27,9 +27,9 @@ class InsightCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(title, style: AppTextStyles.font16BlackSemiBold),
-          const VerticalSpacing(height: 20),
+          const VerticalSpacing(20),
           SizedBox(height: 200, child: chart),
-          const VerticalSpacing(height: 20),
+          const VerticalSpacing(20),
           Wrap(
             spacing: 20,
             runSpacing: 20,

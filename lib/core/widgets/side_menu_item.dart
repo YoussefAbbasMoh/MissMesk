@@ -29,12 +29,8 @@ class SideMenuMainItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        _SideMenuButton(
-          model: model,
-          isSelected: isSelected,
-          onTap: onTap,
-        ),
-        const VerticalSpacing(height: 5),
+        _SideMenuButton(model: model, isSelected: isSelected, onTap: onTap),
+        const VerticalSpacing(5),
         if (isExpanded && subItems.isNotEmpty)
           ...subItems.map(
             (item) => GestureDetector(

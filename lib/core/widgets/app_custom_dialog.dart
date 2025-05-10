@@ -69,7 +69,7 @@ class _DialogHeader extends StatelessWidget {
             height: 25,
             colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
           ),
-          const HorizontalSpaing(width: 10),
+          const HorizontalSpaing(10),
           Text(title, style: AppTextStyles.font18WhiteSemiBold),
           const Spacer(),
           _ActionButtonGroup(
@@ -79,7 +79,7 @@ class _DialogHeader extends StatelessWidget {
             bgColor: AppPallete.greenColoor,
             onPressed: onSave,
           ),
-          const HorizontalSpaing(width: 10),
+          const HorizontalSpaing(10),
           _ActionButtonGroup(
             icon: Icons.cancel,
             text: 'إلغاء',

@@ -25,7 +25,7 @@ class _QuantityDisbrusementDialogState
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text('بيانات الصنف', style: AppTextStyles.font16BlackSemiBold),
-          const VerticalSpacing(height: 20),
+          const VerticalSpacing(20),
           Row(
             spacing: 10,
             children: [
@@ -71,12 +71,12 @@ class _QuantityDisbrusementDialogState
               ),
             ],
           ),
-          const VerticalSpacing(height: 30),
+          const VerticalSpacing(30),
           const Text(
             'بيانات عملية الإضافة',
             style: AppTextStyles.font16BlackSemiBold,
           ),
-          const VerticalSpacing(height: 10),
+          const VerticalSpacing(10),
           Row(
             spacing: 20,
             crossAxisAlignment: CrossAxisAlignment.baseline,
@@ -109,7 +109,7 @@ class _QuantityDisbrusementDialogState
               ),
             ],
           ),
-          const VerticalSpacing(height: 20),
+          const VerticalSpacing(20),
           Row(
             spacing: 20,
             crossAxisAlignment: CrossAxisAlignment.baseline,

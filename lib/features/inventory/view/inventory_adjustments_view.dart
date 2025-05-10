@@ -82,11 +82,11 @@ class InventoryAdjustmentsView extends StatelessWidget {
             'إعدادات المخازن',
             style: AppTextStyles.font16BlackSemiBold,
           ),
-          const VerticalSpacing(height: 40),
+          const VerticalSpacing(40),
           const Text('سجل المخازن', style: AppTextStyles.font16BlackSemiBold),
-          const VerticalSpacing(height: 10),
+          const VerticalSpacing(10),
           DynamicTable(rowData: [row, row, row, row]),
-          const VerticalSpacing(height: 10),
+          const VerticalSpacing(10),
           Align(
             alignment: Alignment.centerLeft,
             child: AppCustomButton(
@@ -100,7 +100,7 @@ class InventoryAdjustmentsView extends StatelessWidget {
               icon: Icons.add,
             ),
           ),
-          const VerticalSpacing(height: 40),
+          const VerticalSpacing(40),
           SizedBox(
             width: context.width * 0.5,
             child: Column(
@@ -110,9 +110,9 @@ class InventoryAdjustmentsView extends StatelessWidget {
                   'سجل أمناء المخازن',
                   style: AppTextStyles.font16BlackSemiBold,
                 ),
-                const VerticalSpacing(height: 10),
+                const VerticalSpacing(10),
                 DynamicTable(rowData: [row2, row2, row2, row2]),
-                const VerticalSpacing(height: 10),
+                const VerticalSpacing(10),
                 Align(
                   alignment: Alignment.centerLeft,
                   child: AppCustomButton(
@@ -129,7 +129,7 @@ class InventoryAdjustmentsView extends StatelessWidget {
               ],
             ),
           ),
-          const VerticalSpacing(height: 40),
+          const VerticalSpacing(40),
           SizedBox(
             width: context.width * 0.4,
             child: Column(
@@ -139,9 +139,9 @@ class InventoryAdjustmentsView extends StatelessWidget {
                   'وحدات الأصناف',
                   style: AppTextStyles.font16BlackSemiBold,
                 ),
-                const VerticalSpacing(height: 10),
+                const VerticalSpacing(10),
                 DynamicTable(rowData: [row3, row3, row3, row3]),
-                const VerticalSpacing(height: 10),
+                const VerticalSpacing(10),
                 Align(
                   alignment: Alignment.centerLeft,
                   child: AppCustomButton(
@@ -158,12 +158,12 @@ class InventoryAdjustmentsView extends StatelessWidget {
               ],
             ),
           ),
-          const VerticalSpacing(height: 40),
+          const VerticalSpacing(40),
           const Text(
             'التحكم بالمخزن',
             style: AppTextStyles.font16BlackSemiBold,
           ),
-          const VerticalSpacing(height: 10),
+          const VerticalSpacing(10),
           AppCustomButton(
             title: 'رفع أصناف جديدة',
 

@@ -24,12 +24,12 @@ class StatisticsWidget extends StatelessWidget {
                 'الإحصائيات العامة',
                 style: AppTextStyles.font20BlackSemiBold,
               ),
-              VerticalSpacing(height: 10),
+              VerticalSpacing(10),
               Text(
                 'هنا يمكنك الاطلاع على أهم المؤشرات المالية والإدارية التي تلخص أداء العمل خلال الفترة الحالية.',
                 style: AppTextStyles.font14BlackRegular,
               ),
-              VerticalSpacing(height: 20),
+              VerticalSpacing(20),
               Row(
                 spacing: 10,
                 children: [

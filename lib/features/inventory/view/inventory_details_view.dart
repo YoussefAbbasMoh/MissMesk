@@ -29,14 +29,14 @@ class InventoryDetailsView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text('تفاصيل الجرد', style: AppTextStyles.font20BlackSemiBold),
-          const VerticalSpacing(height: 10),
+          const VerticalSpacing(10),
           Text(
             'تاريخ بدأ الجرد: 21/07/2023',
             style: AppTextStyles.font12GreyRegular,
           ),
-          const VerticalSpacing(height: 40),
+          const VerticalSpacing(40),
           const Text('بيانات المخزن', style: AppTextStyles.font16BlackSemiBold),
-          const VerticalSpacing(height: 20),
+          const VerticalSpacing(20),
           SizedBox(
             width: context.width * 0.5,
             child: Row(
@@ -79,9 +79,9 @@ class InventoryDetailsView extends StatelessWidget {
               ],
             ),
           ),
-          const VerticalSpacing(height: 30),
+          const VerticalSpacing( 30),
           const Text('بيانات الجرد', style: AppTextStyles.font16BlackSemiBold),
-          const VerticalSpacing(height: 20),
+          const VerticalSpacing(20),
           DynamicTable(rowData: [row, row, row, row, row]),
         ],
       ),
