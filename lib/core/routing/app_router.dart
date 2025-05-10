@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:miss_misq/core/routing/routes.dart';
 import 'package:miss_misq/core/widgets/main_layout.dart';
 import 'package:miss_misq/features/assets/view/assets_groups_view.dart';
+import 'package:miss_misq/features/assets/view/assets_history_view.dart';
 import 'package:miss_misq/features/home/view/home_view.dart';
 import 'package:miss_misq/features/inventory/view/inventory_adjustments_view.dart';
 import 'package:miss_misq/features/inventory/view/inventory_details_view.dart';
@@ -83,6 +84,10 @@ class AppRouter {
               GoRoute(
                 path: AppRoutes.assetsGroups,
                 builder: (context, state) => const AssetsGroupsView(),
+              ),
+              GoRoute(
+                path: AppRoutes.assetsHistory,
+                builder: (context, state) => const AssetsHistoryView(),
               ),
             ],
           ),
