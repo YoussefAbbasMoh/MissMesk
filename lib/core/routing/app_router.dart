@@ -15,6 +15,7 @@ import 'package:miss_misq/features/inventory/view/item_card_view.dart';
 import 'package:miss_misq/features/inventory/view/new_inventory_process_view.dart';
 import 'package:miss_misq/features/inventory/view/reports_view.dart';
 import 'package:miss_misq/features/login/view/login_view.dart';
+import 'package:miss_misq/features/settings/view/settings_view.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
@@ -98,6 +99,15 @@ class AppRouter {
               GoRoute(
                 path: AppRoutes.dailyLog,
                 builder: (context, state) => const DailyLogView(),
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: AppRoutes.settings,
+                builder: (context, state) => const SettingsView(),
               ),
             ],
           ),
