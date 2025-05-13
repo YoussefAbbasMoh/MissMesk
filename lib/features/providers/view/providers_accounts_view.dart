@@ -9,7 +9,7 @@ import 'package:miss_misq/core/widgets/dynamic_table.dart';
 import 'package:miss_misq/core/widgets/search_with_actions.dart';
 import 'package:miss_misq/core/widgets/table_custom_text.dart';
 import 'package:miss_misq/features/providers/models/provider_model.dart';
-import 'package:miss_misq/features/providers/view/widgets/create_provider_account_dialog.dart';
+import 'package:miss_misq/features/providers/view/widgets/add_new_order_dialog.dart';
 
 class ProvidersAccountsView extends StatelessWidget {
   const ProvidersAccountsView({super.key});
@@ -72,7 +72,7 @@ class ProvidersAccountsView extends StatelessWidget {
             onPressed: () {
               showDialog(
                 context: context,
-                builder: (context) => const CreateProviderAccountDialog(),
+                builder: (context) => const AddNewOrderDialog(),
               );
             },
           ),

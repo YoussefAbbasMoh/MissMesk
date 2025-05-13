@@ -18,6 +18,7 @@ import 'package:miss_misq/features/inventory/view/inventory_details_view.dart';
 import 'package:miss_misq/features/assets/view/assets_groups_view.dart';
 import 'package:miss_misq/features/assets/view/assets_history_view.dart';
 import 'package:miss_misq/features/providers/models/provider_model.dart';
+import 'package:miss_misq/features/providers/view/provider_account_statement_view.dart';
 
 import 'package:miss_misq/features/providers/view/providers_accounts_view.dart';
 import 'package:miss_misq/features/providers/view/provider_details_view.dart';
@@ -132,6 +133,10 @@ class AppRouter {
                     providerName: providerName,
                   );
                 },
+              ),
+              GoRoute(
+                path: AppRoutes.providerAccountStatement,
+                builder: (context, state) => const ProviderAccountStatementView(),
               ),
             ],
           ),

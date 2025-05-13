@@ -8,7 +8,8 @@ class AppRoutes {
   static const String inventoryRecords = '/inventory/inventoryrecords';
   static const String reports = '/inventory/reports';
   static const String inventoryAdjustments = '/inventory/inventoryadjustments';
-  static const String inventoryTransactions = '$itemCardBase/inventorytransactions';
+  static const String inventoryTransactions =
+      '$itemCardBase/inventorytransactions';
   static const String newInventoryProcess = '/inventory/newInventoryProcess';
   static const String inventoryDetails = '/inventory/inventorydetails';
 
@@ -17,6 +18,8 @@ class AppRoutes {
 
   static const String providersAccounts = '/providersaccounts';
   static const String providerDetails = '/providersaccounts/providerdetails';
+  static const String providerAccountStatement =
+      '/providersaccounts/providerdetails/provideraccountstatement';
 
   static const String clientsAccounts = '/clientsaccounts';
 
@@ -34,7 +37,7 @@ final Map<String, String> arabicBreadcrumbTitles = {
   AppRoutes.inventoryAdjustments: 'إعدادات المخازن',
   AppRoutes.assetsGroups: 'الأصول الثابتة',
   AppRoutes.assetsHistory: 'سجل الأصول',
-  AppRoutes.providersAccounts: 'خدمات الموردين',
+  AppRoutes.providersAccounts: 'حسابات الموردين',
   AppRoutes.clientsAccounts: 'حسابات العملاء',
   AppRoutes.production: 'متابعة الإنتاج',
   AppRoutes.dailyLog: 'دفتر اليومية',
@@ -44,4 +47,5 @@ final Map<String, String> arabicBreadcrumbTitles = {
   AppRoutes.newInventoryProcess: 'عملية جرد جديدة',
   AppRoutes.inventoryDetails: 'تفاصيل الجرد',
   AppRoutes.providerDetails: 'تفاصيل المورد',
+  AppRoutes.providerAccountStatement: 'كشف حساب المورد',
 };

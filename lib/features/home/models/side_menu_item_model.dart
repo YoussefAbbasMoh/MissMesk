@@ -64,7 +64,7 @@ List<SideMenuButtonModel> menuItems = [
     route: AppRoutes.providersAccounts,
     subItems: [
       SideMenuSubItemModel(
-        title: 'خدمات الموردين',
+        title: 'حسابات الموردين',
         route: AppRoutes.providersAccounts,
       ),
     ],
