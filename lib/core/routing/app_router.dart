@@ -18,10 +18,12 @@ import 'package:miss_misq/features/inventory/view/inventory_details_view.dart';
 import 'package:miss_misq/features/assets/view/assets_groups_view.dart';
 import 'package:miss_misq/features/assets/view/assets_history_view.dart';
 import 'package:miss_misq/features/providers/models/provider_model.dart';
+import 'package:miss_misq/features/providers/view/order_view.dart';
 import 'package:miss_misq/features/providers/view/provider_account_statement_view.dart';
 
 import 'package:miss_misq/features/providers/view/providers_accounts_view.dart';
 import 'package:miss_misq/features/providers/view/provider_details_view.dart';
+import 'package:miss_misq/features/providers/view/provider_scheduled_installments_view.dart';
 
 import 'package:miss_misq/features/settings/view/settings_view.dart';
 import 'package:miss_misq/features/daily_log/view/daily_log_view.dart';
@@ -136,7 +138,20 @@ class AppRouter {
               ),
               GoRoute(
                 path: AppRoutes.providerAccountStatement,
-                builder: (context, state) => const ProviderAccountStatementView(),
+                builder:
+                    (context, state) => const ProviderAccountStatementView(),
+              ),
+              GoRoute(
+                path: AppRoutes.providerScheduledInstallments,
+                builder:
+                    (context, state) =>
+                        const ProviderScheduledInstallmentsView(),
+              ),
+                   GoRoute(
+                path: AppRoutes.providerOrder,
+                builder:
+                    (context, state) =>
+                        const OrderView(),
               ),
             ],
           ),

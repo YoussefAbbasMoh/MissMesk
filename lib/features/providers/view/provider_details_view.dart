@@ -144,7 +144,9 @@ class ProviderDetailsView extends StatelessWidget {
               ),
               AppCustomButton(
                 title: 'الأقساط المجدولة',
-                onPressed: () {},
+                onPressed: () {
+                  context.go(AppRoutes.providerScheduledInstallments);
+                },
                 color: Colors.white,
                 titleColor: Colors.black,
               ),
@@ -167,10 +169,7 @@ class ProviderDetailsView extends StatelessWidget {
                 'طريقة الدفع': const TableCustomText('تحويل بنكي'),
                 '': InkWell(
                   onTap: () {
-                    context.go(
-                      '${AppRoutes.providerDetails}?providerName=شركة+الحلول+الذكية',
-                      extra: {'provider': providers[index]},
-                    );
+                    context.go(AppRoutes.providerOrder);
                   },
                   child: SvgPicture.asset(AssetsManager.linkOut, height: 25),
                 ),

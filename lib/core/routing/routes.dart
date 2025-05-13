@@ -20,6 +20,8 @@ class AppRoutes {
   static const String providerDetails = '/providersaccounts/providerdetails';
   static const String providerAccountStatement =
       '/providersaccounts/providerdetails/provideraccountstatement';
+  static const String providerScheduledInstallments = '/providersaccounts/providerdetails/scheduledinstallments';
+  static const String providerOrder = '/providersaccounts/providerdetails/providerorder';
 
   static const String clientsAccounts = '/clientsaccounts';
 
@@ -48,4 +50,6 @@ final Map<String, String> arabicBreadcrumbTitles = {
   AppRoutes.inventoryDetails: 'تفاصيل الجرد',
   AppRoutes.providerDetails: 'تفاصيل المورد',
   AppRoutes.providerAccountStatement: 'كشف حساب المورد',
+  AppRoutes.providerScheduledInstallments: 'الأقساط المجدولة',
+  AppRoutes.providerOrder: 'طلبية المورد',
 };
