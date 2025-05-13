@@ -61,11 +61,11 @@ List<SideMenuButtonModel> menuItems = [
   SideMenuButtonModel(
     title: 'سجل الموردين',
     iconPath: AssetsManager.supplieres,
-    route: AppRoutes.suppliersServices,
+    route: AppRoutes.providersAccounts,
     subItems: [
       SideMenuSubItemModel(
         title: 'خدمات الموردين',
-        route: AppRoutes.suppliersServices,
+        route: AppRoutes.providersAccounts,
       ),
     ],
   ),

@@ -22,4 +22,5 @@ class AssetsManager {
   static final String arrowDown = 'assets/svgs/arrow_down.svg';
   static final String upload = 'assets/svgs/upload.svg';
   static final String uploadCloud = 'assets/svgs/upload_cloud.svg';
+  static final String minus = 'assets/svgs/minus.svg';
 }

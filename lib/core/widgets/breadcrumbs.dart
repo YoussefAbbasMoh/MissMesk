@@ -8,26 +8,53 @@ class Breadcrumbs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final uriSegments = GoRouterState.of(context).uri.toString().split('/');
-
+    final uri = GoRouterState.of(context).uri;
+    final uriSegments = uri.path.split('/');
     final validSegments = uriSegments.where((e) => e.isNotEmpty).toList();
 
     List<Widget> breadcrumbWidgets = [];
     String accumulatedPath = '';
 
+    // 🧠 خريطة المسارات اللي بتستخدم query parameters بدل العنوان الثابت
+    final Map<String, String> dynamicBreadcrumbRoutes = {
+      AppRoutes.providerDetails: 'providerName',
+      AppRoutes.itemCardBase: 'itemId',
+    };
+
     for (int i = 0; i < validSegments.length; i++) {
       accumulatedPath += '/${validSegments[i]}';
 
-      if (arabicBreadcrumbTitles.containsKey(accumulatedPath)) {
-        breadcrumbWidgets.add(
-          InkWell(
-            onTap: () => context.go(accumulatedPath),
-            child: Text(
-              arabicBreadcrumbTitles[accumulatedPath]!,
-              style: AppTextStyles.font16BlackRegular,
+      // 🔍 مطابقة المسار مع مفتاح موجود في العناوين
+      String matchedKey = arabicBreadcrumbTitles.keys.firstWhere(
+        (k) {
+          if (k.contains('/:')) {
+            final base = k.split('/:').first;
+            return accumulatedPath.startsWith(base);
+          }
+          return accumulatedPath == k;
+        },
+        orElse: () => '',
+      );
+
+      if (matchedKey.isNotEmpty) {
+        // 🧠 إذا المسار ضمن المسارات الديناميكية
+        if (dynamicBreadcrumbRoutes.containsKey(matchedKey)) {
+          final queryKey = dynamicBreadcrumbRoutes[matchedKey]!;
+          final dynamicName = uri.queryParameters[queryKey] ?? 'تفاصيل';
+          breadcrumbWidgets.add(
+            Text(dynamicName, style: AppTextStyles.font16BlackRegular),
+          );
+        } else {
+          breadcrumbWidgets.add(
+            InkWell(
+              onTap: () => context.go(accumulatedPath),
+              child: Text(
+                arabicBreadcrumbTitles[matchedKey]!,
+                style: AppTextStyles.font16BlackRegular,
+              ),
             ),
-          ),
-        );
+          );
+        }
 
         if (i < validSegments.length - 1) {
           breadcrumbWidgets.add(const Text(' / '));

@@ -68,41 +68,48 @@ class AnalyticsSection extends StatelessWidget {
   }
 
   Widget _buildCostDistributionCard() {
-    return InsightCard(
-      title: 'توزيع تكاليف الإنتاج والمصاريف الإدارية',
-      chart: PieChart(
-        PieChartData(
-          sections: [
-            _buildPieSection(50, AppPallete.darkBrownColor),
-            _buildPieSection(20, AppPallete.greyColor),
-            _buildPieSection(10, AppPallete.brownColor),
-            _buildPieSection(10, AppPallete.lightBrownColor),
-            _buildPieSection(10, AppPallete.primaryColor),
-          ],
+    return SizedBox(
+      child: InsightCard(
+        title: 'توزيع تكاليف الإنتاج والمصاريف الإدارية',
+        chart: SizedBox(
+          child: PieChart(
+            PieChartData(
+              sectionsSpace: 0,
+              startDegreeOffset: 70,
+              centerSpaceRadius: 0,
+              sections: [
+                _buildPieSection(50, AppPallete.darkBrownColor, radius: 100),
+                _buildPieSection(20, AppPallete.greyColor, radius: 100),
+                _buildPieSection(10, AppPallete.brownColor, radius: 100),
+                _buildPieSection(10, AppPallete.lightBrownColor, radius: 100),
+                _buildPieSection(10, AppPallete.primaryColor, radius: 100),
+              ],
+            ),
+          ),
         ),
+        legendItems: const [
+          LegendItem(
+            color: AppPallete.darkBrownColor,
+            label: 'مواد خام : 25000 جنيه',
+          ),
+          LegendItem(
+            color: AppPallete.greyColor,
+            label: 'أجور العمال : 1000 جنيه',
+          ),
+          LegendItem(
+            color: AppPallete.lightBrownColor,
+            label: 'استهلاك معدات وصيانة : 5000 جنيه',
+          ),
+          LegendItem(
+            color: AppPallete.primaryColor,
+            label: 'مصروفات إدارية : 5000 جنيه',
+          ),
+          LegendItem(
+            color: AppPallete.brownColor,
+            label: 'نقل وانتقالات : 5000 جنيه',
+          ),
+        ],
       ),
-      legendItems: const [
-        LegendItem(
-          color: AppPallete.darkBrownColor,
-          label: 'مواد خام : 25000 جنيه',
-        ),
-        LegendItem(
-          color: AppPallete.greyColor,
-          label: 'أجور العمال : 1000 جنيه',
-        ),
-        LegendItem(
-          color: AppPallete.lightBrownColor,
-          label: 'استهلاك معدات وصيانة : 5000 جنيه',
-        ),
-        LegendItem(
-          color: AppPallete.primaryColor,
-          label: 'مصروفات إدارية : 5000 جنيه',
-        ),
-        LegendItem(
-          color: AppPallete.brownColor,
-          label: 'نقل وانتقالات : 5000 جنيه',
-        ),
-      ],
     );
   }
 
@@ -172,8 +179,10 @@ class AnalyticsSection extends StatelessWidget {
     double value,
     Color color, {
     bool isBig = false,
+    double? radius,
   }) {
     return PieChartSectionData(
+      radius: radius,
       value: value,
       color: color,
       title: '${value.toInt()}%',

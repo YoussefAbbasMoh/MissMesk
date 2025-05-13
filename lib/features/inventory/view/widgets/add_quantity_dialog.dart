@@ -4,9 +4,9 @@ import 'package:miss_misq/core/utils/assets_manager.dart';
 import 'package:miss_misq/core/utils/extensions.dart';
 import 'package:miss_misq/core/widgets/app_custom_dialog.dart';
 import 'package:miss_misq/core/widgets/app_custom_text_field.dart';
-import 'package:miss_misq/core/widgets/custom_switch.dart';
 import 'package:miss_misq/core/widgets/dropdown_text_field_with_title.dart';
 import 'package:miss_misq/core/widgets/spacing.dart';
+import 'package:miss_misq/core/widgets/switch_row.dart';
 
 class AddQuantityDialog extends StatefulWidget {
   const AddQuantityDialog({super.key});
@@ -94,7 +94,7 @@ class _AddQuantityDialogState extends State<AddQuantityDialog> {
             minLines: 2,
           ),
           const VerticalSpacing(20),
-          _SwitchRow(
+          SwitchRow(
             label: 'كمية مرتجعة',
             value: isReturnedItem,
             onChanged: (value) {
@@ -105,7 +105,7 @@ class _AddQuantityDialogState extends State<AddQuantityDialog> {
           ),
           const VerticalSpacing(20),
           if (isReturnedItem) const _ReturnedItemFields(),
-          _SwitchRow(
+          SwitchRow(
             label: 'كمية جديدة',
             value: isNewItem,
             onChanged: (value) {
@@ -161,31 +161,6 @@ class _ItemField extends StatelessWidget {
       hintText: hintText ?? 'ادخل $label',
       hintTextStyle: AppTextStyles.font14GreyRegular,
       fillColor: const Color(0XFFEDE0CC),
-    );
-  }
-}
-
-class _SwitchRow extends StatelessWidget {
-  final String label;
-  final bool value;
-  final ValueChanged<bool> onChanged;
-
-  const _SwitchRow({
-    required this.label,
-    required this.value,
-    required this.onChanged,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      textBaseline: TextBaseline.alphabetic,
-      spacing: 20,
-      children: [
-        Text(label, style: AppTextStyles.font20BlackSemiBold),
-        CustomSwitch(value: value, onChanged: onChanged),
-      ],
     );
   }
 }

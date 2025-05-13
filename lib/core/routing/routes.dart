@@ -1,23 +1,28 @@
 class AppRoutes {
   static const String home = '/home';
   static const String login = '/login';
+
   static const String inventory = '/inventory';
   static String itemCard(String id) => '$itemCardBase/$id';
   static const String itemCardBase = '/inventory/itemcard';
   static const String inventoryRecords = '/inventory/inventoryrecords';
   static const String reports = '/inventory/reports';
   static const String inventoryAdjustments = '/inventory/inventoryadjustments';
-  static const String inventoryTransactions =
-      '$itemCardBase/inventorytransactions';
+  static const String inventoryTransactions = '$itemCardBase/inventorytransactions';
+  static const String newInventoryProcess = '/inventory/newInventoryProcess';
+  static const String inventoryDetails = '/inventory/inventorydetails';
+
   static const String assetsGroups = '/assetsgroups';
   static const String assetsHistory = '/assetsgroups/assetshistory';
-  static const String suppliersServices = '/supplierservices';
+
+  static const String providersAccounts = '/providersaccounts';
+  static const String providerDetails = '/providersaccounts/providerdetails';
+
   static const String clientsAccounts = '/clientsaccounts';
+
   static const String production = '/production';
   static const String dailyLog = '/dailyLog';
   static const String settings = '/settings';
-  static const String newInventoryProcess = '/inventory/newInventoryProcess';
-  static const String inventoryDetails = '/inventory/inventorydetails';
 }
 
 final Map<String, String> arabicBreadcrumbTitles = {
@@ -29,7 +34,7 @@ final Map<String, String> arabicBreadcrumbTitles = {
   AppRoutes.inventoryAdjustments: 'إعدادات المخازن',
   AppRoutes.assetsGroups: 'الأصول الثابتة',
   AppRoutes.assetsHistory: 'سجل الأصول',
-  AppRoutes.suppliersServices: 'خدمات الموردين',
+  AppRoutes.providersAccounts: 'خدمات الموردين',
   AppRoutes.clientsAccounts: 'حسابات العملاء',
   AppRoutes.production: 'متابعة الإنتاج',
   AppRoutes.dailyLog: 'دفتر اليومية',
@@ -38,4 +43,5 @@ final Map<String, String> arabicBreadcrumbTitles = {
   AppRoutes.inventoryTransactions: 'سجل الحركات المخزنية',
   AppRoutes.newInventoryProcess: 'عملية جرد جديدة',
   AppRoutes.inventoryDetails: 'تفاصيل الجرد',
+  AppRoutes.providerDetails: 'تفاصيل المورد',
 };

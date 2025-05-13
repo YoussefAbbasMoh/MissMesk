@@ -25,7 +25,7 @@ class InventoryView extends StatelessWidget {
       'الكمية الدفترية': const TableCustomText('الكمية الدفترية'),
       '': InkWell(
         onTap: () {
-          context.go(AppRoutes.itemCard('12345'));
+          context.go('${AppRoutes.itemCardBase}?itemId=بطاقة مخزون صنف 89235');
         },
         child: SvgPicture.asset(
           AssetsManager.linkOut,

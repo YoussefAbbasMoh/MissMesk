@@ -2,20 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:miss_misq/core/routing/routes.dart';
 import 'package:miss_misq/core/widgets/main_layout.dart';
-import 'package:miss_misq/features/assets/view/assets_groups_view.dart';
-import 'package:miss_misq/features/assets/view/assets_history_view.dart';
-import 'package:miss_misq/features/daily_log/view/daily_log_view.dart';
+
 import 'package:miss_misq/features/home/view/home_view.dart';
-import 'package:miss_misq/features/inventory/view/inventory_adjustments_view.dart';
-import 'package:miss_misq/features/inventory/view/inventory_details_view.dart';
-import 'package:miss_misq/features/inventory/view/inventory_records_view.dart';
-import 'package:miss_misq/features/inventory/view/inventory_transactions_view.dart';
+import 'package:miss_misq/features/login/view/login_view.dart';
+
 import 'package:miss_misq/features/inventory/view/inventory_view.dart';
 import 'package:miss_misq/features/inventory/view/item_card_view.dart';
-import 'package:miss_misq/features/inventory/view/new_inventory_process_view.dart';
+import 'package:miss_misq/features/inventory/view/inventory_records_view.dart';
+import 'package:miss_misq/features/inventory/view/inventory_transactions_view.dart';
 import 'package:miss_misq/features/inventory/view/reports_view.dart';
-import 'package:miss_misq/features/login/view/login_view.dart';
+import 'package:miss_misq/features/inventory/view/inventory_adjustments_view.dart';
+import 'package:miss_misq/features/inventory/view/new_inventory_process_view.dart';
+import 'package:miss_misq/features/inventory/view/inventory_details_view.dart';
+
+import 'package:miss_misq/features/assets/view/assets_groups_view.dart';
+import 'package:miss_misq/features/assets/view/assets_history_view.dart';
+import 'package:miss_misq/features/providers/models/provider_model.dart';
+
+import 'package:miss_misq/features/providers/view/providers_accounts_view.dart';
+import 'package:miss_misq/features/providers/view/provider_details_view.dart';
+
 import 'package:miss_misq/features/settings/view/settings_view.dart';
+import 'package:miss_misq/features/daily_log/view/daily_log_view.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
@@ -40,7 +48,6 @@ class AppRouter {
               ),
             ],
           ),
-
           StatefulShellBranch(
             routes: [
               GoRoute(
@@ -64,10 +71,10 @@ class AppRouter {
                 builder: (context, state) => const InventoryTransactionsView(),
               ),
               GoRoute(
-                path: '${AppRoutes.itemCardBase}/:id',
+                path: AppRoutes.itemCardBase,
                 builder: (context, state) {
-                  final id = state.pathParameters['id'];
-                  return ItemCardView(itemId: id ?? '');
+                  final id = state.pathParameters['itemId'] ?? '';
+                  return ItemCardView(itemId: id);
                 },
               ),
               GoRoute(
@@ -80,7 +87,6 @@ class AppRouter {
               ),
             ],
           ),
-
           StatefulShellBranch(
             routes: [
               GoRoute(
@@ -93,7 +99,6 @@ class AppRouter {
               ),
             ],
           ),
-
           StatefulShellBranch(
             routes: [
               GoRoute(
@@ -102,12 +107,31 @@ class AppRouter {
               ),
             ],
           ),
-
           StatefulShellBranch(
             routes: [
               GoRoute(
                 path: AppRoutes.settings,
                 builder: (context, state) => const SettingsView(),
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: AppRoutes.providersAccounts,
+                builder: (context, state) => const ProvidersAccountsView(),
+              ),
+              GoRoute(
+                path: AppRoutes.providerDetails,
+                builder: (context, state) {
+                  final provider = state.extra as ProviderModel;
+                  final providerName =
+                      state.uri.queryParameters['providerName'] ?? '';
+                  return ProviderDetailsView(
+                    provider: provider,
+                    providerName: providerName,
+                  );
+                },
               ),
             ],
           ),
