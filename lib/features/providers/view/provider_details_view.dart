@@ -169,7 +169,9 @@ class ProviderDetailsView extends StatelessWidget {
                 'طريقة الدفع': const TableCustomText('تحويل بنكي'),
                 '': InkWell(
                   onTap: () {
-                    context.go(AppRoutes.providerOrder);
+                    context.go(
+                      '${AppRoutes.providerOrder}?orderId=طلبية_012872790',
+                    );
                   },
                   child: SvgPicture.asset(AssetsManager.linkOut, height: 25),
                 ),

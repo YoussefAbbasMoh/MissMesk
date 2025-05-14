@@ -19,6 +19,7 @@ class Breadcrumbs extends StatelessWidget {
     final Map<String, String> dynamicBreadcrumbRoutes = {
       AppRoutes.providerDetails: 'providerName',
       AppRoutes.itemCardBase: 'itemId',
+      AppRoutes.providerOrder: 'orderId',
     };
 
     for (int i = 0; i < validSegments.length; i++) {

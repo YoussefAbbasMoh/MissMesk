@@ -147,11 +147,11 @@ class AppRouter {
                     (context, state) =>
                         const ProviderScheduledInstallmentsView(),
               ),
-                   GoRoute(
+              GoRoute(
                 path: AppRoutes.providerOrder,
-                builder:
-                    (context, state) =>
-                        const OrderView(),
+                builder: (context, state) {
+                  return OrderView();
+                },
               ),
             ],
           ),
