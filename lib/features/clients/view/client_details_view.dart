@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:miss_misq/core/routing/routes.dart';
 import 'package:miss_misq/core/theming/app_text_styles.dart';
 import 'package:miss_misq/core/utils/assets_manager.dart';
 import 'package:miss_misq/core/utils/extensions.dart';
@@ -106,7 +108,9 @@ class ClientDetailsView extends StatelessWidget {
               AppCustomButton(
                 title: 'كشف حساب عميل',
                 borderRadius: 8,
-                onPressed: () {},
+                onPressed: () {
+                  context.go(AppRoutes.clientStatement);
+                },
               ),
               AppCustomButton(
                 title: 'الأقساط المجدولة',
@@ -158,4 +162,3 @@ class ClientDetailsView extends StatelessWidget {
     );
   }
 }
-

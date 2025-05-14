@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 class TableCustomText extends StatelessWidget {
-  const TableCustomText(this.text, {super.key});
+  const TableCustomText(this.text, {super.key, this.color});
   final String text;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -12,6 +13,7 @@ class TableCustomText extends StatelessWidget {
       overflow: TextOverflow.ellipsis,
       softWrap: true,
       maxLines: 2,
+      style: TextStyle(color: color),
     );
   }
 }

@@ -25,6 +25,7 @@ class AppRoutes {
 
   static const String clientsAccounts = '/clientsaccounts';
   static const String clientDetails= '/clientsaccounts/clientdetails';
+  static const String clientStatement = '/clientsaccounts/clientdetails/clientstatement';
 
   static const String production = '/production';
   static const String dailyLog = '/dailyLog';
@@ -53,4 +54,5 @@ final Map<String, String> arabicBreadcrumbTitles = {
   AppRoutes.providerAccountStatement: 'كشف حساب المورد',
   AppRoutes.providerScheduledInstallments: 'الأقساط المجدولة',
   AppRoutes.providerOrder: 'طلبية المورد',
+  AppRoutes.clientStatement: 'كشف حساب العميل',
 };
