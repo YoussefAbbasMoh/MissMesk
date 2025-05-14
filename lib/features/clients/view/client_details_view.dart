@@ -143,7 +143,9 @@ class ClientDetailsView extends StatelessWidget {
                 'عدد الأقساط': const TableCustomText('3'),
                 'وصف الطلبية': const TableCustomText('وصف الطلبية'),
                 '': InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    context.go(AppRoutes.clientInvoice);
+                  },
                   child: SvgPicture.asset(AssetsManager.linkOut, height: 25),
                 ),
               },

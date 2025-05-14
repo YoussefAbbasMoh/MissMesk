@@ -16,6 +16,7 @@ class AppCustomTextField extends StatelessWidget {
   final TextStyle? hintTextStyle;
   final Widget? suffixIcon;
   final Widget? prefixIcon;
+  final Function(String)? onChanged;
 
   const AppCustomTextField({
     super.key,
@@ -32,6 +33,7 @@ class AppCustomTextField extends StatelessWidget {
     this.hintTextStyle,
     this.prefixIcon,
     this.suffixIcon,
+    this.onChanged
   });
 
   @override
@@ -60,6 +62,7 @@ class AppCustomTextField extends StatelessWidget {
         SizedBox(
           width: width,
           child: TextFormField(
+            onChanged: onChanged,
             textAlignVertical: TextAlignVertical.top,
             minLines: minLines ?? 1,
             maxLines: minLines != null ? minLines! + 2 : 1,

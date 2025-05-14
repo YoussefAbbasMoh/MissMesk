@@ -31,6 +31,7 @@ class AppRoutes {
       '/clientsaccounts/clientdetails/clientstatement';
   static const String clientScheduledInstallments =
       '/clientsaccounts/clientdetails/scheduledinstallments';
+  static const String clientInvoice = '/clientsaccounts/clientdetails/clientinvoice';
 
   static const String production = '/production';
   static const String dailyLog = '/dailyLog';

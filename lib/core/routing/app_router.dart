@@ -6,6 +6,7 @@ import 'package:miss_misq/features/clients/view/client_details_view.dart';
 import 'package:miss_misq/features/clients/view/client_scheduled_installments_view.dart';
 import 'package:miss_misq/features/clients/view/client_statement_view.dart';
 import 'package:miss_misq/features/clients/view/clients_accounts_view.dart';
+import 'package:miss_misq/features/clients/view/invoice_view.dart';
 
 import 'package:miss_misq/features/home/view/home_view.dart';
 import 'package:miss_misq/features/login/view/login_view.dart';
@@ -160,9 +161,14 @@ class AppRouter {
                 path: AppRoutes.clientStatement,
                 builder: (context, state) => const ClientStatementView(),
               ),
-               GoRoute(
+              GoRoute(
                 path: AppRoutes.clientScheduledInstallments,
-                builder: (context, state) => const ClientScheduledInstallmentsView(),
+                builder:
+                    (context, state) => const ClientScheduledInstallmentsView(),
+              ),
+              GoRoute(
+                path: AppRoutes.clientInvoice,
+                builder: (context, state) => const InvoiceView(),
               ),
             ],
           ),
