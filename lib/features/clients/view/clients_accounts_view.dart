@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:miss_misq/core/routing/routes.dart';
 import 'package:miss_misq/core/theming/app_text_styles.dart';
 import 'package:miss_misq/core/utils/assets_manager.dart';
 import 'package:miss_misq/core/widgets/app_custom_button.dart';
@@ -41,7 +43,14 @@ class ClientsAccountsView extends StatelessWidget {
                 'عنوان العميل': const TableCustomText('عنوان العميل'),
                 'نوع العميل': const TableCustomText('نوع العميل'),
                 'الوصف': const TableCustomText('الوصف'),
-                '': SvgPicture.asset(AssetsManager.linkOut, height: 25),
+                '': InkWell(
+                  onTap: () {
+                    context.go(
+                      '${AppRoutes.clientDetails}?clientName=محل ملابس الأميرة',
+                    );
+                  },
+                  child: SvgPicture.asset(AssetsManager.linkOut, height: 25),
+                ),
               },
             ),
           ),

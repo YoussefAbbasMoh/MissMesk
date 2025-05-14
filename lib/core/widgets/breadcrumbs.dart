@@ -20,22 +20,20 @@ class Breadcrumbs extends StatelessWidget {
       AppRoutes.providerDetails: 'providerName',
       AppRoutes.itemCardBase: 'itemId',
       AppRoutes.providerOrder: 'orderId',
+      AppRoutes.clientDetails: 'clientName',
     };
 
     for (int i = 0; i < validSegments.length; i++) {
       accumulatedPath += '/${validSegments[i]}';
 
       // 🔍 مطابقة المسار مع مفتاح موجود في العناوين
-      String matchedKey = arabicBreadcrumbTitles.keys.firstWhere(
-        (k) {
-          if (k.contains('/:')) {
-            final base = k.split('/:').first;
-            return accumulatedPath.startsWith(base);
-          }
-          return accumulatedPath == k;
-        },
-        orElse: () => '',
-      );
+      String matchedKey = arabicBreadcrumbTitles.keys.firstWhere((k) {
+        if (k.contains('/:')) {
+          final base = k.split('/:').first;
+          return accumulatedPath.startsWith(base);
+        }
+        return accumulatedPath == k;
+      }, orElse: () => '');
 
       if (matchedKey.isNotEmpty) {
         // 🧠 إذا المسار ضمن المسارات الديناميكية

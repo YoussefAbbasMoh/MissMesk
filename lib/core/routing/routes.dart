@@ -24,6 +24,7 @@ class AppRoutes {
   static const String providerOrder = '/providersaccounts/providerdetails/providerorder';
 
   static const String clientsAccounts = '/clientsaccounts';
+  static const String clientDetails= '/clientsaccounts/clientdetails';
 
   static const String production = '/production';
   static const String dailyLog = '/dailyLog';

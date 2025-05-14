@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:miss_misq/core/routing/routes.dart';
 import 'package:miss_misq/core/widgets/main_layout.dart';
+import 'package:miss_misq/features/clients/view/client_details_view.dart';
+import 'package:miss_misq/features/clients/view/clients_accounts_view.dart';
 
 import 'package:miss_misq/features/home/view/home_view.dart';
 import 'package:miss_misq/features/login/view/login_view.dart';
@@ -51,6 +53,7 @@ class AppRouter {
               ),
             ],
           ),
+
           StatefulShellBranch(
             routes: [
               GoRoute(
@@ -102,22 +105,7 @@ class AppRouter {
               ),
             ],
           ),
-          StatefulShellBranch(
-            routes: [
-              GoRoute(
-                path: AppRoutes.dailyLog,
-                builder: (context, state) => const DailyLogView(),
-              ),
-            ],
-          ),
-          StatefulShellBranch(
-            routes: [
-              GoRoute(
-                path: AppRoutes.settings,
-                builder: (context, state) => const SettingsView(),
-              ),
-            ],
-          ),
+
           StatefulShellBranch(
             routes: [
               GoRoute(
@@ -150,8 +138,39 @@ class AppRouter {
               GoRoute(
                 path: AppRoutes.providerOrder,
                 builder: (context, state) {
-                  return OrderView();
+                  return const OrderView();
                 },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: AppRoutes.clientsAccounts,
+                builder: (context, state) => const ClientsAccountsView(),
+              ),
+              GoRoute(
+                path: AppRoutes.clientDetails,
+                builder: (context, state) => const ClientDetailsView(),
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: AppRoutes.dailyLog,
+                builder: (context, state) => const DailyLogView(),
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: AppRoutes.settings,
+                builder: (context, state) => const SettingsView(),
               ),
             ],
           ),
