@@ -20,12 +20,17 @@ class AppRoutes {
   static const String providerDetails = '/providersaccounts/providerdetails';
   static const String providerAccountStatement =
       '/providersaccounts/providerdetails/provideraccountstatement';
-  static const String providerScheduledInstallments = '/providersaccounts/providerdetails/scheduledinstallments';
-  static const String providerOrder = '/providersaccounts/providerdetails/providerorder';
+  static const String providerScheduledInstallments =
+      '/providersaccounts/providerdetails/scheduledinstallments';
+  static const String providerOrder =
+      '/providersaccounts/providerdetails/providerorder';
 
   static const String clientsAccounts = '/clientsaccounts';
-  static const String clientDetails= '/clientsaccounts/clientdetails';
-  static const String clientStatement = '/clientsaccounts/clientdetails/clientstatement';
+  static const String clientDetails = '/clientsaccounts/clientdetails';
+  static const String clientStatement =
+      '/clientsaccounts/clientdetails/clientstatement';
+  static const String clientScheduledInstallments =
+      '/clientsaccounts/clientdetails/scheduledinstallments';
 
   static const String production = '/production';
   static const String dailyLog = '/dailyLog';
@@ -55,4 +60,5 @@ final Map<String, String> arabicBreadcrumbTitles = {
   AppRoutes.providerScheduledInstallments: 'الأقساط المجدولة',
   AppRoutes.providerOrder: 'طلبية المورد',
   AppRoutes.clientStatement: 'كشف حساب العميل',
+  AppRoutes.clientScheduledInstallments: 'الأقساط المجدولة',
 };

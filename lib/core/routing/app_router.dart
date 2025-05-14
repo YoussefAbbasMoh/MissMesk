@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:miss_misq/core/routing/routes.dart';
 import 'package:miss_misq/core/widgets/main_layout.dart';
 import 'package:miss_misq/features/clients/view/client_details_view.dart';
+import 'package:miss_misq/features/clients/view/client_scheduled_installments_view.dart';
 import 'package:miss_misq/features/clients/view/client_statement_view.dart';
 import 'package:miss_misq/features/clients/view/clients_accounts_view.dart';
 
@@ -158,6 +159,10 @@ class AppRouter {
               GoRoute(
                 path: AppRoutes.clientStatement,
                 builder: (context, state) => const ClientStatementView(),
+              ),
+               GoRoute(
+                path: AppRoutes.clientScheduledInstallments,
+                builder: (context, state) => const ClientScheduledInstallmentsView(),
               ),
             ],
           ),

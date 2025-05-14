@@ -117,7 +117,9 @@ class ClientDetailsView extends StatelessWidget {
                 borderRadius: 8,
                 color: Colors.white,
                 titleColor: Colors.black,
-                onPressed: () {},
+                onPressed: () {
+                  context.go(AppRoutes.clientScheduledInstallments);
+                },
               ),
             ],
           ),

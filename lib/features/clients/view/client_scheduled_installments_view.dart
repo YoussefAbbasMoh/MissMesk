@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:miss_misq/core/theming/app_text_styles.dart';
 import 'package:miss_misq/core/utils/extensions.dart';
-import 'package:miss_misq/core/widgets/app_custom_button.dart';
 import 'package:miss_misq/core/widgets/app_custom_text_field.dart';
 import 'package:miss_misq/core/widgets/dynamic_table.dart';
 import 'package:miss_misq/core/widgets/search_with_actions.dart';
 import 'package:miss_misq/core/widgets/spacing.dart';
 import 'package:miss_misq/core/widgets/table_custom_text.dart';
-import 'package:miss_misq/features/clients/view/widgets/add_transaction_dialog.dart';
 
-class ClientStatementView extends StatelessWidget {
-  const ClientStatementView({super.key});
+class ClientScheduledInstallmentsView extends StatelessWidget {
+  const ClientScheduledInstallmentsView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +26,7 @@ class ClientStatementView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    'محل ملابس الأميرة - كشف حساب العميل',
+                    'محل ملابس الأميرة - الأقساط المجدولة',
                     style: AppTextStyles.font16BlackSemiBold,
                   ),
                   Text(
@@ -89,40 +87,18 @@ class ClientStatementView extends StatelessWidget {
             fillColor: Colors.white,
           ),
           const VerticalSpacing(40),
-          
-          const Text(
-            'جميع المعاملات',
-            style: AppTextStyles.font16BlackSemiBold,
-          ),
-          const VerticalSpacing(20),
           DynamicTable(
             rowData: List.generate(
-              5,
+              7,
               (_) => {
                 'الرقم التسلسلي': const TableCustomText('1'),
-                'نوع المعاملة': const TableCustomText('دفعة فورية'),
                 'رقم الفاتورة': const TableCustomText('5633222236'),
-                'تاريخ المعاملة': const TableCustomText('1   2/10/2024'),
-                'المبلغ الآجل': const TableCustomText('6,000'),
-                'المبلغ المسدد': const TableCustomText('70,000'),
-                'الرصيد المستحق': const TableCustomText(
-                  '16,000',
-                  color: Colors.red,
-                ),
-                'رصيد الشركة': const TableCustomText('70,000'),
-                'طريقة التسلم': const TableCustomText('تحويل بنكي'),
+                'رقم القسط': const TableCustomText('1'),
+                'قيمة القسط': const TableCustomText('100'),
+                'تاريخ الدفعة': const TableCustomText('21/07/2023'),
               },
             ),
-          ),
-          const VerticalSpacing(40),
-          AppCustomButton(
-            title: 'إضافة معاملة',
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (context) => const AddTransactionDialog(),
-              );
-            },
+            tableWidth: context.width * .5,
           ),
         ],
       ),
