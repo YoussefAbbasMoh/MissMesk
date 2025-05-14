@@ -9,7 +9,7 @@ import 'package:miss_misq/core/widgets/app_custom_text_field.dart';
 import 'package:miss_misq/core/widgets/dynamic_table.dart';
 import 'package:miss_misq/core/widgets/spacing.dart';
 import 'package:miss_misq/core/widgets/table_custom_text.dart';
-import 'package:miss_misq/features/providers/view/widgets/add_new_item_dialog.dart';
+import 'package:miss_misq/features/clients/view/widgets/invoice_search_section.dart';
 
 class OrderView extends StatelessWidget {
   const OrderView({super.key});
@@ -106,32 +106,33 @@ class OrderView extends StatelessWidget {
           ),
 
           const VerticalSpacing(20),
-          AppCustomTextField(
-            label: 'إضافة صنف',
-            hintText: 'بحث بإسم او كود الصنف',
-            width: context.width * .4,
-            fillColor: Colors.white,
-            isRequired: false,
-            titleFontSize: 14,
-            prefixIcon: const Icon(
-              Icons.search,
-              color: AppPallete.lightGreyColor,
-            ),
-            suffixIcon: TextButton(
-              style: TextButton.styleFrom(
-                backgroundColor: AppPallete.primaryColor,
-                padding: const EdgeInsets.all(16),
-                shape: const RoundedRectangleBorder(),
-              ),
-              onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (_) => const AddNewItemDialog(),
-                );
-              },
-              child: const Text('+', style: AppTextStyles.font24WhiteSemiBold),
-            ),
-          ),
+          // AppCustomTextField(
+          //   label: 'إضافة صنف',
+          //   hintText: 'بحث بإسم او كود الصنف',
+          //   width: context.width * .4,
+          //   fillColor: Colors.white,
+          //   isRequired: false,
+          //   titleFontSize: 14,
+          //   prefixIcon: const Icon(
+          //     Icons.search,
+          //     color: AppPallete.lightGreyColor,
+          //   ),
+          //   suffixIcon: TextButton(
+          //     style: TextButton.styleFrom(
+          //       backgroundColor: AppPallete.primaryColor,
+          //       padding: const EdgeInsets.all(16),
+          //       shape: const RoundedRectangleBorder(),
+          //     ),
+          //     onPressed: () {
+          //       showDialog(
+          //         context: context,
+          //         builder: (_) => const AddNewItemDialog(),
+          //       );
+          //     },
+          //     child: const Text('+', style: AppTextStyles.font24WhiteSemiBold),
+          //   ),
+          // ),
+          const InvoiceSearchSection(),
           const VerticalSpacing(20),
           DynamicTable(
             rowData: List.generate(
