@@ -9,6 +9,8 @@ import 'package:miss_misq/features/clients/view/clients_accounts_view.dart';
 import 'package:miss_misq/features/clients/view/invoice_view.dart';
 
 import 'package:miss_misq/features/home/view/home_view.dart';
+import 'package:miss_misq/features/job_orders/view/job_order_details_view.dart';
+import 'package:miss_misq/features/job_orders/view/job_orders_history_view.dart';
 import 'package:miss_misq/features/login/view/login_view.dart';
 
 import 'package:miss_misq/features/inventory/view/inventory_view.dart';
@@ -169,6 +171,19 @@ class AppRouter {
               GoRoute(
                 path: AppRoutes.clientInvoice,
                 builder: (context, state) => const InvoiceView(),
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: AppRoutes.jobOrdersHistory,
+                builder: (context, state) => const JobOrdersHistoryView(),
+              ),
+              GoRoute(
+                path: AppRoutes.jobOrderDetails,
+                builder: (context, state) => const JobOrderDetailsView(),
               ),
             ],
           ),

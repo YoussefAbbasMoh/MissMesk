@@ -83,11 +83,11 @@ List<SideMenuButtonModel> menuItems = [
   SideMenuButtonModel(
     title: 'متابعة الإنتاج',
     iconPath: AssetsManager.production,
-    route: AppRoutes.production,
+    route: AppRoutes.jobOrdersHistory,
     subItems: [
       SideMenuSubItemModel(
-        title: 'متابعة الإنتاج',
-        route: AppRoutes.production,
+        title: 'سجل أوامر الشغل',
+        route: AppRoutes.jobOrdersHistory,
       ),
     ],
   ),

@@ -31,10 +31,14 @@ class AppRoutes {
       '/clientsaccounts/clientdetails/clientstatement';
   static const String clientScheduledInstallments =
       '/clientsaccounts/clientdetails/scheduledinstallments';
-  static const String clientInvoice = '/clientsaccounts/clientdetails/clientinvoice';
+  static const String clientInvoice =
+      '/clientsaccounts/clientdetails/clientinvoice';
 
-  static const String production = '/production';
+  static const String jobOrdersHistory = '/jobordershistory';
+  static const String jobOrderDetails = '/jobordershistory/joborderdetails';
+
   static const String dailyLog = '/dailyLog';
+
   static const String settings = '/settings';
 }
 
@@ -49,7 +53,7 @@ final Map<String, String> arabicBreadcrumbTitles = {
   AppRoutes.assetsHistory: 'سجل الأصول',
   AppRoutes.providersAccounts: 'حسابات الموردين',
   AppRoutes.clientsAccounts: 'حسابات العملاء',
-  AppRoutes.production: 'متابعة الإنتاج',
+  AppRoutes.jobOrdersHistory: 'سجل أوامر الشغل',
   AppRoutes.dailyLog: 'دفتر اليومية',
   AppRoutes.settings: 'الإعدادات',
   AppRoutes.itemCardBase: 'بطاقة مخزون صنف',
@@ -60,6 +64,8 @@ final Map<String, String> arabicBreadcrumbTitles = {
   AppRoutes.providerAccountStatement: 'كشف حساب المورد',
   AppRoutes.providerScheduledInstallments: 'الأقساط المجدولة',
   AppRoutes.providerOrder: 'طلبية المورد',
+  AppRoutes.clientDetails: 'تفاصيل العميل',
   AppRoutes.clientStatement: 'كشف حساب العميل',
+  AppRoutes.jobOrderDetails: 'أمر الشغل',
   AppRoutes.clientScheduledInstallments: 'الأقساط المجدولة',
 };
