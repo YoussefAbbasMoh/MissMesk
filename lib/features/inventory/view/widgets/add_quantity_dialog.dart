@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:miss_misq/core/theming/app_text_styles.dart';
-import 'package:miss_misq/core/utils/assets_manager.dart';
 import 'package:miss_misq/core/utils/extensions.dart';
 import 'package:miss_misq/core/widgets/app_custom_dialog.dart';
 import 'package:miss_misq/core/widgets/app_custom_text_field.dart';
@@ -22,102 +21,98 @@ class _AddQuantityDialogState extends State<AddQuantityDialog> {
   Widget build(BuildContext context) {
     return AppCustomDialog(
       title: 'اضافة كمية',
-      iconPath: AssetsManager.management,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const _ItemInfoSection(),
-          const VerticalSpacing(20),
-          const Text(
-            'بيانات عملية الإضافة',
-            style: AppTextStyles.font20BlackSemiBold,
-          ),
-          const VerticalSpacing(20),
-          Row(
-            spacing: 20,
-            crossAxisAlignment: CrossAxisAlignment.baseline,
-            textBaseline: TextBaseline.alphabetic,
-            children: [
-              Flexible(
-                child: AppCustomTextField(
-                  titleFontSize: 14,
-                  label: 'الكمية المضافة',
-                  hintText: 'أدخل الكمية المضافة',
-                  hintTextStyle: AppTextStyles.font14GreyRegular,
-                ),
+      children: [
+        const _ItemInfoSection(),
+        const VerticalSpacing(20),
+        const Text(
+          'بيانات عملية الإضافة',
+          style: AppTextStyles.font20BlackSemiBold,
+        ),
+        const VerticalSpacing(20),
+        Row(
+          spacing: 20,
+          crossAxisAlignment: CrossAxisAlignment.baseline,
+          textBaseline: TextBaseline.alphabetic,
+          children: [
+            Flexible(
+              child: AppCustomTextField(
+                titleFontSize: 14,
+                label: 'الكمية المضافة',
+                hintText: 'أدخل الكمية المضافة',
+                hintTextStyle: AppTextStyles.font14GreyRegular,
               ),
-              Flexible(
-                child: AppCustomTextField(
-                  titleFontSize: 14,
-                  label: 'رقم إذن الإضافة',
-                  isRequired: false,
-                  hintText: 'أدخل أذن الإضافة',
-                  hintTextStyle: AppTextStyles.font14GreyRegular,
-                ),
+            ),
+            Flexible(
+              child: AppCustomTextField(
+                titleFontSize: 14,
+                label: 'رقم إذن الإضافة',
+                isRequired: false,
+                hintText: 'أدخل أذن الإضافة',
+                hintTextStyle: AppTextStyles.font14GreyRegular,
               ),
-              Flexible(
-                child: DropdownTextFieldWithTitle(
-                  onChanged: (value) {},
-                  title: 'المورد',
-                  items: const ['رقم 1', 'رقم 2', 'رقم 3', 'رقم 4'],
-                  hintText: 'أختر أسم المورد',
-                  value: 'رقم 1',
-                ),
+            ),
+            Flexible(
+              child: DropdownTextFieldWithTitle(
+                onChanged: (value) {},
+                title: 'المورد',
+                items: const ['رقم 1', 'رقم 2', 'رقم 3', 'رقم 4'],
+                hintText: 'أختر أسم المورد',
+                value: 'رقم 1',
               ),
-            ],
-          ),
-          const VerticalSpacing(10),
-          Row(
-            spacing: 20,
-            crossAxisAlignment: CrossAxisAlignment.baseline,
-            textBaseline: TextBaseline.alphabetic,
-            children: [
-              Flexible(
-                child: AppCustomTextField(
-                  titleFontSize: 14,
-                  label: 'مسئول التسجيل',
-                  hintText: 'أدخل أسم مسئول التسجيل',
-                  hintTextStyle: AppTextStyles.font14GreyRegular,
-                ),
+            ),
+          ],
+        ),
+        const VerticalSpacing(10),
+        Row(
+          spacing: 20,
+          crossAxisAlignment: CrossAxisAlignment.baseline,
+          textBaseline: TextBaseline.alphabetic,
+          children: [
+            Flexible(
+              child: AppCustomTextField(
+                titleFontSize: 14,
+                label: 'مسئول التسجيل',
+                hintText: 'أدخل أسم مسئول التسجيل',
+                hintTextStyle: AppTextStyles.font14GreyRegular,
               ),
-              const Flexible(child: SizedBox()),
-              const Flexible(child: SizedBox()),
-            ],
-          ),
-          const VerticalSpacing(20),
-          AppCustomTextField(
-            titleFontSize: 14,
-            label: 'ملاحظات',
-            isRequired: false,
-            hintText: 'أضف ملاحظاتك',
-            hintTextStyle: AppTextStyles.font14GreyRegular,
-            minLines: 2,
-          ),
-          const VerticalSpacing(20),
-          SwitchRow(
-            label: 'كمية مرتجعة',
-            value: isReturnedItem,
-            onChanged: (value) {
-              setState(() {
-                isReturnedItem = value;
-              });
-            },
-          ),
-          const VerticalSpacing(20),
-          if (isReturnedItem) const _ReturnedItemFields(),
-          SwitchRow(
-            label: 'كمية جديدة',
-            value: isNewItem,
-            onChanged: (value) {
-              setState(() {
-                isNewItem = value;
-              });
-            },
-          ),
-          const VerticalSpacing(20),
-          if (isNewItem) const _NewItemFields(),
-        ],
-      ),
+            ),
+            const Flexible(child: SizedBox()),
+            const Flexible(child: SizedBox()),
+          ],
+        ),
+        const VerticalSpacing(20),
+        AppCustomTextField(
+          titleFontSize: 14,
+          label: 'ملاحظات',
+          isRequired: false,
+          hintText: 'أضف ملاحظاتك',
+          hintTextStyle: AppTextStyles.font14GreyRegular,
+          minLines: 2,
+        ),
+        const VerticalSpacing(20),
+        SwitchRow(
+          label: 'كمية مرتجعة',
+          value: isReturnedItem,
+          onChanged: (value) {
+            setState(() {
+              isReturnedItem = value;
+            });
+          },
+        ),
+        const VerticalSpacing(20),
+        if (isReturnedItem) const _ReturnedItemFields(),
+        SwitchRow(
+          label: 'كمية جديدة',
+          value: isNewItem,
+          onChanged: (value) {
+            setState(() {
+              isNewItem = value;
+            });
+          },
+        ),
+        const VerticalSpacing(20),
+        if (isNewItem) const _NewItemFields(),
+      ],
     );
   }
 }

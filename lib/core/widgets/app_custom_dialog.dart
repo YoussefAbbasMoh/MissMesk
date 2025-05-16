@@ -2,20 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:miss_misq/core/theming/app_pallete.dart';
 import 'package:miss_misq/core/theming/app_text_styles.dart';
+import 'package:miss_misq/core/utils/assets_manager.dart';
 import 'package:miss_misq/core/widgets/spacing.dart';
 
 class AppCustomDialog extends StatelessWidget {
   const AppCustomDialog({
     super.key,
-    required this.child,
+    required this.children,
     required this.title,
-    required this.iconPath,
     this.onSave,
   });
 
-  final Widget child;
+  final List<Widget> children;
   final String title;
-  final String iconPath;
   final void Function()? onSave;
 
   @override
@@ -32,8 +31,15 @@ class AppCustomDialog extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _DialogHeader(title: title, iconPath: iconPath, onSave: onSave),
-                Padding(padding: const EdgeInsets.all(24), child: child),
+                _DialogHeader(title: title, onSave: onSave),
+                Padding(
+                  padding: const EdgeInsets.all(24),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    spacing: 20,
+                    children: children,
+                  ),
+                ),
               ],
             ),
           ),
@@ -44,14 +50,9 @@ class AppCustomDialog extends StatelessWidget {
 }
 
 class _DialogHeader extends StatelessWidget {
-  const _DialogHeader({
-    required this.title,
-    required this.iconPath,
-    this.onSave,
-  });
+  const _DialogHeader({required this.title, this.onSave});
 
   final String title;
-  final String iconPath;
   final void Function()? onSave;
 
   @override
@@ -65,7 +66,7 @@ class _DialogHeader extends StatelessWidget {
       child: Row(
         children: [
           SvgPicture.asset(
-            iconPath,
+            AssetsManager.management,
             height: 25,
             colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
           ),

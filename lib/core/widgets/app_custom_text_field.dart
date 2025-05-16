@@ -33,7 +33,7 @@ class AppCustomTextField extends StatelessWidget {
     this.hintTextStyle,
     this.prefixIcon,
     this.suffixIcon,
-    this.onChanged
+    this.onChanged,
   });
 
   @override

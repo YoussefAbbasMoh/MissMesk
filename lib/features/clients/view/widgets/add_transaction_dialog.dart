@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:miss_misq/core/theming/app_pallete.dart';
 import 'package:miss_misq/core/theming/app_text_styles.dart';
-import 'package:miss_misq/core/utils/assets_manager.dart';
 import 'package:miss_misq/core/utils/extensions.dart';
 import 'package:miss_misq/core/widgets/app_custom_dialog.dart';
 import 'package:miss_misq/core/widgets/app_custom_text_field.dart';
@@ -14,11 +13,7 @@ class AddTransactionDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppCustomDialog(
       title: 'معاملة توريد قسط',
-      iconPath: AssetsManager.management,
-      child: Column(
-        spacing: 20,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+      children: [
           const Text('بيانات العميل', style: AppTextStyles.font16BlackSemiBold),
           const Row(
             spacing: 20,
@@ -93,7 +88,6 @@ class AddTransactionDialog extends StatelessWidget {
             ],
           ),
         ],
-      ),
     );
   }
 }
