@@ -14,28 +14,8 @@ class NewInventoryProcessView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final row = {
-      'الرقم التسلسلي': const TableCustomText('1'),
-      'رقم كود الصنف': const TableCustomText('11010234'),
-      'أسم الصنف': const TableCustomText('اسم الصنف'),
-      'الوحدة': const TableCustomText('متر'),
-      'الكمية الدفترية': const TableCustomText('350'),
-      'الكمية الفعلية': const TableCustomText('324'),
-      'الفروق + -': const TableCustomText('12350'),
-      'الحالة': const TableCustomText('بواقي'),
-      '': InkWell(
-        onTap: () {
-          showDialog(
-            context: context,
-            builder: (context) => const NewItemInventoryDialog(),
-          );
-        },
-        child: const Center(child: Icon(Icons.edit)),
-      ),
-    };
     return SingleChildScrollView(
       padding: const EdgeInsets.all(16),
-
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
@@ -44,7 +24,7 @@ class NewInventoryProcessView extends StatelessWidget {
             'عملية جرد جديدة',
             style: AppTextStyles.font20BlackSemiBold,
           ),
-          const VerticalSpacing( 10),
+          const VerticalSpacing(10),
           Text(
             'تاريخ بدأ الجرد: 21/07/2023',
             style: AppTextStyles.font12GreyRegular,
@@ -100,11 +80,33 @@ class NewInventoryProcessView extends StatelessWidget {
             onPressed: () {},
             width: context.width * 0.1,
           ),
-
           const VerticalSpacing(20),
           const Text('عملية الجرد', style: AppTextStyles.font16BlackSemiBold),
           const VerticalSpacing(20),
-          DynamicTable(rowData: [row, row, row, row, row]),
+          DynamicTable(
+            rowData: List.generate(
+              6,
+              (index) => {
+                'الرقم التسلسلي': const TableCustomText('1'),
+                'رقم كود الصنف': const TableCustomText('11010234'),
+                'أسم الصنف': const TableCustomText('اسم الصنف'),
+                'الوحدة': const TableCustomText('متر'),
+                'الكمية الدفترية': const TableCustomText('350'),
+                'الكمية الفعلية': const TableCustomText('324'),
+                'الفروق + -': const TableCustomText('12350'),
+                'الحالة': const TableCustomText('بواقي'),
+                '': InkWell(
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) => const NewItemInventoryDialog(),
+                    );
+                  },
+                  child: const Center(child: Icon(Icons.edit)),
+                ),
+              },
+            ),
+          ),
           const VerticalSpacing(20),
           AppCustomButton(
             title: 'جرد صنف جديد',

@@ -139,13 +139,17 @@ class ProviderDetailsView extends StatelessWidget {
               AppCustomButton(
                 title: 'كشف حساب المورد',
                 onPressed: () {
-                  context.go(AppRoutes.providerAccountStatement);
+                  context.go(
+                    '${AppRoutes.providerAccountStatement}?providerName=${context.queryParam('providerName')}&mainIndex=${context.queryParam('mainIndex')}&subIndex=${context.queryParam('subIndex')}',
+                  );
                 },
               ),
               AppCustomButton(
                 title: 'الأقساط المجدولة',
                 onPressed: () {
-                  context.go(AppRoutes.providerScheduledInstallments);
+                  context.go(
+                    '${AppRoutes.providerScheduledInstallments}?providerName=${context.queryParam('providerName')}&mainIndex=${context.queryParam('mainIndex')}&subIndex=${context.queryParam('subIndex')}',
+                  );
                 },
                 color: Colors.white,
                 titleColor: Colors.black,
@@ -170,7 +174,7 @@ class ProviderDetailsView extends StatelessWidget {
                 '': InkWell(
                   onTap: () {
                     context.go(
-                      '${AppRoutes.providerOrder}?orderId=طلبية_012872790',
+                      '${AppRoutes.providerOrder}?providerName=${context.queryParam('providerName')}&orderId=طلبية_012872790&mainIndex=${context.queryParam('mainIndex')}&subIndex=${context.queryParam('subIndex')}',
                     );
                   },
                   child: SvgPicture.asset(AssetsManager.linkOut, height: 25),

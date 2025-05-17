@@ -6,9 +6,11 @@ import 'package:miss_misq/core/widgets/app_custom_button.dart';
 import 'package:miss_misq/core/widgets/app_custom_text_field.dart';
 import 'package:miss_misq/core/widgets/dynamic_table.dart';
 import 'package:miss_misq/core/widgets/search_with_actions.dart';
+import 'package:miss_misq/core/widgets/search_with_result.dart';
 import 'package:miss_misq/core/widgets/spacing.dart';
 import 'package:miss_misq/core/widgets/table_custom_text.dart';
-import 'package:miss_misq/features/clients/view/widgets/invoice_search_section.dart';
+import 'package:miss_misq/features/clients/view/widgets/add_item_in_invoice_dialog.dart';
+import 'package:miss_misq/features/providers/view/widgets/add_new_item_dialog.dart';
 
 class InvoiceView extends StatelessWidget {
   const InvoiceView({super.key});
@@ -84,7 +86,23 @@ class InvoiceView extends StatelessWidget {
             ),
           ),
           const VerticalSpacing(20),
-          const InvoiceSearchSection(),
+          SearchWithResult(
+            items: const ['قطن ناعم', 'قماش عالي الجودة', 'قماش كتان'],
+            title: 'المنتجات المطلوبة',
+            hintText: 'بحث بإسم او كود الصنف',
+            onItemSelected: (value) {
+              showDialog(
+                context: context,
+                builder: (context) => const AddItemInInvoiceDialog(),
+              );
+            },
+            onAddNewItem: () {
+              showDialog(
+                context: context,
+                builder: (context) => const AddNewItemDialog(),
+              );
+            },
+          ),
           const VerticalSpacing(20),
           DynamicTable(
             rowData: List.generate(
@@ -148,4 +166,3 @@ class InvoiceView extends StatelessWidget {
     );
   }
 }
-

@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:miss_misq/core/routing/routes.dart';
 import 'package:miss_misq/core/theming/app_text_styles.dart';
 import 'package:miss_misq/core/utils/assets_manager.dart';
+import 'package:miss_misq/core/utils/extensions.dart';
 import 'package:miss_misq/core/widgets/app_custom_button.dart';
 import 'package:miss_misq/core/widgets/dynamic_table.dart';
 import 'package:miss_misq/core/widgets/search_with_actions.dart';
@@ -49,7 +50,7 @@ class JobOrdersHistoryView extends StatelessWidget {
                 '': InkWell(
                   onTap: () {
                     context.go(
-                      '${AppRoutes.jobOrderDetails}?jobOrderId=أمر الشغل 8726099',
+                      '${AppRoutes.jobOrderDetails}?jobOrderId=أمر الشغل 8726099&mainIndex=${context.queryParam('mainIndex')}&subIndex=${context.queryParam('subIndex')}',
                     );
                   },
                   child: SvgPicture.asset(AssetsManager.linkOut, height: 28),

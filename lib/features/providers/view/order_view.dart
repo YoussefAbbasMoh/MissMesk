@@ -7,9 +7,11 @@ import 'package:miss_misq/core/utils/extensions.dart';
 import 'package:miss_misq/core/widgets/app_custom_button.dart';
 import 'package:miss_misq/core/widgets/app_custom_text_field.dart';
 import 'package:miss_misq/core/widgets/dynamic_table.dart';
+import 'package:miss_misq/core/widgets/search_with_result.dart';
 import 'package:miss_misq/core/widgets/spacing.dart';
 import 'package:miss_misq/core/widgets/table_custom_text.dart';
-import 'package:miss_misq/features/clients/view/widgets/invoice_search_section.dart';
+import 'package:miss_misq/features/clients/view/widgets/add_item_in_invoice_dialog.dart';
+import 'package:miss_misq/features/providers/view/widgets/add_new_item_dialog.dart';
 
 class OrderView extends StatelessWidget {
   const OrderView({super.key});
@@ -104,35 +106,24 @@ class OrderView extends StatelessWidget {
             width: context.width * .14,
             child: _buildTextField('عدد الأقساط', '0'),
           ),
-
           const VerticalSpacing(20),
-          // AppCustomTextField(
-          //   label: 'إضافة صنف',
-          //   hintText: 'بحث بإسم او كود الصنف',
-          //   width: context.width * .4,
-          //   fillColor: Colors.white,
-          //   isRequired: false,
-          //   titleFontSize: 14,
-          //   prefixIcon: const Icon(
-          //     Icons.search,
-          //     color: AppPallete.lightGreyColor,
-          //   ),
-          //   suffixIcon: TextButton(
-          //     style: TextButton.styleFrom(
-          //       backgroundColor: AppPallete.primaryColor,
-          //       padding: const EdgeInsets.all(16),
-          //       shape: const RoundedRectangleBorder(),
-          //     ),
-          //     onPressed: () {
-          //       showDialog(
-          //         context: context,
-          //         builder: (_) => const AddNewItemDialog(),
-          //       );
-          //     },
-          //     child: const Text('+', style: AppTextStyles.font24WhiteSemiBold),
-          //   ),
-          // ),
-          const InvoiceSearchSection(),
+          SearchWithResult(
+            items: const ['قطن ناعم', 'قماش عالي الجودة', 'قماش كتان'],
+            title: 'إضافة صنف',
+            hintText: 'بحث يأسم أو كود الصنف',
+            onItemSelected: (value) {
+              showDialog(
+                context: context,
+                builder: (context) => const AddItemInInvoiceDialog(),
+              );
+            },
+            onAddNewItem: () {
+              showDialog(
+                context: context,
+                builder: (context) => const AddNewItemDialog(),
+              );
+            },
+          ),
           const VerticalSpacing(20),
           DynamicTable(
             rowData: List.generate(

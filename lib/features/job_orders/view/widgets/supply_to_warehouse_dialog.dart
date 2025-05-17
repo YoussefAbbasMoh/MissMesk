@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:miss_misq/core/theming/app_text_styles.dart';
 import 'package:miss_misq/core/widgets/app_custom_dialog.dart';
 import 'package:miss_misq/core/widgets/app_custom_text_field.dart';
+import 'package:miss_misq/core/widgets/search_with_result.dart';
 import 'package:miss_misq/core/widgets/switch_row.dart';
-import 'package:miss_misq/features/clients/view/widgets/invoice_search_section.dart';
 
 class SupplyToWarehouseDialog extends StatelessWidget {
   const SupplyToWarehouseDialog({super.key});
@@ -17,7 +17,12 @@ class SupplyToWarehouseDialog extends StatelessWidget {
           'بيانات المنتج الموُرد',
           style: AppTextStyles.font16BlackSemiBold,
         ),
-        const InvoiceSearchSection(),
+        SearchWithResult(
+          items: const ['قطن ناعم', 'قماش عالي الجودة', 'قماش كتان'],
+          title: 'إبحث في المخزن',
+          hintText: 'بحث يأسم أو كود الصنف',
+          onItemSelected: (value) {},
+        ),
         const Text('بيانات المخزن', style: AppTextStyles.font16BlackSemiBold),
         const Row(
           spacing: 20,

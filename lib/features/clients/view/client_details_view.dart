@@ -109,7 +109,9 @@ class ClientDetailsView extends StatelessWidget {
                 title: 'كشف حساب عميل',
                 borderRadius: 8,
                 onPressed: () {
-                  context.go(AppRoutes.clientStatement);
+                  context.go(
+                    '${AppRoutes.clientStatement}?clientName=${context.queryParam('clientName')}&mainIndex=${context.queryParam('mainIndex')}&subIndex=${context.queryParam('subIndex')}',
+                  );
                 },
               ),
               AppCustomButton(
@@ -118,7 +120,9 @@ class ClientDetailsView extends StatelessWidget {
                 color: Colors.white,
                 titleColor: Colors.black,
                 onPressed: () {
-                  context.go(AppRoutes.clientScheduledInstallments);
+                  context.go(
+                    '${AppRoutes.clientScheduledInstallments}?clientName=${context.queryParam('clientName')}&mainIndex=${context.queryParam('mainIndex')}&subIndex=${context.queryParam('subIndex')}',
+                  );
                 },
               ),
             ],
@@ -144,7 +148,9 @@ class ClientDetailsView extends StatelessWidget {
                 'وصف الطلبية': const TableCustomText('وصف الطلبية'),
                 '': InkWell(
                   onTap: () {
-                    context.go(AppRoutes.clientInvoice);
+                    context.go(
+                      '${AppRoutes.clientInvoice}?clientName=${context.queryParam('clientName')}&invoiceId=فاتورة رقم 12345&mainIndex=${context.queryParam('mainIndex')}&subIndex=${context.queryParam('subIndex')}',
+                    );
                   },
                   child: SvgPicture.asset(AssetsManager.linkOut, height: 25),
                 ),

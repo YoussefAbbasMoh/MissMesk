@@ -7,7 +7,6 @@ import 'package:miss_misq/core/utils/assets_manager.dart';
 import 'package:miss_misq/core/utils/extensions.dart';
 import 'package:miss_misq/core/widgets/app_custom_button.dart';
 import 'package:miss_misq/core/widgets/app_custom_dialog.dart';
-import 'package:miss_misq/core/widgets/spacing.dart';
 
 class UploadNewProductsDialog extends StatelessWidget {
   const UploadNewProductsDialog({super.key});
@@ -39,12 +38,10 @@ class UploadNewProductsDialog extends StatelessWidget {
             ),
           ],
         ),
-        const VerticalSpacing(10),
         const Text('رفع الملف', style: AppTextStyles.font16BlackSemiBold),
         Divider(
           color: AppPallete.lightGreyColor.withAlpha(100),
           endIndent: context.width * 0.2,
-          height: 20,
         ),
         SizedBox(
           width: context.width * 0.27,
@@ -78,7 +75,6 @@ class UploadNewProductsDialog extends StatelessWidget {
         Divider(
           color: AppPallete.lightGreyColor.withAlpha(100),
           endIndent: context.width * 0.25,
-          height: 20,
         ),
         Row(
           spacing: 10,
@@ -100,7 +96,6 @@ class UploadNewProductsDialog extends StatelessWidget {
             ),
           ],
         ),
-        const VerticalSpacing(20),
         const Text(
           'تنبيه: إذا كان المخزن يحتوي على أصناف مسبقة فسيتم دمج الأصناف الجديدة مع الأصناف المخزنة سابقاً.',
           style: AppTextStyles.font14BlackRegular,

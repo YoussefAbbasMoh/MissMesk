@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:miss_misq/core/routing/routes.dart';
 import 'package:miss_misq/core/theming/app_pallete.dart';
 import 'package:miss_misq/core/theming/app_text_styles.dart';
+import 'package:miss_misq/core/utils/extensions.dart';
 import 'package:miss_misq/core/widgets/app_custom_button.dart';
 import 'package:miss_misq/core/widgets/app_custom_text_field.dart';
 import 'package:miss_misq/core/widgets/dynamic_table.dart';
@@ -10,7 +11,6 @@ import 'package:miss_misq/core/widgets/search_with_actions.dart';
 import 'package:miss_misq/core/widgets/spacing.dart';
 import 'package:miss_misq/core/widgets/table_custom_text.dart';
 import 'package:miss_misq/features/inventory/view/widgets/add_quantity_dialog.dart';
-import 'package:miss_misq/features/inventory/view/widgets/item_card_custom_text_feild.dart';
 import 'package:miss_misq/features/inventory/view/widgets/quantity_disbrusement_dialog.dart';
 
 class ItemCardView extends StatelessWidget {
@@ -20,17 +20,6 @@ class ItemCardView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final row = {
-      'الرقم التسلسلي': const TableCustomText('1'),
-      'كود الكمية': const TableCustomText('12345'),
-      'المورد': const TableCustomText('اسم المورد'),
-      'الكمية': const TableCustomText('100'),
-      'تاريخ العملية': const TableCustomText('21/07/2023'),
-      'الحالة': const TableCustomText('بواقي'),
-      'سعر الوحدة': const TableCustomText('100'),
-      'قام بالتسجيل': const TableCustomText('اسم المسجل'),
-    };
-
     return SingleChildScrollView(
       padding: const EdgeInsets.all(16),
       child: Column(
@@ -78,20 +67,71 @@ class ItemCardView extends StatelessWidget {
             runSpacing: 20,
             alignment: WrapAlignment.start,
             children: [
-              ItemCardCustomTextFeild(label: 'رقم المخزن'),
-              ItemCardCustomTextFeild(label: 'اسم المخزن'),
-              ItemCardCustomTextFeild(label: 'مكان المخزن'),
-              ItemCardCustomTextFeild(label: 'رقم الرف'),
-              ItemCardCustomTextFeild(label: 'الوحدة'),
-              ItemCardCustomTextFeild(label: 'حد الطلب'),
-              ItemCardCustomTextFeild(label: 'نوع المنتج '),
+              AppCustomTextField(
+                label: 'رقم المخزن',
+                hintText: '123',
+                width: 200,
+                titleFontSize: 14,
+                isRequired: false,
+                fillColor: Colors.white,
+              ),
+              AppCustomTextField(
+                label: 'اسم المخزن',
+                hintText: '123',
+                width: 200,
+                titleFontSize: 14,
+                isRequired: false,
+                fillColor: Colors.white,
+              ),
+              AppCustomTextField(
+                label: 'مكان المخزن',
+                hintText: '123',
+                width: 200,
+                titleFontSize: 14,
+                isRequired: false,
+                fillColor: Colors.white,
+              ),
+              AppCustomTextField(
+                label: 'رقم الرف',
+                hintText: '123',
+                width: 200,
+                titleFontSize: 14,
+                isRequired: false,
+                fillColor: Colors.white,
+              ),
+              AppCustomTextField(
+                label: 'الوحدة',
+                hintText: '123',
+                width: 200,
+                titleFontSize: 14,
+                isRequired: false,
+                fillColor: Colors.white,
+              ),
+              AppCustomTextField(
+                label: 'حد الطلب',
+                hintText: '123',
+                width: 200,
+                titleFontSize: 14,
+                isRequired: false,
+                fillColor: Colors.white,
+              ),
+              AppCustomTextField(
+                label: 'نوع المنتج',
+                hintText: '123',
+                width: 200,
+                titleFontSize: 14,
+                isRequired: false,
+                fillColor: Colors.white,
+              ),
             ],
           ),
           const VerticalSpacing(30),
           AppCustomButton(
             title: 'سجل الحركات المخزنية',
             onPressed: () {
-              context.go(AppRoutes.inventoryTransactions);
+              context.go(
+                '${AppRoutes.inventoryTransactions}?itemId=${context.queryParam('itemId')}&mainIndex=${context.queryParam('mainIndex')}&subIndex=${context.queryParam('subIndex')}',
+              );
             },
           ),
           const VerticalSpacing(30),
@@ -100,7 +140,21 @@ class ItemCardView extends StatelessWidget {
             style: AppTextStyles.font16BlackSemiBold,
           ),
           const VerticalSpacing(10),
-          DynamicTable(rowData: [row, row, row, row, row, row, row, row, row]),
+          DynamicTable(
+            rowData: List.generate(
+              6,
+              (index) => {
+                'الرقم التسلسلي': const TableCustomText('1'),
+                'كود الكمية': const TableCustomText('12345'),
+                'المورد': const TableCustomText('اسم المورد'),
+                'الكمية': const TableCustomText('100'),
+                'تاريخ العملية': const TableCustomText('21/07/2023'),
+                'الحالة': const TableCustomText('بواقي'),
+                'سعر الوحدة': const TableCustomText('100'),
+                'قام بالتسجيل': const TableCustomText('اسم المسجل'),
+              },
+            ),
+          ),
           const VerticalSpacing(20),
           Row(
             spacing: 30,

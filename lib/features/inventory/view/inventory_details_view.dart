@@ -11,17 +11,6 @@ class InventoryDetailsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final row = {
-      'الرقم التسلسلي': const TableCustomText('1'),
-      'رقم كود الصنف': const TableCustomText('11010234'),
-      'أسم الصنف': const TableCustomText('أتواب حرير مزركش ورد - أصفر كناري'),
-      'الوحدة': const TableCustomText('متر'),
-      'الكمية الدفترية': const TableCustomText('350'),
-      'الكمية الفعلية': const TableCustomText('324'),
-      'الفروق + -': const TableCustomText('12350'),
-      'الحالة': const TableCustomText('بواقي'),
-    };
-
     return SingleChildScrollView(
       padding: const EdgeInsets.all(16),
       child: Column(
@@ -79,10 +68,26 @@ class InventoryDetailsView extends StatelessWidget {
               ],
             ),
           ),
-          const VerticalSpacing( 30),
+          const VerticalSpacing(30),
           const Text('بيانات الجرد', style: AppTextStyles.font16BlackSemiBold),
           const VerticalSpacing(20),
-          DynamicTable(rowData: [row, row, row, row, row]),
+          DynamicTable(
+            rowData: List.generate(
+              6,
+              (index) => {
+                'الرقم التسلسلي': const TableCustomText('1'),
+                'رقم كود الصنف': const TableCustomText('11010234'),
+                'أسم الصنف': const TableCustomText(
+                  'أتواب حرير مزركش ورد - أصفر كناري',
+                ),
+                'الوحدة': const TableCustomText('متر'),
+                'الكمية الدفترية': const TableCustomText('350'),
+                'الكمية الفعلية': const TableCustomText('324'),
+                'الفروق + -': const TableCustomText('12350'),
+                'الحالة': const TableCustomText('بواقي'),
+              },
+            ),
+          ),
         ],
       ),
     );
