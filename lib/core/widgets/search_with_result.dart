@@ -5,36 +5,49 @@ import 'package:miss_misq/core/utils/extensions.dart';
 import 'package:miss_misq/core/widgets/app_custom_button.dart';
 import 'package:miss_misq/core/widgets/app_custom_text_field.dart';
 import 'package:miss_misq/core/widgets/spacing.dart';
-import 'package:miss_misq/features/clients/view/widgets/search_result_item.dart';
-import 'package:miss_misq/features/providers/view/widgets/add_new_item_dialog.dart';
+import 'package:miss_misq/core/widgets/search_result_item.dart';
 
-class InvoiceSearchSection extends StatefulWidget {
-  const InvoiceSearchSection({super.key});
+class SearchWithResult extends StatefulWidget {
+  final List<String> items;
+
+  final String title;
+
+  final String hintText;
+
+  final String emptyResultsMessage;
+
+  final String createNewLabel;
+
+  final void Function(String)? onItemSelected;
+
+  final VoidCallback? onAddNewItem;
+
+  const SearchWithResult({
+    super.key,
+    required this.items,
+    required this.title,
+    required this.hintText,
+    this.emptyResultsMessage = 'لا يوجد نتائج مطابقة',
+    this.createNewLabel = 'إنشاء عنصر جديد',
+    this.onItemSelected,
+    this.onAddNewItem,
+  });
 
   @override
-  State<InvoiceSearchSection> createState() => _InvoiceSearchSectionState();
+  State<SearchWithResult> createState() => _SearchSelectFieldState();
 }
 
-class _InvoiceSearchSectionState extends State<InvoiceSearchSection> {
+class _SearchSelectFieldState extends State<SearchWithResult> {
   bool isSearching = false;
-
-  List<String> listOfItems = [
-    'قماش كتان عالي الجودة',
-    'قماش كتان',
-    'قماش عادي',
-  ];
-
   List<String> searchedItems = [];
 
-  void search(String value) {
+  void _search(String value) {
     setState(() {
       searchedItems =
-          listOfItems
-              .where(
-                (element) =>
-                    element.toLowerCase().contains(value.toLowerCase()),
-              )
+          widget.items
+              .where((e) => e.toLowerCase().contains(value.toLowerCase()))
               .toList();
+      isSearching = value.isNotEmpty;
     });
   }
 
@@ -43,14 +56,9 @@ class _InvoiceSearchSectionState extends State<InvoiceSearchSection> {
     return Column(
       children: [
         AppCustomTextField(
-          onChanged: (value) {
-            search(value);
-            setState(() {
-              isSearching = value.isNotEmpty;
-            });
-          },
-          label: 'المنتجات المطلوبة',
-          hintText: 'بحث بإسم او كود الصنف',
+          onChanged: _search,
+          label: widget.title,
+          hintText: widget.hintText,
           width: context.width * .4,
           fillColor: Colors.white,
           isRequired: false,
@@ -69,7 +77,6 @@ class _InvoiceSearchSectionState extends State<InvoiceSearchSection> {
             child: const Text('+', style: AppTextStyles.font24WhiteSemiBold),
           ),
         ),
-
         const VerticalSpacing(10),
         if (isSearching)
           Container(
@@ -86,29 +93,26 @@ class _InvoiceSearchSectionState extends State<InvoiceSearchSection> {
                       ? [
                         const VerticalSpacing(10),
                         Text(
-                          'لا يوجد صنف بهذا الأسم أو الكود',
+                          widget.emptyResultsMessage,
                           style: AppTextStyles.font14GreyRegular.copyWith(
                             color: AppPallete.lightGreyColor,
                           ),
                         ),
                         const VerticalSpacing(5),
                         AppCustomButton(
-                          title: 'إنشاء صنف جديد',
+                          title: widget.createNewLabel,
                           color: AppPallete.primaryColor,
-                          onPressed: () {
-                            showDialog(
-                              context: context,
-                              builder: (context) => const AddNewItemDialog(),
-                            );
-                          },
+                          onPressed: widget.onAddNewItem ?? () {},
                         ),
                         const VerticalSpacing(10),
                       ]
                       : List.generate(
                         searchedItems.length,
-                        (index) => SearchResultItem(
-                          title: searchedItems[index],
-                          onTap: () {},
+                        (i) => SearchResultItem(
+                          title: searchedItems[i],
+                          onTap:
+                              () =>
+                                  widget.onItemSelected?.call(searchedItems[i]),
                         ),
                       ),
             ),

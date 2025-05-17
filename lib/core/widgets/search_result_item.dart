@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:miss_misq/core/theming/app_pallete.dart';
 import 'package:miss_misq/core/theming/app_text_styles.dart';
-import 'package:miss_misq/features/clients/view/widgets/add_item_in_invoice_dialog.dart';
 
 class SearchResultItem extends StatelessWidget {
   const SearchResultItem({super.key, required this.title, this.onTap});
@@ -13,10 +12,7 @@ class SearchResultItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        showDialog(
-          context: context,
-          builder: (context) => const AddItemInInvoiceDialog(),
-        );
+        onTap!();
       },
       child: Container(
         width: double.infinity,
