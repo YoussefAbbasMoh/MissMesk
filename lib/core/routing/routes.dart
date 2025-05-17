@@ -68,4 +68,5 @@ final Map<String, String> arabicBreadcrumbTitles = {
   AppRoutes.clientStatement: 'كشف حساب العميل',
   AppRoutes.jobOrderDetails: 'أمر الشغل',
   AppRoutes.clientScheduledInstallments: 'الأقساط المجدولة',
+  AppRoutes.clientInvoice: 'فاتورة العميل',
 };

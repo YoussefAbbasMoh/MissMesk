@@ -22,6 +22,7 @@ class Breadcrumbs extends StatelessWidget {
       AppRoutes.providerOrder: 'orderId',
       AppRoutes.clientDetails: 'clientName',
       AppRoutes.jobOrderDetails: 'jobOrderId',
+      AppRoutes.clientInvoice : 'invoiceId',
     };
 
     for (int i = 0; i < validSegments.length; i++) {

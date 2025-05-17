@@ -30,6 +30,21 @@ class _SideMenuState extends State<SideMenu> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final uri = Uri.parse(GoRouterState.of(context).uri.toString());
+    final mainIndex = int.tryParse(uri.queryParameters['mainIndex'] ?? '');
+    final subIndex = int.tryParse(uri.queryParameters['subIndex'] ?? '');
+
+    if (mainIndex != null) {
+      _selectedIndex = mainIndex;
+      if (subIndex != null) {
+        _selectedSubIndices[mainIndex] = subIndex;
+      }
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -83,9 +98,11 @@ class _SideMenuState extends State<SideMenu> {
                 onTap: () {
                   _handleMenuItemTap(index);
                   if (item.subItems?.isNotEmpty ?? false) {
-                    context.go(item.subItems!.first.route);
+                    context.go(
+                      '${item.subItems!.first.route}?mainIndex=$index',
+                    );
                   } else {
-                    context.go(item.route);
+                    context.go('${item.route}?mainIndex=$index');
                   }
                 },
                 subItems: item.subItems ?? [],
@@ -93,7 +110,9 @@ class _SideMenuState extends State<SideMenu> {
                 selectedSubIndex: _selectedSubIndices[index] ?? 0,
                 onSubItemSelected: (subIndex) {
                   _handleSubItemTap(index, subIndex);
-                  context.go(item.subItems![subIndex].route);
+                  context.go(
+                    '${item.subItems![subIndex].route}?mainIndex=$index&subIndex=$subIndex',
+                  );
                 },
               );
             }),
