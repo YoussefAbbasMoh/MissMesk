@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:miss_misq/core/routing/routes.dart';
 import 'package:miss_misq/core/theming/app_text_styles.dart';
@@ -9,6 +8,7 @@ import 'package:miss_misq/core/widgets/app_custom_button.dart';
 import 'package:miss_misq/core/widgets/dynamic_table.dart';
 import 'package:miss_misq/core/widgets/search_with_actions.dart';
 import 'package:miss_misq/core/widgets/spacing.dart';
+import 'package:miss_misq/core/widgets/table_custom_icon.dart';
 import 'package:miss_misq/core/widgets/table_custom_text.dart';
 import 'package:miss_misq/features/job_orders/view/widgets/new_job_order_dialog.dart';
 
@@ -53,7 +53,7 @@ class JobOrdersHistoryView extends StatelessWidget {
                       '${AppRoutes.jobOrderDetails}?jobOrderId=أمر الشغل 8726099&mainIndex=${context.queryParam('mainIndex')}&subIndex=${context.queryParam('subIndex')}',
                     );
                   },
-                  child: SvgPicture.asset(AssetsManager.linkOut, height: 28),
+                  child: TableCustomIcon(AssetsManager.linkOut),
                 ),
               },
             ),

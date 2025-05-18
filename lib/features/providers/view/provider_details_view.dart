@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:miss_misq/core/routing/routes.dart';
 import 'package:miss_misq/core/theming/app_text_styles.dart';
@@ -10,6 +9,7 @@ import 'package:miss_misq/core/widgets/app_custom_text_field.dart';
 import 'package:miss_misq/core/widgets/dynamic_table.dart';
 import 'package:miss_misq/core/widgets/search_with_actions.dart';
 import 'package:miss_misq/core/widgets/spacing.dart';
+import 'package:miss_misq/core/widgets/table_custom_icon.dart';
 import 'package:miss_misq/core/widgets/table_custom_text.dart';
 import 'package:miss_misq/features/providers/models/provider_model.dart';
 import 'package:miss_misq/features/providers/view/widgets/create_provider_account_dialog.dart';
@@ -177,7 +177,7 @@ class ProviderDetailsView extends StatelessWidget {
                       '${AppRoutes.providerOrder}?providerName=${context.queryParam('providerName')}&orderId=طلبية_012872790&mainIndex=${context.queryParam('mainIndex')}&subIndex=${context.queryParam('subIndex')}',
                     );
                   },
-                  child: SvgPicture.asset(AssetsManager.linkOut, height: 25),
+                  child: TableCustomIcon(AssetsManager.linkOut),
                 ),
               },
             ),

@@ -9,6 +9,7 @@ import 'package:miss_misq/core/widgets/app_custom_text_field.dart';
 import 'package:miss_misq/core/widgets/dynamic_table.dart';
 import 'package:miss_misq/core/widgets/search_with_result.dart';
 import 'package:miss_misq/core/widgets/spacing.dart';
+import 'package:miss_misq/core/widgets/table_custom_icon.dart';
 import 'package:miss_misq/core/widgets/table_custom_text.dart';
 import 'package:miss_misq/features/clients/view/widgets/add_item_in_invoice_dialog.dart';
 import 'package:miss_misq/features/providers/view/widgets/add_new_item_dialog.dart';
@@ -139,7 +140,7 @@ class OrderView extends StatelessWidget {
                 'الوصف': const TableCustomText('لا يوجد وصف'),
                 '': InkWell(
                   onTap: () {},
-                  child: SvgPicture.asset(AssetsManager.linkOut, height: 25),
+                  child: TableCustomIcon(AssetsManager.linkOut),
                 ),
               },
             ),

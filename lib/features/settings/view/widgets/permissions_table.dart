@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:miss_misq/core/theming/app_pallete.dart';
 import 'package:miss_misq/core/theming/app_text_styles.dart';
+import 'package:miss_misq/core/utils/assets_manager.dart';
 import 'package:miss_misq/core/utils/extensions.dart';
 import 'package:miss_misq/core/widgets/dynamic_table.dart';
 import 'package:miss_misq/core/widgets/spacing.dart';
+import 'package:miss_misq/core/widgets/table_custom_icon.dart';
 import 'package:miss_misq/core/widgets/table_custom_text.dart';
 import 'package:miss_misq/features/settings/view/widgets/add_user_dialog.dart';
 
@@ -49,7 +51,10 @@ class PermissionsTable extends StatelessWidget {
                         builder: (context) => const AddUserDialog(),
                       );
                     },
-                    icon: const Icon(Icons.edit, color: Colors.white),
+                    icon: TableCustomIcon(
+                      AssetsManager.edit,
+                      color: Colors.white,
+                    ),
                   ),
                   IconButton(
                     style: IconButton.styleFrom(
@@ -63,7 +68,10 @@ class PermissionsTable extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {},
-                    icon: const Icon(Icons.delete_outline, color: Colors.white),
+                    icon: TableCustomIcon(
+                      AssetsManager.delete,
+                      color: Colors.white,
+                    ),
                   ),
                 ],
               ),

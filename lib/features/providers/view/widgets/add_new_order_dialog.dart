@@ -20,18 +20,18 @@ class AddNewOrderDialog extends StatelessWidget {
         const Row(
           spacing: 20,
           children: [
-            Flexible(child: _ItemField(label: 'اسم المورد')),
-            Flexible(child: _ItemField(label: 'كود المورد')),
-            Flexible(child: _ItemField(label: 'اسم ممثل التوريدات')),
-            Flexible(child: _ItemField(label: 'رقم هاتف المورد')),
+            Flexible(child: ReadOnlyTextField(label: 'اسم المورد')),
+            Flexible(child: ReadOnlyTextField(label: 'كود المورد')),
+            Flexible(child: ReadOnlyTextField(label: 'اسم ممثل التوريدات')),
+            Flexible(child: ReadOnlyTextField(label: 'رقم هاتف المورد')),
           ],
         ),
         const Row(
           spacing: 20,
           children: [
-            Flexible(child: _ItemField(label: 'نشاط المورد')),
-            Flexible(child: _ItemField(label: 'نوع التوريدات')),
-            Flexible(flex: 2, child: _ItemField(label: 'عنوان المورد')),
+            Flexible(child: ReadOnlyTextField(label: 'نشاط المورد')),
+            Flexible(child: ReadOnlyTextField(label: 'نوع التوريدات')),
+            Flexible(flex: 2, child: ReadOnlyTextField(label: 'عنوان المورد')),
           ],
         ),
         const Text('بيانات الطلبية', style: AppTextStyles.font16BlackSemiBold),
@@ -96,24 +96,6 @@ class AddNewOrderDialog extends StatelessWidget {
         ),
         const InstallmentsSection(),
       ],
-    );
-  }
-}
-
-class _ItemField extends StatelessWidget {
-  final String label;
-
-  const _ItemField({required this.label});
-
-  @override
-  Widget build(BuildContext context) {
-    return AppCustomTextField(
-      titleFontSize: 14,
-      label: label,
-      isRequired: false,
-      hintText: 'ادخل $label',
-      hintTextStyle: AppTextStyles.font14GreyRegular,
-      fillColor: const Color(0XFFEDE0CC),
     );
   }
 }

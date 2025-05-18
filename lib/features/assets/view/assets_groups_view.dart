@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:miss_misq/core/theming/app_text_styles.dart';
+import 'package:miss_misq/core/utils/assets_manager.dart';
 import 'package:miss_misq/core/utils/extensions.dart';
 import 'package:miss_misq/core/widgets/app_custom_button.dart';
 import 'package:miss_misq/core/widgets/dynamic_table.dart';
 import 'package:miss_misq/core/widgets/search_with_actions.dart';
 import 'package:miss_misq/core/widgets/spacing.dart';
+import 'package:miss_misq/core/widgets/table_custom_icon.dart';
 import 'package:miss_misq/core/widgets/table_custom_text.dart';
 import 'package:miss_misq/features/assets/view/widgets/add_new_assets_group_dialog.dart';
 
@@ -42,7 +44,7 @@ class AssetsGroupsView extends StatelessWidget {
                 ),
                 '': IconButton(
                   onPressed: () {},
-                  icon: const Icon(Icons.delete_outline, color: Colors.black),
+                  icon: TableCustomIcon(AssetsManager.delete),
                 ),
                 ' ': IconButton(
                   onPressed: () {
@@ -51,7 +53,7 @@ class AssetsGroupsView extends StatelessWidget {
                       builder: (context) => const AddNewAssetsGroupDialog(),
                     );
                   },
-                  icon: const Icon(Icons.edit, color: Colors.black),
+                  icon: TableCustomIcon(AssetsManager.edit),
                 ),
               },
             ),

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:miss_misq/core/theming/app_pallete.dart';
 import 'package:miss_misq/core/theming/app_text_styles.dart';
+import 'package:miss_misq/core/utils/assets_manager.dart';
 import 'package:miss_misq/core/utils/extensions.dart';
 import 'package:miss_misq/core/widgets/app_custom_text_field.dart';
 import 'package:miss_misq/core/widgets/dynamic_table.dart';
+import 'package:miss_misq/core/widgets/table_custom_icon.dart';
 import 'package:miss_misq/core/widgets/table_custom_text.dart';
 
 class AnotherExpenses extends StatelessWidget {
@@ -67,9 +69,12 @@ class AnotherExpenses extends StatelessWidget {
               ),
               '': InkWell(
                 onTap: () {},
-                child: const Icon(Icons.delete_outline),
+                child: TableCustomIcon(AssetsManager.delete),
               ),
-              ' ': InkWell(onTap: () {}, child: const Icon(Icons.edit)),
+              ' ': InkWell(
+                onTap: () {},
+                child: TableCustomIcon(AssetsManager.edit),
+              ),
             },
           ),
         ),

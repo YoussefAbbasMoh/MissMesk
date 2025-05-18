@@ -19,9 +19,13 @@ class AddItemInInvoiceDialog extends StatelessWidget {
         const Row(
           spacing: 20,
           children: [
-            Flexible(child: _ItemField(label: 'كود الصنف')),
-            Flexible(child: _ItemField(label: 'أسم الصنف')),
-            Flexible(child: _ItemField(label: 'الوحدة')),
+            Flexible(
+              child: ReadOnlyTextField(label: 'كود الصنف', initialValue: '123'),
+            ),
+            Flexible(
+              child: ReadOnlyTextField(label: 'أسم الصنف', initialValue: 'قماش سادة'),
+            ),
+            Flexible(child: ReadOnlyTextField(label: 'الوحدة', initialValue: 'متر')),
           ],
         ),
         Row(
@@ -90,24 +94,6 @@ class AddItemInInvoiceDialog extends StatelessWidget {
           minLines: 2,
         ),
       ],
-    );
-  }
-}
-
-class _ItemField extends StatelessWidget {
-  final String label;
-
-  const _ItemField({required this.label});
-
-  @override
-  Widget build(BuildContext context) {
-    return AppCustomTextField(
-      titleFontSize: 14,
-      label: label,
-      isRequired: false,
-      hintText: 'ادخل $label',
-      hintTextStyle: AppTextStyles.font14GreyRegular,
-      fillColor: const Color(0XFFEDE0CC),
     );
   }
 }

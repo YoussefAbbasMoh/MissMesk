@@ -17,6 +17,8 @@ class AppCustomTextField extends StatelessWidget {
   final Widget? suffixIcon;
   final Widget? prefixIcon;
   final Function(String)? onChanged;
+  final String? initialValue;
+  final bool? isReadOnly;
 
   const AppCustomTextField({
     super.key,
@@ -34,6 +36,8 @@ class AppCustomTextField extends StatelessWidget {
     this.prefixIcon,
     this.suffixIcon,
     this.onChanged,
+    this.initialValue,
+    this.isReadOnly,
   });
 
   @override
@@ -62,6 +66,11 @@ class AppCustomTextField extends StatelessWidget {
         SizedBox(
           width: width,
           child: TextFormField(
+            readOnly: isReadOnly ?? false,
+            style: AppTextStyles.font18BlackRegular.copyWith(
+              fontSize: titleFontSize,
+            ),
+            initialValue: initialValue,
             onChanged: onChanged,
             textAlignVertical: TextAlignVertical.top,
             minLines: minLines ?? 1,
@@ -79,7 +88,6 @@ class AppCustomTextField extends StatelessWidget {
             decoration: InputDecoration(
               suffixIcon: suffixIcon,
               prefixIcon: prefixIcon,
-
               fillColor: fillColor,
               filled: fillColor != null,
               focusedBorder: _border(fillColor ?? AppPallete.primaryColor),
@@ -106,6 +114,34 @@ class AppCustomTextField extends StatelessWidget {
     return OutlineInputBorder(
       borderRadius: BorderRadius.circular(5),
       borderSide: BorderSide(color: color),
+    );
+  }
+}
+
+class ReadOnlyTextField extends StatelessWidget {
+  final String label;
+  final String? initialValue;
+  final TextEditingController? controller;
+
+  const ReadOnlyTextField({
+    super.key,
+    required this.label,
+    this.initialValue,
+    this.controller,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return AppCustomTextField(
+      isReadOnly: true,
+      controller: controller,
+      titleFontSize: 12,
+      label: label,
+      isRequired: false,
+      hintText: 'ادخل $label',
+      hintTextStyle: AppTextStyles.font14GreyRegular,
+      initialValue: initialValue,
+      fillColor: const Color(0XFFEDE0CC),
     );
   }
 }

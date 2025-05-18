@@ -17,18 +17,42 @@ class PayingDueExpensesDialog extends StatelessWidget {
         const Row(
           spacing: 20,
           children: [
-            Flexible(child: _ItemField(label: 'اسم المورد')),
-            Flexible(child: _ItemField(label: 'كود المورد')),
-            Flexible(child: _ItemField(label: 'أسم ممثل التوريدات')),
-            Flexible(child: _ItemField(label: 'رقم هاتف المورد')),
+            Flexible(
+              child: ReadOnlyTextField(
+                label: 'اسم المورد',
+                initialValue: 'محمد إيهاب',
+              ),
+            ),
+            Flexible(
+              child: ReadOnlyTextField(label: 'كود المورد', initialValue: '12344'),
+            ),
+            Flexible(
+              child: ReadOnlyTextField(
+                label: 'أسم ممثل التوريدات',
+                initialValue: 'محمدإيهاب',
+              ),
+            ),
+            Flexible(
+              child: ReadOnlyTextField(
+                label: 'رقم هاتف المورد',
+                initialValue: '0123456789',
+              ),
+            ),
           ],
         ),
         const Row(
           spacing: 20,
           children: [
-            Flexible(child: _ItemField(label: 'نشاط المورد')),
-            Flexible(child: _ItemField(label: 'نوع التوريدات')),
-            Flexible(flex: 2, child: _ItemField(label: 'عنوان المورد')),
+            Flexible(
+              child: ReadOnlyTextField(label: 'نشاط المورد', initialValue: 'خامات'),
+            ),
+            Flexible(
+              child: ReadOnlyTextField(label: 'نوع التوريدات', initialValue: 'خامات'),
+            ),
+            Flexible(
+              flex: 2,
+              child: ReadOnlyTextField(label: 'عنوان المورد', initialValue: 'القاهرة'),
+            ),
           ],
         ),
         const Text('بيانات السداد', style: AppTextStyles.font16BlackSemiBold),
@@ -91,24 +115,6 @@ class PayingDueExpensesDialog extends StatelessWidget {
           ],
         ),
       ],
-    );
-  }
-}
-
-class _ItemField extends StatelessWidget {
-  final String label;
-
-  const _ItemField({required this.label});
-
-  @override
-  Widget build(BuildContext context) {
-    return AppCustomTextField(
-      titleFontSize: 14,
-      label: label,
-      isRequired: false,
-      hintText: 'ادخل $label',
-      hintTextStyle: AppTextStyles.font14GreyRegular,
-      fillColor: const Color(0XFFEDE0CC),
     );
   }
 }

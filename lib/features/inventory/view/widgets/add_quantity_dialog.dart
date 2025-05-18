@@ -130,32 +130,19 @@ class _ItemInfoSection extends StatelessWidget {
         Row(
           spacing: 10,
           children: [
-            Flexible(child: _ItemField(label: 'كود الصنف')),
-            Flexible(child: _ItemField(label: 'اسم الصنف')),
-            Flexible(child: _ItemField(label: 'نوع الصنف')),
-            Flexible(child: _ItemField(label: 'الوحدة', hintText: 'متر')),
+            Flexible(
+              child: ReadOnlyTextField(label: 'كود الصنف', initialValue: '1234'),
+            ),
+            Flexible(
+              child: ReadOnlyTextField(label: 'اسم الصنف', initialValue: 'صنف'),
+            ),
+            Flexible(
+              child: ReadOnlyTextField(label: 'نوع الصنف', initialValue: 'صنف'),
+            ),
+            Flexible(child: ReadOnlyTextField(label: 'الوحدة', initialValue: 'متر')),
           ],
         ),
       ],
-    );
-  }
-}
-
-class _ItemField extends StatelessWidget {
-  final String label;
-  final String? hintText;
-
-  const _ItemField({required this.label, this.hintText});
-
-  @override
-  Widget build(BuildContext context) {
-    return AppCustomTextField(
-      titleFontSize: 14,
-      label: label,
-      isRequired: false,
-      hintText: hintText ?? 'ادخل $label',
-      hintTextStyle: AppTextStyles.font14GreyRegular,
-      fillColor: const Color(0XFFEDE0CC),
     );
   }
 }

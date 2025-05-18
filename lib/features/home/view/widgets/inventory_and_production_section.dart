@@ -8,12 +8,6 @@ class InventoryAndProductionSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final row = {
-      'كود الصنف': const TableCustomText('كود الصنف'),
-      'اسم الصنف': const TableCustomText('اسم الصنف'),
-      'الوحدة': const TableCustomText('الوحدة'),
-      'الكمية الدفترية': const TableCustomText('الكمية الدفترية'),
-    };
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       spacing: 20,
@@ -34,7 +28,17 @@ class InventoryAndProductionSection extends StatelessWidget {
                   ],
                 ),
               ),
-              DynamicTable(rowData: [row, row, row, row]),
+              DynamicTable(
+                rowData: List.generate(
+                  6,
+                  (index) => {
+                    'كود الصنف': const TableCustomText('كود الصنف'),
+                    'اسم الصنف': const TableCustomText('اسم الصنف'),
+                    'الوحدة': const TableCustomText('الوحدة'),
+                    'الكمية الدفترية': const TableCustomText('الكمية الدفترية'),
+                  },
+                ),
+              ),
             ],
           ),
         ),
@@ -54,7 +58,17 @@ class InventoryAndProductionSection extends StatelessWidget {
                   ],
                 ),
               ),
-              DynamicTable(rowData: [row, row, row, row]),
+              DynamicTable(
+                rowData: List.generate(
+                  6,
+                  (index) => {
+                    'كود الصنف': const TableCustomText('كود الصنف'),
+                    'اسم الصنف': const TableCustomText('اسم الصنف'),
+                    'الوحدة': const TableCustomText('الوحدة'),
+                    'الكمية الدفترية': const TableCustomText('الكمية الدفترية'),
+                  },
+                ),
+              ),
             ],
           ),
         ),

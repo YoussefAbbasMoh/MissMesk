@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:miss_misq/core/routing/routes.dart';
 import 'package:miss_misq/core/theming/app_text_styles.dart';
@@ -10,6 +9,7 @@ import 'package:miss_misq/core/widgets/app_custom_text_field.dart';
 import 'package:miss_misq/core/widgets/dynamic_table.dart';
 import 'package:miss_misq/core/widgets/search_with_actions.dart';
 import 'package:miss_misq/core/widgets/spacing.dart';
+import 'package:miss_misq/core/widgets/table_custom_icon.dart';
 import 'package:miss_misq/core/widgets/table_custom_text.dart';
 import 'package:miss_misq/features/clients/view/widgets/add_new_customer_order_dialog.dart';
 
@@ -152,7 +152,7 @@ class ClientDetailsView extends StatelessWidget {
                       '${AppRoutes.clientInvoice}?clientName=${context.queryParam('clientName')}&invoiceId=فاتورة رقم 12345&mainIndex=${context.queryParam('mainIndex')}&subIndex=${context.queryParam('subIndex')}',
                     );
                   },
-                  child: SvgPicture.asset(AssetsManager.linkOut, height: 25),
+                  child: TableCustomIcon(AssetsManager.linkOut),
                 ),
               },
             ),

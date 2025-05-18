@@ -34,7 +34,8 @@ class DynamicTable<T> extends StatelessWidget {
   List<DataColumn> _buildColumns() {
     return _getColumnsNames(rowData[0])
         .map(
-          (name) => DataColumn(
+          (name) => DataColumn2(
+            fixedWidth: name == null || name.trim().isEmpty ? 70 : null,
             label: Text(
               name,
               style: AppTextStyles.font14WhiteSemiBold,
@@ -51,7 +52,7 @@ class DynamicTable<T> extends StatelessWidget {
   List<DataRow> _buildRows() {
     return rowData
         .map(
-          (e) => DataRow(
+          (e) => DataRow2(
             cells: [..._getFields(e).map((e) => DataCell(Center(child: e)))],
           ),
         )
@@ -80,6 +81,7 @@ class DynamicTable<T> extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10),
         child: DataTable2(
+          horizontalMargin: 0,
           columnSpacing: 10,
           headingRowHeight: headerHeight,
           dataRowHeight: rowHeight,

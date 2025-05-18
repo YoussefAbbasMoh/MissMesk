@@ -20,17 +20,36 @@ class AddNewCustomerOrderDialog extends StatelessWidget {
         const Row(
           spacing: 20,
           children: [
-            Flexible(child: _ItemField(label: 'اسم العميل')),
-            Flexible(child: _ItemField(label: 'كود العميل')),
-            Flexible(child: _ItemField(label: 'نوع العميل')),
-            Flexible(child: _ItemField(label: 'اسم ممثل العميل')),
+            Flexible(
+              child: ReadOnlyTextField(label: 'اسم العميل', initialValue: 'محمدإيهاب'),
+            ),
+            Flexible(
+              child: ReadOnlyTextField(label: 'كود العميل', initialValue: '12344'),
+            ),
+            Flexible(
+              child: ReadOnlyTextField(label: 'نوع العميل', initialValue: 'عميل'),
+            ),
+            Flexible(
+              child: ReadOnlyTextField(
+                label: 'اسم ممثل العميل',
+                initialValue: 'محمدإيهاب',
+              ),
+            ),
           ],
         ),
         const Row(
           spacing: 20,
           children: [
-            Flexible(child: _ItemField(label: 'رقم هاتف العميل')),
-            Flexible(flex: 2, child: _ItemField(label: 'عنوان المورد')),
+            Flexible(
+              child: ReadOnlyTextField(
+                label: 'رقم هاتف العميل',
+                initialValue: '0123456789',
+              ),
+            ),
+            Flexible(
+              flex: 2,
+              child: ReadOnlyTextField(label: 'عنوان المورد', initialValue: 'القاهرة'),
+            ),
             Flexible(child: SizedBox()),
           ],
         ),
@@ -94,24 +113,6 @@ class AddNewCustomerOrderDialog extends StatelessWidget {
         ),
         const InstallmentsSection(),
       ],
-    );
-  }
-}
-
-class _ItemField extends StatelessWidget {
-  final String label;
-
-  const _ItemField({required this.label});
-
-  @override
-  Widget build(BuildContext context) {
-    return AppCustomTextField(
-      titleFontSize: 14,
-      label: label,
-      isRequired: false,
-      hintText: 'ادخل $label',
-      hintTextStyle: AppTextStyles.font14GreyRegular,
-      fillColor: const Color(0XFFEDE0CC),
     );
   }
 }

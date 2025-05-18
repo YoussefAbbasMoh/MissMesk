@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:miss_misq/core/routing/routes.dart';
 import 'package:miss_misq/core/utils/assets_manager.dart';
@@ -8,6 +7,7 @@ import 'package:miss_misq/core/widgets/app_custom_button.dart';
 import 'package:miss_misq/core/widgets/dynamic_table.dart';
 import 'package:miss_misq/core/widgets/search_with_actions.dart';
 import 'package:miss_misq/core/widgets/spacing.dart';
+import 'package:miss_misq/core/widgets/table_custom_icon.dart';
 import 'package:miss_misq/core/widgets/table_custom_text.dart';
 import 'package:miss_misq/features/inventory/view/widgets/add_item_dialog.dart';
 import 'package:miss_misq/features/inventory/view/widgets/drop_down_filter.dart';
@@ -73,11 +73,7 @@ class InventoryView extends StatelessWidget {
                       '${AppRoutes.itemCardBase}?itemId=بطاقة مخزون صنف 89235&mainIndex=${context.queryParam('mainIndex')}&subIndex=${context.queryParam('subIndex')}',
                     );
                   },
-                  child: SvgPicture.asset(
-                    AssetsManager.linkOut,
-                    height: 30,
-                    fit: BoxFit.fill,
-                  ),
+                  child: TableCustomIcon(AssetsManager.linkOut),
                 ),
               },
             ),

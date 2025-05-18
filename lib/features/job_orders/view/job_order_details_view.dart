@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:miss_misq/core/theming/app_text_styles.dart';
+import 'package:miss_misq/core/utils/assets_manager.dart';
 import 'package:miss_misq/core/utils/extensions.dart';
 import 'package:miss_misq/core/widgets/app_custom_button.dart';
 import 'package:miss_misq/core/widgets/dynamic_table.dart';
 import 'package:miss_misq/core/widgets/search_with_actions.dart';
 import 'package:miss_misq/core/widgets/search_with_result.dart';
 import 'package:miss_misq/core/widgets/spacing.dart';
+import 'package:miss_misq/core/widgets/table_custom_icon.dart';
 import 'package:miss_misq/core/widgets/table_custom_text.dart';
 import 'package:miss_misq/features/clients/view/widgets/add_item_in_invoice_dialog.dart';
 import 'package:miss_misq/features/job_orders/view/widgets/another_expenses.dart';
@@ -82,9 +84,12 @@ class JobOrderDetailsView extends StatelessWidget {
                 'إجمالي القيمة (ج.م)': const TableCustomText('1000'),
                 '': InkWell(
                   onTap: () {},
-                  child: const Icon(Icons.delete_outline),
+                  child: TableCustomIcon(AssetsManager.delete),
                 ),
-                ' ': InkWell(onTap: () {}, child: const Icon(Icons.edit)),
+                ' ': InkWell(
+                  onTap: () {},
+                  child: TableCustomIcon(AssetsManager.edit),
+                ),
               },
             ),
           ),
@@ -119,9 +124,12 @@ class JobOrderDetailsView extends StatelessWidget {
                 'إجمالي قيمة الإهلاك (ج)': const TableCustomText('2500'),
                 '': InkWell(
                   onTap: () {},
-                  child: const Icon(Icons.delete_outline),
+                  child: TableCustomIcon(AssetsManager.delete),
                 ),
-                ' ': InkWell(onTap: () {}, child: const Icon(Icons.edit)),
+                ' ': InkWell(
+                  onTap: () {},
+                  child: TableCustomIcon(AssetsManager.edit),
+                ),
               },
             ),
           ),
