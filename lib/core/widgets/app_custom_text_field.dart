@@ -19,6 +19,7 @@ class AppCustomTextField extends StatelessWidget {
   final Function(String)? onChanged;
   final String? initialValue;
   final bool? isReadOnly;
+  final String? Function(String?)? validator;
 
   const AppCustomTextField({
     super.key,
@@ -38,6 +39,7 @@ class AppCustomTextField extends StatelessWidget {
     this.onChanged,
     this.initialValue,
     this.isReadOnly,
+    this.validator,
   });
 
   @override
@@ -75,12 +77,7 @@ class AppCustomTextField extends StatelessWidget {
             textAlignVertical: TextAlignVertical.top,
             minLines: minLines ?? 1,
             maxLines: minLines != null ? minLines! + 2 : 1,
-            validator: (value) {
-              if (isRequired && value == null || value == '') {
-                return '* $label الذي أدخلته غير صحيح ';
-              }
-              return null;
-            },
+            validator: validator,
             controller: controller,
             obscureText: obscureText,
             keyboardType: keyboardType,
