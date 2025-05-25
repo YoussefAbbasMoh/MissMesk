@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:miss_misq/core/di/dependency_injcection.dart';
 import 'package:miss_misq/core/routing/routes.dart';
 import 'package:miss_misq/core/widgets/main_layout.dart';
 import 'package:miss_misq/features/clients/view/client_details_view.dart';
@@ -11,6 +13,7 @@ import 'package:miss_misq/features/clients/view/invoice_view.dart';
 import 'package:miss_misq/features/home/view/home_view.dart';
 import 'package:miss_misq/features/job_orders/view/job_order_details_view.dart';
 import 'package:miss_misq/features/job_orders/view/job_orders_history_view.dart';
+import 'package:miss_misq/features/login/view/cubit/login_cubit.dart';
 import 'package:miss_misq/features/login/view/login_view.dart';
 
 import 'package:miss_misq/features/inventory/view/inventory_view.dart';
@@ -37,13 +40,15 @@ import 'package:miss_misq/features/daily_log/view/daily_log_view.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
-    initialLocation: AppRoutes.home,
+    initialLocation: AppRoutes.login,
     errorBuilder:
         (context, state) => const Scaffold(body: Center(child: Text('404'))),
     routes: [
       GoRoute(
         path: AppRoutes.login,
-        builder: (context, state) => const LoginView(),
+        builder:
+            (context, state) =>
+                BlocProvider.value(value: sl<LoginCubit>(), child: LoginView()),
       ),
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) {

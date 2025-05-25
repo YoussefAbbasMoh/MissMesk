@@ -1,8 +1,11 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:miss_misq/core/networking/cache_helper.dart';
 import 'package:miss_misq/core/theming/app_pallete.dart';
 import 'package:miss_misq/core/theming/app_text_styles.dart';
 import 'package:miss_misq/core/utils/assets_manager.dart';
+import 'package:miss_misq/core/utils/extensions.dart';
 import 'package:miss_misq/core/widgets/breadcrumbs.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -10,6 +13,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+
+  String getUserName() {
+    final data = jsonDecode(CachHelper.getString(key: 'user') ?? '{}');
+    final String name = data['name'].split(' ')[0] ?? '';
+    return name.capitalize();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +39,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             child: Row(
               spacing: 5,
               children: [
-                const Text('Ahmed', style: AppTextStyles.font20WhiteRegular),
+                Text(getUserName(), style: AppTextStyles.font20WhiteRegular),
                 SvgPicture.asset(AssetsManager.person),
               ],
             ),
