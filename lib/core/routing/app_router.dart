@@ -40,7 +40,9 @@ import 'package:miss_misq/features/settings/view/settings_view.dart';
 import 'package:miss_misq/features/daily_log/view/daily_log_view.dart';
 
 class AppRouter {
+  static final rootNavigatorKey = GlobalKey<NavigatorState>();
   static final GoRouter router = GoRouter(
+    navigatorKey: rootNavigatorKey,
     initialLocation: AppRoutes.login,
     errorBuilder:
         (context, state) => const Scaffold(body: Center(child: Text('404'))),
