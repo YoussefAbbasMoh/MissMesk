@@ -1,12 +1,26 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:miss_misq/core/networking/cache_helper.dart';
+import 'package:miss_misq/core/routing/routes.dart';
+import 'package:miss_misq/core/theming/app_pallete.dart';
 import 'package:miss_misq/core/theming/app_text_styles.dart';
 import 'package:miss_misq/core/utils/extensions.dart';
+import 'package:miss_misq/core/utils/show_toastification.dart';
 import 'package:miss_misq/core/widgets/app_custom_button.dart';
 import 'package:miss_misq/core/widgets/app_custom_text_field.dart';
 import 'package:miss_misq/core/widgets/spacing.dart';
+import 'package:miss_misq/features/settings/view/cubit/settings_cubit.dart';
+import 'package:toastification/toastification.dart';
 
 class PersonalInfo extends StatelessWidget {
   const PersonalInfo({super.key});
+
+  dynamic getUserData() {
+    final data = jsonDecode(CachHelper.getString(key: 'user') ?? '{}');
+    return data;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,56 +33,31 @@ class PersonalInfo extends StatelessWidget {
         ),
         const VerticalSpacing(20),
         SizedBox(
-          width: context.width * 0.6,
-          child: const Row(
-            spacing: 20,
-            children: [
-              Flexible(
-                child: AppCustomTextField(
-                  titleFontSize: 16,
-                  label: 'الإسم الكامل',
-                  hintText: 'عمر عبد العزيز اسلام',
-                  fillColor: Colors.white,
-                  isRequired: false,
-                ),
-              ),
-              Flexible(
-                child: AppCustomTextField(
-                  titleFontSize: 16,
-                  label: 'الإسم الكامل',
-                  hintText: 'عمر عبد العزيز اسلام',
-                  fillColor: Colors.white,
-                  isRequired: false,
-                ),
-              ),
-              Flexible(child: SizedBox()),
-            ],
-          ),
-        ),
-        const VerticalSpacing(20),
-        SizedBox(
-          width: context.width * 0.6,
+          width: context.width * 0.8,
           child: Row(
-            spacing: 20,
             crossAxisAlignment: CrossAxisAlignment.end,
-            // textBaseline: TextBaseline.ideographic,
+            spacing: 20,
             children: [
-              const Flexible(
+              Flexible(
                 child: AppCustomTextField(
-                  fillColor: Colors.white,
-                  label: 'رقم الهاتف',
                   titleFontSize: 16,
-                  hintText: '012345678910',
+                  label: 'الإسم الكامل',
+                  hintText: '',
+                  fillColor: Colors.white,
                   isRequired: false,
+                  initialValue: getUserData()['name'] ?? '',
+                  isReadOnly: true,
                 ),
               ),
-              const Flexible(
+              Flexible(
                 child: AppCustomTextField(
-                  fillColor: Colors.white,
                   titleFontSize: 16,
-                  label: 'كلمة المرور',
-                  hintText: '********',
+                  label: 'البريد الإلكتروني',
+                  hintText: '',
+                  fillColor: Colors.white,
                   isRequired: false,
+                  initialValue: getUserData()['email'] ?? '',
+                  isReadOnly: true,
                 ),
               ),
               Flexible(
@@ -76,6 +65,36 @@ class PersonalInfo extends StatelessWidget {
                   title: 'تغيير كلمة المرور',
                   onPressed: () {},
                   borderRadius: 10,
+                ),
+              ),
+              BlocListener<SettingsCubit, SettingsState>(
+                listenWhen:
+                    (previous, current) =>
+                        current is SettingsLogoutSuccess ||
+                        current is SettingsLogoutFailure,
+                listener: (context, state) {
+                  if (state is SettingsLogoutSuccess) {
+                    context.go(AppRoutes.login);
+                    showToastification(
+                      message: state.message,
+                      type: ToastificationType.success,
+                    );
+                  } else if (state is SettingsLogoutFailure) {
+                    showToastification(
+                      message: state.message,
+                      type: ToastificationType.error,
+                    );
+                  }
+                },
+                child: Flexible(
+                  child: AppCustomButton(
+                    color: AppPallete.darkRedColor,
+                    title: 'تسجيل الخروج',
+                    onPressed: () {
+                      context.read<SettingsCubit>().logout();
+                    },
+                    borderRadius: 10,
+                  ),
                 ),
               ),
             ],

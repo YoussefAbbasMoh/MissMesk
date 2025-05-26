@@ -69,6 +69,7 @@ class AppCustomTextField extends StatelessWidget {
           width: width,
           child: TextFormField(
             readOnly: isReadOnly ?? false,
+            enabled: isReadOnly != true,
             style: AppTextStyles.font18BlackRegular.copyWith(
               fontSize: titleFontSize,
             ),

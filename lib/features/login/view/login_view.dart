@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:miss_misq/core/routing/routes.dart';
 import 'package:miss_misq/core/utils/assets_manager.dart';
+import 'package:miss_misq/core/utils/show_toastification.dart';
 import 'package:miss_misq/features/login/view/cubit/login_cubit.dart';
 import 'package:miss_misq/features/login/view/widgets/credits_section.dart';
 import 'package:miss_misq/features/login/view/widgets/login_form.dart';
@@ -28,36 +29,23 @@ class LoginView extends StatelessWidget {
                 (state, previous) => loginStates.contains(state.runtimeType),
             listener: (context, state) {
               if (state is LoginFailure) {
-                Toastification().dismiss;
-                Toastification().show(
-                  context: context,
-                  title: const Text('فشل تسجيل الدخول'),
-                  direction: TextDirection.rtl,
-                  alignment: AlignmentDirectional.topStart,
-                  description: Text(state.message),
+                showToastification(
+                  message: state.message,
                   type: ToastificationType.error,
-                  autoCloseDuration: const Duration(seconds: 2),
                 );
               } else if (state is LoginSuccess) {
-                Toastification().dismiss;
-                context.go(AppRoutes.home);
-                Toastification().show(
-                  direction: TextDirection.rtl,
-                  alignment: AlignmentDirectional.topStart,
-                  context: context,
-                  title: const Text('تم تسجيل الدخول بنجاح'),
+                while (GoRouter.of(context).canPop()) {
+                  GoRouter.of(context).pop();
+                }
+                context.pushReplacement(AppRoutes.home);
+                showToastification(
+                  message: 'تم تسجيل الدخول بنجاح',
                   type: ToastificationType.success,
-                  autoCloseDuration: const Duration(seconds: 2),
                 );
               } else if (state is LoginLoading) {
-                Toastification().dismiss;
-                Toastification().show(
-                  context: context,
-                  title: const Text('جاري تسجيل الدخول'),
-                  direction: TextDirection.rtl,
-                  alignment: AlignmentDirectional.topStart,
+                showToastification(
+                  message: 'جاري تسجيل الدخول...',
                   type: ToastificationType.info,
-                  autoCloseDuration: const Duration(seconds: 2),
                 );
               }
             },

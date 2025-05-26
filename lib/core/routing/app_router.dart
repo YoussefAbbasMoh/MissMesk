@@ -34,6 +34,7 @@ import 'package:miss_misq/features/providers/view/provider_account_statement_vie
 import 'package:miss_misq/features/providers/view/providers_accounts_view.dart';
 import 'package:miss_misq/features/providers/view/provider_details_view.dart';
 import 'package:miss_misq/features/providers/view/provider_scheduled_installments_view.dart';
+import 'package:miss_misq/features/settings/view/cubit/settings_cubit.dart';
 
 import 'package:miss_misq/features/settings/view/settings_view.dart';
 import 'package:miss_misq/features/daily_log/view/daily_log_view.dart';
@@ -206,7 +207,11 @@ class AppRouter {
             routes: [
               GoRoute(
                 path: AppRoutes.settings,
-                builder: (context, state) => const SettingsView(),
+                builder:
+                    (context, state) => BlocProvider.value(
+                      value: sl<SettingsCubit>(),
+                      child: const SettingsView(),
+                    ),
               ),
             ],
           ),

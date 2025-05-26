@@ -26,7 +26,8 @@ class CompanySettings extends StatelessWidget {
                 child: AppCustomTextField(
                   titleFontSize: 16,
                   label: 'اسم الشركة',
-                  hintText: 'Miss Misk',
+                  initialValue: 'Miss Misk',
+                  hintText: 'ادخل اسم الشركة',
                   fillColor: Colors.white,
                   isRequired: false,
                 ),
@@ -58,7 +59,8 @@ class CompanySettings extends StatelessWidget {
                 child: AppCustomTextField(
                   titleFontSize: 16,
                   label: 'العنوان',
-                  hintText: '17 شارع , القاهرة , مصر',
+                  initialValue: '17 شارع , القاهرة , مصر',
+                  hintText: 'ادخل عنوان الشركة',
                   fillColor: Colors.white,
                   isRequired: false,
                 ),
@@ -67,11 +69,8 @@ class CompanySettings extends StatelessWidget {
                 child: AppCustomTextField(
                   titleFontSize: 16,
                   label: 'العملة الافتراضية',
-                  hintText: 'الجنية',
-                  prefixIcon: Icon(
-                    Icons.camera_alt,
-                    color: AppPallete.lightGreyColor,
-                  ),
+                  initialValue: 'الجنيه',
+                  hintText: 'ادخل العملة الافتراضية',
                   fillColor: Colors.white,
                   isRequired: false,
                 ),
@@ -91,7 +90,8 @@ class CompanySettings extends StatelessWidget {
                 child: AppCustomTextField(
                   titleFontSize: 16,
                   label: 'الرقم الضريبي',
-                  hintText: '343354651',
+                  initialValue: '343354651',
+                  hintText: 'ادخل الرقم الضريبي',
                   fillColor: Colors.white,
                   isRequired: false,
                 ),
