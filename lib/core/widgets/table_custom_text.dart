@@ -7,6 +7,15 @@ class TableCustomText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (text.isEmpty) {
+      return const Text(
+        'لا يوجد بيانات',
+        textAlign: TextAlign.center,
+        overflow: TextOverflow.ellipsis,
+        softWrap: true,
+        maxLines: 2,
+      );
+    }
     return Text(
       text,
       textAlign: TextAlign.center,

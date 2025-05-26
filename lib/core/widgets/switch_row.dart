@@ -8,6 +8,7 @@ class SwitchRow extends StatelessWidget {
   final ValueChanged<bool> onChanged;
 
   const SwitchRow({
+    super.key,
     required this.label,
     required this.value,
     required this.onChanged,

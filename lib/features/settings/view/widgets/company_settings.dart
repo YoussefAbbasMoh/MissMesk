@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:miss_misq/core/theming/app_pallete.dart';
 import 'package:miss_misq/core/theming/app_text_styles.dart';
 import 'package:miss_misq/core/utils/extensions.dart';
 import 'package:miss_misq/core/widgets/app_custom_button.dart';
 import 'package:miss_misq/core/widgets/app_custom_text_field.dart';
-import 'package:miss_misq/core/widgets/dropdown_text_field_with_title.dart';
 import 'package:miss_misq/core/widgets/spacing.dart';
 
 class CompanySettings extends StatelessWidget {
@@ -18,7 +16,7 @@ class CompanySettings extends StatelessWidget {
         const Text('اعدادات الشركة', style: AppTextStyles.font16BlackSemiBold),
         const VerticalSpacing(20),
         SizedBox(
-          width: context.width * 0.6,
+          width: context.width * 0.375,
           child: const Row(
             spacing: 20,
             children: [
@@ -35,27 +33,24 @@ class CompanySettings extends StatelessWidget {
               Flexible(
                 child: AppCustomTextField(
                   titleFontSize: 16,
-                  label: 'رفع اللوجو',
-                  hintText: 'تغيير الصورة',
-                  prefixIcon: Icon(
-                    Icons.camera_alt,
-                    color: AppPallete.lightGreyColor,
-                  ),
+                  label: 'العملة الافتراضية',
+                  initialValue: 'الجنيه',
+                  hintText: 'ادخل العملة الافتراضية',
                   fillColor: Colors.white,
                   isRequired: false,
                 ),
               ),
-              Flexible(child: SizedBox()),
             ],
           ),
         ),
         const VerticalSpacing(20),
         SizedBox(
-          width: context.width * 0.6,
-          child: const Row(
+          width: context.width * 0.57,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
             spacing: 20,
             children: [
-              Flexible(
+              const Flexible(
                 child: AppCustomTextField(
                   titleFontSize: 16,
                   label: 'العنوان',
@@ -65,27 +60,6 @@ class CompanySettings extends StatelessWidget {
                   isRequired: false,
                 ),
               ),
-              Flexible(
-                child: AppCustomTextField(
-                  titleFontSize: 16,
-                  label: 'العملة الافتراضية',
-                  initialValue: 'الجنيه',
-                  hintText: 'ادخل العملة الافتراضية',
-                  fillColor: Colors.white,
-                  isRequired: false,
-                ),
-              ),
-              Flexible(child: SizedBox()),
-            ],
-          ),
-        ),
-        const VerticalSpacing(20),
-        SizedBox(
-          width: context.width * 0.6,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            spacing: 20,
-            children: [
               const Flexible(
                 child: AppCustomTextField(
                   titleFontSize: 16,
@@ -94,17 +68,6 @@ class CompanySettings extends StatelessWidget {
                   hintText: 'ادخل الرقم الضريبي',
                   fillColor: Colors.white,
                   isRequired: false,
-                ),
-              ),
-              Flexible(
-                child: DropdownTextFieldWithTitle(
-                  items: const ['الجنيه', 'الدولار', 'اليورو'],
-                  value: 'الجنيه',
-                  title: 'العملة الافتراضية',
-                  hintText: 'الجنيه',
-                  fillColor: Colors.white,
-                  isRequired: false,
-                  onChanged: (value) {},
                 ),
               ),
               Flexible(
@@ -117,6 +80,7 @@ class CompanySettings extends StatelessWidget {
             ],
           ),
         ),
+        const VerticalSpacing(20),
       ],
     );
   }
