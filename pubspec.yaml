@@ -30,6 +30,7 @@ dependencies:
   dotted_border: ^2.1.0
   toastification: ^3.0.2
   cupertino_icons: ^1.0.8
+  skeletonizer: ^2.0.1
 
   # Networking
   dio: ^5.8.0+1
