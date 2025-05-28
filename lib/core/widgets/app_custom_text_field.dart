@@ -68,6 +68,7 @@ class AppCustomTextField extends StatelessWidget {
         SizedBox(
           width: width,
           child: TextFormField(
+            autovalidateMode: AutovalidateMode.onUserInteraction,
             readOnly: isReadOnly ?? false,
             enabled: isReadOnly != true,
             style: AppTextStyles.font18BlackRegular.copyWith(
@@ -93,6 +94,7 @@ class AppCustomTextField extends StatelessWidget {
               errorStyle: AppTextStyles.font16BlackRegular.copyWith(
                 color: Colors.red,
               ),
+              focusedErrorBorder: _border(Colors.red),
               errorBorder: _border(Colors.red),
               hintText: hintText,
               hintStyle:

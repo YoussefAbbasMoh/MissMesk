@@ -7,6 +7,7 @@ import 'package:miss_misq/features/settings/data/models/get_all_accounts_respons
 abstract class SettingsRepo {
   Future<ApiResult> logout();
   Future<ApiResult<GetAllAccountsResponseModel>> getAllAccounts();
+  Future<ApiResult<UserAccount>> addAccount({required UserAccount user});
 }
 
 class SettingsRepoImpl implements SettingsRepo {
@@ -34,6 +35,18 @@ class SettingsRepoImpl implements SettingsRepo {
       return ApiResult.failure(e.message);
     } catch (e) {
       return ApiResult.failure('مشكلة في جلب الحسابات');
+    }
+  }
+
+  @override
+  Future<ApiResult<UserAccount>> addAccount({required UserAccount user}) async {
+    try {
+      final response = await _settingsRemoteDataSource.addAccount(user: user);
+      return ApiResult.success(response);
+    } on ServerException catch (e) {
+      return ApiResult.failure(e.message);
+    } catch (e) {
+      return ApiResult.failure('مشكلة في إنشاء الحساب');
     }
   }
 }

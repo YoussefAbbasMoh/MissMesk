@@ -1,6 +1,5 @@
 part of 'settings_cubit.dart';
 
-
 @immutable
 sealed class SettingsState {}
 
@@ -32,8 +31,24 @@ final class SettingsGetAllAccountsSuccess extends SettingsState {
   SettingsGetAllAccountsSuccess(this.accounts);
 }
 
+// Add Account
+
 final class SettingsGetAllAccountsFailure extends SettingsState {
   final String message;
 
   SettingsGetAllAccountsFailure(this.message);
 }
+
+final class SettingsAddAccountLoading extends SettingsState {}
+
+final class SettingsAddAccountSuccess extends SettingsState {
+  final UserAccount user;
+
+  SettingsAddAccountSuccess(this.user);
+}
+
+final class SettingsAddAccountFailure extends SettingsState {
+  final String message;
+
+  SettingsAddAccountFailure(this.message);
+} 

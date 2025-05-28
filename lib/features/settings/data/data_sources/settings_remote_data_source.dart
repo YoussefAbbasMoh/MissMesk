@@ -7,6 +7,8 @@ abstract class SettingsRemoteDataSource {
   Future logout();
 
   Future<GetAllAccountsResponseModel> getAllAccounts();
+
+  Future<UserAccount> addAccount({required UserAccount user});
 }
 
 class SettingsRemoteDataSourceImpl implements SettingsRemoteDataSource {
@@ -32,6 +34,24 @@ class SettingsRemoteDataSourceImpl implements SettingsRemoteDataSource {
     try {
       final response = await _apiService.get(path: EndPoints.allAccounts);
       return GetAllAccountsResponseModel.fromJson(response.data['data']);
+    } on DioException catch (e) {
+      throw Exception(
+        e.response?.data['message'] ?? 'مشكلة في الاتصال بالسيرفر',
+      );
+    } catch (e) {
+      throw Exception('مشكلة في الاتصال بالسيرفر');
+    }
+  }
+
+  @override
+  Future<UserAccount> addAccount({required UserAccount user}) async {
+    try {
+      final response = await _apiService.post(
+        path: EndPoints.addAccount,
+        data: user.toJson(),
+      );
+
+      return UserAccount.fromJson(response.data['data']);
     } on DioException catch (e) {
       throw Exception(
         e.response?.data['message'] ?? 'مشكلة في الاتصال بالسيرفر',

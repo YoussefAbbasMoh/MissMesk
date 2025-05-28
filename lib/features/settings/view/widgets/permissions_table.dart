@@ -41,15 +41,18 @@ class _PermissionsTableState extends State<PermissionsTable> {
           buildWhen: (previous, current) {
             return current is SettingsGetAllAccountsSuccess ||
                 current is SettingsGetAllAccountsFailure ||
-                current is SettingsGetAllAccountsLoading;
+                current is SettingsGetAllAccountsLoading ||
+                current is SettingsAddAccountSuccess;
           },
           builder: (context, state) {
             final isLoading = state is SettingsGetAllAccountsLoading;
-            final hasData = state is SettingsGetAllAccountsSuccess;
+            final hasData =
+                state is SettingsGetAllAccountsSuccess ||
+                state is SettingsAddAccountSuccess;
 
             final accounts =
                 hasData
-                    ? state.accounts
+                    ? context.read<SettingsCubit>().accounts
                     : List.filled(
                       3,
                       UserAccount(name: 'اسم المستخدم', email: 'user@email'),

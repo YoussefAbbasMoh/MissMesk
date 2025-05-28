@@ -20,6 +20,8 @@ class GetAllAccountsResponseModel {
 
 class UserAccount {
   final String? id;
+  final String? password;
+  final String? confirmPassword;
   final String? name;
   final String? role;
   final String? email;
@@ -43,6 +45,8 @@ class UserAccount {
     this.suppliers,
     this.daily,
     this.settings,
+    this.password,
+    this.confirmPassword,
   });
 
   factory UserAccount.fromJson(Map<String, dynamic> json) {
@@ -58,14 +62,14 @@ class UserAccount {
       suppliers: json['suppliers'] ?? false,
       daily: json['daily'] ?? false,
       settings: json['setting'] ?? false,
+      password: json['password'] ?? '',
+      confirmPassword: json['confirmPassword'] ?? '',
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      '_id': id,
       'name': name,
-      'role': role,
       'email': email,
       'assets': assets,
       'inventory': inventory,
@@ -74,6 +78,8 @@ class UserAccount {
       'suppliers': suppliers,
       'daily': daily,
       'setting': settings,
+      'password': password,
+      'confirmPassword': confirmPassword,
     };
   }
 
@@ -81,7 +87,7 @@ class UserAccount {
     StringBuffer permissions = StringBuffer();
     if (user.assets ?? false) permissions.write('الأصول, ');
     if (user.inventory ?? false) permissions.write('المخزون, ');
-    if (user.production ?? false) permissions.write('المنتجات, ');
+    if (user.production ?? false) permissions.write('الإنتاج, ');
     if (user.clients ?? false) permissions.write('العملاء, ');
     if (user.suppliers ?? false) permissions.write('الموردين, ');
     if (user.daily ?? false) permissions.write('اليومية, ');
