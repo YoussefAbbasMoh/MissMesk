@@ -50,11 +50,20 @@ class _AddUserDialogState extends State<AddUserDialog> {
 
   @override
   void initState() {
-    nameController = TextEditingController(text: 'يووووووسف');
-    emailController = TextEditingController(text: 'joe@misk.com');
-    passwordController = TextEditingController(text: '123456');
-    confirmPasswordController = TextEditingController(text: '123456');
+    nameController = TextEditingController();
+    emailController = TextEditingController();
+    passwordController = TextEditingController();
+    confirmPasswordController = TextEditingController();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+    super.dispose();
   }
 
   @override

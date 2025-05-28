@@ -8,6 +8,7 @@ abstract class SettingsRepo {
   Future<ApiResult> logout();
   Future<ApiResult<GetAllAccountsResponseModel>> getAllAccounts();
   Future<ApiResult<UserAccount>> addAccount({required UserAccount user});
+  Future<ApiResult> resetUserPassword({required String newPassword});
 }
 
 class SettingsRepoImpl implements SettingsRepo {
@@ -47,6 +48,20 @@ class SettingsRepoImpl implements SettingsRepo {
       return ApiResult.failure(e.message);
     } catch (e) {
       return ApiResult.failure('مشكلة في إنشاء الحساب');
+    }
+  }
+
+  @override
+  Future<ApiResult> resetUserPassword( {required String newPassword}) async {
+    try {
+      await _settingsRemoteDataSource.resetUserPassword(
+        newPassword: newPassword,
+      );
+      return ApiResult.success('تم تغيير كلمة المرور بنجاح');
+    } on ServerException catch (e) {
+      return ApiResult.failure(e.message);
+    } catch (e) {
+      return ApiResult.failure('مشكلة في تغيير كلمة المرور');
     }
   }
 }

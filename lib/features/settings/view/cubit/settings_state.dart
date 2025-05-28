@@ -52,3 +52,19 @@ final class SettingsAddAccountFailure extends SettingsState {
 
   SettingsAddAccountFailure(this.message);
 } 
+
+// Reset Password
+
+final class SettingsResetPasswordLoading extends SettingsState {}
+
+final class SettingsResetPasswordSuccess extends SettingsState {
+  final String message;
+
+  SettingsResetPasswordSuccess(this.message);
+}
+
+final class SettingsResetPasswordFailure extends SettingsState {
+  final String message;
+
+  SettingsResetPasswordFailure(this.message);
+}

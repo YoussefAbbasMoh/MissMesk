@@ -47,13 +47,13 @@ class ApiService {
     }
   }
 
-  Future<Response> put({
+  Future<Response> patch({
     required String path,
     Map<String, dynamic>? headers,
     dynamic data,
   }) async {
     try {
-      return await _dio.put(
+      return await _dio.patch(
         path,
         data: data,
         options: Options(

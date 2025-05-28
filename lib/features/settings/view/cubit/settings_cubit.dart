@@ -41,4 +41,14 @@ class SettingsCubit extends Cubit<SettingsState> {
       emit(SettingsAddAccountFailure(result.message));
     }
   }
+
+  Future<void> resetUserPassword({required String newPassword}) async {
+    emit(SettingsResetPasswordLoading());
+    final result = await _settingsRepo.resetUserPassword(newPassword: newPassword);
+    if (result is Success) {
+      emit(SettingsResetPasswordSuccess(result.data));
+    } else if (result is Failure) {
+      emit(SettingsResetPasswordFailure(result.message));
+    }
+  }
 }

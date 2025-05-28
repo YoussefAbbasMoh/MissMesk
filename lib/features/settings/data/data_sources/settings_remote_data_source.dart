@@ -9,6 +9,8 @@ abstract class SettingsRemoteDataSource {
   Future<GetAllAccountsResponseModel> getAllAccounts();
 
   Future<UserAccount> addAccount({required UserAccount user});
+
+  Future resetUserPassword({required String newPassword});
 }
 
 class SettingsRemoteDataSourceImpl implements SettingsRemoteDataSource {
@@ -52,6 +54,22 @@ class SettingsRemoteDataSourceImpl implements SettingsRemoteDataSource {
       );
 
       return UserAccount.fromJson(response.data['data']);
+    } on DioException catch (e) {
+      throw Exception(
+        e.response?.data['message'] ?? 'مشكلة في الاتصال بالسيرفر',
+      );
+    } catch (e) {
+      throw Exception('مشكلة في الاتصال بالسيرفر');
+    }
+  }
+
+  @override
+  Future resetUserPassword({required String newPassword}) async {
+    try {
+      return await _apiService.patch(
+        path: EndPoints.resetPassword,
+        data: {'password': newPassword},
+      );
     } on DioException catch (e) {
       throw Exception(
         e.response?.data['message'] ?? 'مشكلة في الاتصال بالسيرفر',
