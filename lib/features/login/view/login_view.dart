@@ -42,11 +42,6 @@ class LoginView extends StatelessWidget {
                   message: 'تم تسجيل الدخول بنجاح',
                   type: ToastificationType.success,
                 );
-              } else if (state is LoginLoading) {
-                showToastification(
-                  message: 'جاري تسجيل الدخول...',
-                  type: ToastificationType.info,
-                );
               }
             },
             child: const SingleChildScrollView(

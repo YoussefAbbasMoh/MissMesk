@@ -10,6 +10,7 @@ import 'package:miss_misq/core/utils/extensions.dart';
 import 'package:miss_misq/core/utils/show_toastification.dart';
 import 'package:miss_misq/core/widgets/app_custom_button.dart';
 import 'package:miss_misq/core/widgets/app_custom_text_field.dart';
+import 'package:miss_misq/core/widgets/are_you_sure_dialog.dart';
 import 'package:miss_misq/core/widgets/spacing.dart';
 import 'package:miss_misq/features/settings/view/cubit/settings_cubit.dart';
 import 'package:toastification/toastification.dart';
@@ -71,7 +72,8 @@ class PersonalInfo extends StatelessWidget {
                 listenWhen:
                     (previous, current) =>
                         current is SettingsLogoutSuccess ||
-                        current is SettingsLogoutFailure,
+                        current is SettingsLogoutFailure ||
+                        current is SettingsLogoutLoading,
                 listener: (context, state) {
                   if (state is SettingsLogoutSuccess) {
                     context.go(AppRoutes.login);
@@ -91,7 +93,16 @@ class PersonalInfo extends StatelessWidget {
                     color: AppPallete.darkRedColor,
                     title: 'تسجيل الخروج',
                     onPressed: () {
-                      context.read<SettingsCubit>().logout();
+                      final settingsCubit = context.read<SettingsCubit>();
+                      showDialog(
+                        context: context,
+                        builder:
+                            (context) => AreYouSureDialog(
+                              title: 'هل تريد تسجيل الخروج؟',
+                              cubit: settingsCubit,
+                              onConfirm: settingsCubit.logout,
+                            ),
+                      );
                     },
                     borderRadius: 10,
                   ),

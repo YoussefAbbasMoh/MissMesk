@@ -52,10 +52,7 @@ class _PermissionsTableState extends State<PermissionsTable> {
                     ? state.accounts
                     : List.filled(
                       3,
-                      UserAccount(
-                        name: 'اسم المستخدم',
-                        email: 'user@email',
-                      ),
+                      UserAccount(name: 'اسم المستخدم', email: 'user@email'),
                     );
 
             if (state is SettingsGetAllAccountsFailure) {

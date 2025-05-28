@@ -23,8 +23,8 @@ class _LoginFormState extends State<LoginForm> {
 
   @override
   void initState() {
-    _emailController = TextEditingController();
-    _passwordController = TextEditingController();
+    _emailController = TextEditingController(text: 'mudar@gmail.com');
+    _passwordController = TextEditingController(text: '123456789');
     super.initState();
   }
 
@@ -94,9 +94,10 @@ class _LoginFormState extends State<LoginForm> {
                 const VerticalSpacing(30),
                 AppCustomButton(
                   title: 'تسجيل الدخول',
-                  onPressed: () async {
+                  isLoading: context.watch<LoginCubit>().state is LoginLoading,
+                  onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      await context.read<LoginCubit>().login(
+                      context.read<LoginCubit>().login(
                         email: _emailController.text,
                         password: _passwordController.text,
                       );

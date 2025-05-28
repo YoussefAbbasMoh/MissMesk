@@ -7,6 +7,9 @@ sealed class SettingsState {}
 final class SettingsInitial extends SettingsState {}
 
 // Logout
+
+final class SettingsLogoutLoading extends SettingsState {}
+
 final class SettingsLogoutSuccess extends SettingsState {
   final String message;
 

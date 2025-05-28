@@ -10,10 +10,11 @@ class AppCustomButton extends StatelessWidget {
     this.borderColor,
     this.color,
     this.titleColor,
-    this.icon,
+    this.icon,  
     this.borderRadius,
     this.fontSize,
     this.width,
+    this.isLoading = false,
   });
 
   final String title;
@@ -25,9 +26,16 @@ class AppCustomButton extends StatelessWidget {
   final double? borderRadius;
   final double? fontSize;
   final double? width;
+  final bool? isLoading;
 
   @override
   Widget build(BuildContext context) {
+    if (isLoading!) {
+      return const CircularProgressIndicator(
+        backgroundColor: AppPallete.lightBrownColor,
+        valueColor: AlwaysStoppedAnimation<Color>(AppPallete.primaryColor),
+      );
+    }
     return SizedBox(
       width: width,
       child: ElevatedButton(
@@ -45,7 +53,7 @@ class AppCustomButton extends StatelessWidget {
           spacing: 20,
           children: [
             Text(
-              title,
+              isLoading! ? '•••••' : title,
               style: AppTextStyles.font18BlackRegular.copyWith(
                 color: titleColor ?? Colors.white,
                 fontSize: fontSize,
