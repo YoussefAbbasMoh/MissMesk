@@ -51,7 +51,7 @@ final class SettingsAddAccountFailure extends SettingsState {
   final String message;
 
   SettingsAddAccountFailure(this.message);
-} 
+}
 
 // Reset Password
 
@@ -67,4 +67,20 @@ final class SettingsResetPasswordFailure extends SettingsState {
   final String message;
 
   SettingsResetPasswordFailure(this.message);
+}
+
+// Delete Account
+
+final class SettingsDeleteAccountLoading extends SettingsState {}
+
+final class SettingsDeleteAccountSuccess extends SettingsState {
+  final String message;
+
+  SettingsDeleteAccountSuccess(this.message);
+}
+
+final class SettingsDeleteAccountFailure extends SettingsState {
+  final String message;
+
+  SettingsDeleteAccountFailure(this.message);
 }

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:miss_misq/core/theming/app_pallete.dart';
 import 'package:miss_misq/core/theming/app_text_styles.dart';
 import 'package:miss_misq/core/utils/assets_manager.dart';
 import 'package:miss_misq/core/utils/extensions.dart';
+import 'package:miss_misq/core/utils/show_loading.dart';
+import 'package:miss_misq/core/utils/show_toastification.dart';
 import 'package:miss_misq/core/widgets/dynamic_table.dart';
 import 'package:miss_misq/core/widgets/spacing.dart';
 import 'package:miss_misq/core/widgets/table_custom_icon.dart';
@@ -11,7 +14,9 @@ import 'package:miss_misq/core/widgets/table_custom_text.dart';
 import 'package:miss_misq/features/settings/data/models/get_all_accounts_response_model.dart';
 import 'package:miss_misq/features/settings/view/cubit/settings_cubit.dart';
 import 'package:miss_misq/features/settings/view/widgets/add_user_dialog.dart';
+import 'package:miss_misq/features/settings/view/widgets/delete_account_button.dart';
 import 'package:skeletonizer/skeletonizer.dart';
+import 'package:toastification/toastification.dart';
 
 class PermissionsTable extends StatefulWidget {
   const PermissionsTable({super.key});
@@ -27,6 +32,15 @@ class _PermissionsTableState extends State<PermissionsTable> {
     context.read<SettingsCubit>().getAllAccounts();
   }
 
+  final List states = List.unmodifiable([
+    SettingsGetAllAccountsSuccess,
+    SettingsGetAllAccountsFailure,
+    SettingsGetAllAccountsLoading,
+    SettingsDeleteAccountLoading,
+    SettingsDeleteAccountSuccess,
+    SettingsDeleteAccountFailure
+  ]);
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -37,13 +51,27 @@ class _PermissionsTableState extends State<PermissionsTable> {
           style: AppTextStyles.font16BlackSemiBold,
         ),
         const VerticalSpacing(20),
-        BlocBuilder<SettingsCubit, SettingsState>(
-          buildWhen: (previous, current) {
-            return current is SettingsGetAllAccountsSuccess ||
-                current is SettingsGetAllAccountsFailure ||
-                current is SettingsGetAllAccountsLoading ||
-                current is SettingsAddAccountSuccess;
+        BlocConsumer<SettingsCubit, SettingsState>(
+          listenWhen:
+              (previous, current) => states.skip(3).contains(current.runtimeType),
+          listener: (context, state) {
+            if (state is SettingsDeleteAccountLoading) {
+              showLoading(context);
+            } else if (state is SettingsDeleteAccountSuccess) {
+              context.pop();
+              showToastification(
+                message: state.message,
+                type: ToastificationType.success,
+              );
+            } else if (state is SettingsDeleteAccountFailure) {
+              context.pop();
+              showToastification(
+                message: state.message,
+                type: ToastificationType.error,
+              );
+            }
           },
+          buildWhen: (previous, current) => states.take(3).contains(current.runtimeType),
           builder: (context, state) {
             final isLoading = state is SettingsGetAllAccountsLoading;
             final hasData =
@@ -118,22 +146,8 @@ class _PermissionsTableState extends State<PermissionsTable> {
                                     color: Colors.white,
                                   ),
                                 ),
-                                IconButton(
-                                  style: IconButton.styleFrom(
-                                    backgroundColor: const Color(0XFFAD0A0A),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    padding: const EdgeInsets.symmetric(
-                                      vertical: 10,
-                                      horizontal: 14,
-                                    ),
-                                  ),
-                                  onPressed: () {},
-                                  icon: TableCustomIcon(
-                                    AssetsManager.delete,
-                                    color: Colors.white,
-                                  ),
+                                DeleteAccountButton(
+                                  id: accounts[index].id ?? '',
                                 ),
                               ],
                             ),

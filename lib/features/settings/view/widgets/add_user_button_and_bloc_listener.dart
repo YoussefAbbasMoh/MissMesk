@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:miss_misq/core/theming/app_pallete.dart';
+import 'package:miss_misq/core/utils/show_loading.dart';
 import 'package:miss_misq/core/utils/show_toastification.dart';
 import 'package:miss_misq/core/widgets/app_custom_button.dart';
 import 'package:miss_misq/features/settings/view/cubit/settings_cubit.dart';
@@ -33,15 +33,7 @@ class AddUserButtonAndBlocListener extends StatelessWidget {
             type: ToastificationType.error,
           );
         } else if (state is SettingsAddAccountLoading) {
-          showDialog(
-            context: context,
-            builder:
-                (context) => const Center(
-                  child: CircularProgressIndicator(
-                    color: AppPallete.primaryColor,
-                  ),
-                ),
-          );
+          showLoading(context);
         }
       },
       child: AppCustomButton(

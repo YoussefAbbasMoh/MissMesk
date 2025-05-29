@@ -10,9 +10,7 @@ import 'package:miss_misq/features/settings/view/cubit/settings_cubit.dart';
 import 'package:toastification/toastification.dart';
 
 class LogoutButtonWithBlocListener extends StatelessWidget {
-  const LogoutButtonWithBlocListener({
-    super.key,
-  });
+  const LogoutButtonWithBlocListener({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,11 +27,6 @@ class LogoutButtonWithBlocListener extends StatelessWidget {
             message: state.message,
             type: ToastificationType.success,
           );
-        } else if (state is SettingsLogoutFailure) {
-          showToastification(
-            message: state.message,
-            type: ToastificationType.error,
-          );
         }
       },
       child: Flexible(
@@ -48,7 +41,7 @@ class LogoutButtonWithBlocListener extends StatelessWidget {
                   (context) => AreYouSureDialog(
                     title: 'هل تريد تسجيل الخروج؟',
                     cubit: settingsCubit,
-                    onConfirm: settingsCubit.logout,
+                    onConfirm: () => settingsCubit.logout(),
                   ),
             );
           },

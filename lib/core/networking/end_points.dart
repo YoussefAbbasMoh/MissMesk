@@ -5,4 +5,5 @@ class EndPoints {
   static const String allAccounts = '/auth/getAllAccounts';
   static const String addAccount = '/auth/addAccount';
   static const String resetPassword = '/auth/updateAccount';
+  static const String deleteAccount = '/auth/deleteAccount';
 }

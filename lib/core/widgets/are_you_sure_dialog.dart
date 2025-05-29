@@ -17,7 +17,7 @@ class AreYouSureDialog<T> extends StatelessWidget {
 
   final String title;
   final StateStreamableSource<Object?> cubit;
-  final VoidCallback? onConfirm;
+  final Future<void> Function()? onConfirm;
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +54,12 @@ class AreYouSureDialog<T> extends StatelessWidget {
                               title: 'نعم',
                               color: AppPallete.darkRedColor,
                               borderRadius: 10,
-                              onPressed: onConfirm,
+                              onPressed: () async {
+                                context.pop();
+                                if (onConfirm != null) {
+                                  await onConfirm!();
+                                }
+                              },
                             ),
                           ),
                           Expanded(

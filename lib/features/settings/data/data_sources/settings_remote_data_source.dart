@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:miss_misq/core/networking/api_service.dart';
 import 'package:miss_misq/core/networking/end_points.dart';
+import 'package:miss_misq/core/networking/exceptions.dart';
 import 'package:miss_misq/features/settings/data/models/get_all_accounts_response_model.dart';
 
 abstract class SettingsRemoteDataSource {
@@ -11,6 +12,8 @@ abstract class SettingsRemoteDataSource {
   Future<UserAccount> addAccount({required UserAccount user});
 
   Future resetUserPassword({required String newPassword});
+
+  Future deletAccount({required String id});
 }
 
 class SettingsRemoteDataSourceImpl implements SettingsRemoteDataSource {
@@ -23,11 +26,11 @@ class SettingsRemoteDataSourceImpl implements SettingsRemoteDataSource {
     try {
       return await _apiService.get(path: EndPoints.logout);
     } on DioException catch (e) {
-      throw Exception(
+      throw ServerException(
         e.response?.data['message'] ?? 'مشكلة في الاتصال بالسيرفر',
       );
     } catch (e) {
-      throw Exception('مشكلة في الاتصال بالسيرفر');
+      throw ServerException('مشكلة في الاتصال بالسيرفر');
     }
   }
 
@@ -37,11 +40,11 @@ class SettingsRemoteDataSourceImpl implements SettingsRemoteDataSource {
       final response = await _apiService.get(path: EndPoints.allAccounts);
       return GetAllAccountsResponseModel.fromJson(response.data['data']);
     } on DioException catch (e) {
-      throw Exception(
+      throw ServerException(
         e.response?.data['message'] ?? 'مشكلة في الاتصال بالسيرفر',
       );
     } catch (e) {
-      throw Exception('مشكلة في الاتصال بالسيرفر');
+      throw ServerException('مشكلة في الاتصال بالسيرفر');
     }
   }
 
@@ -55,11 +58,11 @@ class SettingsRemoteDataSourceImpl implements SettingsRemoteDataSource {
 
       return UserAccount.fromJson(response.data['data']);
     } on DioException catch (e) {
-      throw Exception(
+      throw ServerException(
         e.response?.data['message'] ?? 'مشكلة في الاتصال بالسيرفر',
       );
     } catch (e) {
-      throw Exception('مشكلة في الاتصال بالسيرفر');
+      throw ServerException('مشكلة في الاتصال بالسيرفر');
     }
   }
 
@@ -71,11 +74,24 @@ class SettingsRemoteDataSourceImpl implements SettingsRemoteDataSource {
         data: {'password': newPassword},
       );
     } on DioException catch (e) {
-      throw Exception(
+      throw ServerException(
         e.response?.data['message'] ?? 'مشكلة في الاتصال بالسيرفر',
       );
     } catch (e) {
-      throw Exception('مشكلة في الاتصال بالسيرفر');
+      throw ServerException('مشكلة في الاتصال بالسيرفر');
+    }
+  }
+
+  @override
+  Future deletAccount({required String id}) async {
+    try {
+      return await _apiService.delete(path: '${EndPoints.deleteAccount}/$id');
+    } on DioException catch (e) {
+      throw ServerException(
+        e.response?.data['message'] ?? 'مشكلة في الاتصال بالسيرفر',
+      );
+    } catch (e) {
+      throw ServerException('مشكلة في الاتصال بالسيرفر');
     }
   }
 }
