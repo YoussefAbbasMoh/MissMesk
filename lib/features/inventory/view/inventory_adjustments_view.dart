@@ -7,6 +7,7 @@ import 'package:miss_misq/core/widgets/dynamic_table.dart';
 import 'package:miss_misq/core/widgets/spacing.dart';
 import 'package:miss_misq/core/widgets/table_custom_icon.dart';
 import 'package:miss_misq/core/widgets/table_custom_text.dart';
+import 'package:miss_misq/features/inventory/view/widgets/add_inventory_button_and_bloc_listener.dart';
 import 'package:miss_misq/features/inventory/view/widgets/add_new_inventory_dialog.dart';
 import 'package:miss_misq/features/inventory/view/widgets/add_storekeeper_dialog.dart';
 import 'package:miss_misq/features/inventory/view/widgets/add_unit_dialog.dart';
@@ -58,19 +59,7 @@ class InventoryAdjustmentsView extends StatelessWidget {
             ),
           ),
           const VerticalSpacing(10),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: AppCustomButton(
-              title: 'إضافة مخزن',
-              onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (context) => const AddNewInventoryDialog(),
-                );
-              },
-              icon: Icons.add,
-            ),
-          ),
+          const AddInventoryButtonAndBlocListener(),
           const VerticalSpacing(40),
           SizedBox(
             width: context.width * 0.5,

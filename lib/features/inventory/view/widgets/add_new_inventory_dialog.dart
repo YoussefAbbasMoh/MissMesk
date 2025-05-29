@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:miss_misq/core/di/dependency_injcection.dart';
 import 'package:miss_misq/core/theming/app_pallete.dart';
 import 'package:miss_misq/core/theming/app_text_styles.dart';
 import 'package:miss_misq/core/utils/extensions.dart';
 import 'package:miss_misq/core/widgets/app_custom_dialog.dart';
 import 'package:miss_misq/core/widgets/app_custom_text_field.dart';
+import 'package:miss_misq/features/inventory/data/models/add_inventory_request_model.dart';
+import 'package:miss_misq/features/inventory/view/cubit/inventory_adjustments/inventory_adjustments_cubit.dart';
 
-// ignore: must_be_immutable
 class AddNewInventoryDialog extends StatefulWidget {
   const AddNewInventoryDialog({super.key});
 
@@ -14,7 +18,10 @@ class AddNewInventoryDialog extends StatefulWidget {
 }
 
 class _AddNewInventoryDialogState extends State<AddNewInventoryDialog> {
-  final TextEditingController shelfNameController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+  late final TextEditingController shelfNameController;
+  late final TextEditingController inventoryNameController;
+  late final TextEditingController inventoryAddressController;
 
   List<String> shelfNames = [];
 
@@ -27,95 +34,131 @@ class _AddNewInventoryDialogState extends State<AddNewInventoryDialog> {
   }
 
   @override
+  void initState() {
+    shelfNameController = TextEditingController();
+    inventoryNameController = TextEditingController();
+    inventoryAddressController = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    shelfNameController.dispose();
+    inventoryNameController.dispose();
+    inventoryAddressController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return AppCustomDialog(
-      title: 'إضافة مخزن',
-      children: [
-        const Text('بيانات المخزن', style: AppTextStyles.font16BlackSemiBold),
-        const Row(
-          spacing: 20,
-          children: [
-            Flexible(
-              child: AppCustomTextField(
-                label: 'رقم المخزن',
-                hintText: 'أضف رقم المخزن',
-                isRequired: false,
-                titleFontSize: 14,
-              ),
-            ),
-            Flexible(
-              child: AppCustomTextField(
-                label: 'اسم المخزن',
-                hintText: 'أضف اسم المخزن',
-                isRequired: false,
-                titleFontSize: 14,
-              ),
-            ),
-            Flexible(
-              child: AppCustomTextField(
-                label: 'عنوان المخزن',
-                hintText: 'أضف عنوان المخزن',
-                isRequired: false,
-                titleFontSize: 14,
-              ),
-            ),
-          ],
-        ),
-        const Text('بيانات الرفوف', style: AppTextStyles.font16BlackSemiBold),
-        Row(
-          spacing: 20,
-          children: [
-            const Flexible(
-              child: AppCustomTextField(
-                label: 'عدد الرفوف',
-                hintText: 'ضع عدد الرفوف',
-                isRequired: false,
-                titleFontSize: 14,
-              ),
-            ),
-            Flexible(child: Container()),
-            Flexible(child: Container()),
-          ],
-        ),
-        AppCustomTextField(
-          label: 'أسماء الرفوف',
-          hintText: 'اكتب اسم او كود الرف',
-          isRequired: false,
-          width: context.width * 0.3,
-          controller: shelfNameController,
-          suffixIcon: Padding(
-            padding: const EdgeInsets.only(left: 5),
-            child: IconButton(
-              onPressed: () {
-                addShelfName();
+    return BlocProvider.value(
+      value: sl<InventoryAdjustmentsCubit>(),
+      child: Builder(
+        builder: (context) {
+          return Form(
+            key: _formKey,
+            child: AppCustomDialog(
+              onSave: () {
+                if (_formKey.currentState!.validate()) {
+                  context.pop();
+                  context.read<InventoryAdjustmentsCubit>().addInventory(
+                    inventory: AddInventoryRequestModel(
+                      name: inventoryNameController.text,
+                      address: inventoryAddressController.text,
+                      rowsName: shelfNames,
+                    ),
+                  );
+                }
               },
-              style: IconButton.styleFrom(
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(8)),
+              title: 'إضافة مخزن',
+              children: [
+                const Text(
+                  'بيانات المخزن',
+                  style: AppTextStyles.font16BlackSemiBold,
                 ),
-                backgroundColor: AppPallete.primaryColor,
-              ),
-              icon: const Icon(Icons.add, color: AppPallete.whiteColor),
+                Row(
+                  spacing: 20,
+                  children: [
+                    Flexible(
+                      child: AppCustomTextField(
+                        label: 'اسم المخزن',
+                        hintText: 'أضف اسم المخزن',
+                        isRequired: false,
+                        titleFontSize: 14,
+                        controller: inventoryNameController,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'يرجى ادخال اسم المخزن';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    Flexible(
+                      child: AppCustomTextField(
+                        label: 'عنوان المخزن',
+                        hintText: 'أضف عنوان المخزن',
+                        isRequired: false,
+                        titleFontSize: 14,
+                        controller: inventoryAddressController,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'يرجى ادخال عنوان المخزن';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    const Flexible(child: SizedBox.shrink()),
+                  ],
+                ),
+                const Text(
+                  'بيانات الرفوف',
+                  style: AppTextStyles.font16BlackSemiBold,
+                ),
+                AppCustomTextField(
+                  label: 'أسماء الرفوف',
+                  hintText: 'اكتب اسم او كود الرف',
+                  isRequired: false,
+                  width: context.width * 0.3,
+                  controller: shelfNameController,
+                  suffixIcon: Padding(
+                    padding: const EdgeInsets.only(left: 5),
+                    child: IconButton(
+                      onPressed: () {
+                        addShelfName();
+                      },
+                      style: IconButton.styleFrom(
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(8)),
+                        ),
+                        backgroundColor: AppPallete.primaryColor,
+                      ),
+                      icon: const Icon(Icons.add, color: AppPallete.whiteColor),
+                    ),
+                  ),
+                ),
+                Wrap(
+                  spacing: 10,
+                  runSpacing: 10,
+                  runAlignment: WrapAlignment.start,
+                  children: List.generate(
+                    shelfNames.length,
+                    (index) => Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: AppPallete.lightGreyColor,
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: Text(shelfNames[index]),
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ),
-        ),
-        Wrap(
-          spacing: 10,
-          runSpacing: 10,
-          runAlignment: WrapAlignment.start,
-          children: List.generate(
-            shelfNames.length,
-            (index) => Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: AppPallete.lightGreyColor,
-                borderRadius: BorderRadius.circular(5),
-              ),
-              child: Text(shelfNames[index]),
-            ),
-          ),
-        ),
-      ],
+          );
+        },
+      ),
     );
   }
 }
