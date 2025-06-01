@@ -8,7 +8,7 @@ abstract class SettingsRepo {
   Future<ApiResult> logout();
   Future<ApiResult<GetAllAccountsResponseModel>> getAllAccounts();
   Future<ApiResult> addAccount({required UserAccount user});
-  Future<ApiResult> resetUserPassword({required String newPassword});
+  Future<ApiResult> updateAccount({required UserAccount user});
   Future<ApiResult> deletAccount({required String id});
 }
 
@@ -53,10 +53,10 @@ class SettingsRepoImpl implements SettingsRepo {
   }
 
   @override
-  Future<ApiResult> resetUserPassword({required String newPassword}) async {
+  Future<ApiResult> updateAccount({required UserAccount user}) async {
     try {
-      await _settingsRemoteDataSource.resetUserPassword(
-        newPassword: newPassword,
+      await _settingsRemoteDataSource.updateAccount(
+        user: user,
       );
       return ApiResult.success('تم تغيير كلمة المرور بنجاح');
     } on ServerException catch (e) {

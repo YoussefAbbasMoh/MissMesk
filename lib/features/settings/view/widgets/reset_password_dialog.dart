@@ -5,6 +5,7 @@ import 'package:miss_misq/core/di/dependency_injcection.dart';
 import 'package:miss_misq/core/widgets/app_custom_dialog.dart';
 import 'package:miss_misq/core/widgets/app_custom_text_field.dart';
 import 'package:miss_misq/core/widgets/spacing.dart';
+import 'package:miss_misq/features/settings/data/models/get_all_accounts_response_model.dart';
 import 'package:miss_misq/features/settings/view/cubit/settings_cubit.dart';
 
 class ResetPasswordDialog extends StatefulWidget {
@@ -46,7 +47,9 @@ class _ResetPasswordDialogState extends State<ResetPasswordDialog> {
                 if (formKey.currentState!.validate()) {
                   context.pop();
                   context.read<SettingsCubit>().resetUserPassword(
-                    newPassword: _passwordController.text,
+                    user: UserAccount(
+                      password: _passwordController.text,
+                    ),
                   );
                 }
               },

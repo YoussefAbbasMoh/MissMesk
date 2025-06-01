@@ -73,6 +73,7 @@ class AppCustomTextField extends StatelessWidget {
             enabled: isReadOnly != true,
             style: AppTextStyles.font18BlackRegular.copyWith(
               fontSize: titleFontSize,
+              color: isReadOnly != true ? null : AppPallete.lightGreyColor,
             ),
             initialValue: initialValue,
             onChanged: onChanged,
@@ -89,6 +90,7 @@ class AppCustomTextField extends StatelessWidget {
               prefixIcon: prefixIcon,
               fillColor: fillColor,
               filled: fillColor != null,
+              disabledBorder: _border(fillColor ?? AppPallete.lightBrownColor),
               focusedBorder: _border(fillColor ?? AppPallete.primaryColor),
               enabledBorder: _border(fillColor ?? AppPallete.primaryColor),
               errorStyle: AppTextStyles.font16BlackRegular.copyWith(

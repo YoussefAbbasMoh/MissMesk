@@ -41,9 +41,7 @@ final class SettingsGetAllAccountsFailure extends SettingsState {
 
 final class SettingsAddAccountLoading extends SettingsState {}
 
-final class SettingsAddAccountSuccess extends SettingsState {
-
-}
+final class SettingsAddAccountSuccess extends SettingsState {}
 
 final class SettingsAddAccountFailure extends SettingsState {
   final String message;
@@ -81,4 +79,20 @@ final class SettingsDeleteAccountFailure extends SettingsState {
   final String message;
 
   SettingsDeleteAccountFailure(this.message);
+}
+
+// Update Account
+
+final class SettingsUpdateAccountLoading extends SettingsState {}
+
+final class SettingsUpdateAccountSuccess extends SettingsState {
+  final String message;
+
+  SettingsUpdateAccountSuccess(this.message);
+}
+
+final class SettingsUpdateAccountFailure extends SettingsState {
+  final String message;
+
+  SettingsUpdateAccountFailure(this.message);
 }

@@ -38,10 +38,10 @@ class SettingsCubit extends Cubit<SettingsState> {
     }
   }
 
-  Future<void> resetUserPassword({required String newPassword}) async {
+  Future<void> resetUserPassword({required UserAccount user}) async {
     emit(SettingsResetPasswordLoading());
-    final result = await _settingsRepo.resetUserPassword(
-      newPassword: newPassword,
+    final result = await _settingsRepo.updateAccount(
+      user: user
     );
     if (result is Success) {
       emit(SettingsResetPasswordSuccess(result.data));
@@ -57,6 +57,16 @@ class SettingsCubit extends Cubit<SettingsState> {
       emit(SettingsDeleteAccountSuccess(result.data));
     } else if (result is Failure) {
       emit(SettingsDeleteAccountFailure(result.message));
+    }
+  }
+
+  Future<void> updateAccount({required UserAccount user}) async {
+    emit(SettingsUpdateAccountLoading());
+    final result = await _settingsRepo.updateAccount(user: user);
+    if (result is Success) {
+      emit(SettingsUpdateAccountSuccess('تم تحديث بيانات المستخدم بنجاح'));
+    } else if (result is Failure) {
+      emit(SettingsUpdateAccountFailure('مشكلة في تحديث بيانات المستخدم'));
     }
   }
 }

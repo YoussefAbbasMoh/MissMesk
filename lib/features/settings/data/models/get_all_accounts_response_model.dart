@@ -68,19 +68,22 @@ class UserAccount {
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'name': name,
-      'email': email,
-      'assets': assets,
-      'inventory': inventory,
-      'production': production,
-      'clients': clients,
-      'suppliers': suppliers,
-      'daily': daily,
-      'setting': settings,
-      'password': password,
-      'confirmPassword': confirmPassword,
-    };
+    final Map<String, dynamic> data = {};
+    if (id != null && id != '') data['id'] = id;
+    if (name != null && name != '') data['name'] = name;
+    if (email != null && email != '') data['email'] = email;
+    if (assets != null) data['assets'] = assets;
+    if (inventory != null) data['inventory'] = inventory;
+    if (production != null) data['production'] = production;
+    if (clients != null) data['clients'] = clients;
+    if (suppliers != null) data['suppliers'] = suppliers;
+    if (daily != null) data['daily'] = daily;
+    if (settings != null) data['setting'] = settings;
+    if (password != null && password != '') data['password'] = password;
+    if (confirmPassword != null && confirmPassword != '') {
+      data['confirmPassword'] = confirmPassword;
+    }
+    return data;
   }
 
   static String getPermissions(UserAccount user) {

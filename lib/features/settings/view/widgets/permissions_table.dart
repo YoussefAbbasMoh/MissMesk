@@ -39,6 +39,9 @@ class _PermissionsTableState extends State<PermissionsTable> {
     SettingsDeleteAccountLoading,
     SettingsDeleteAccountSuccess,
     SettingsDeleteAccountFailure,
+    SettingsUpdateAccountLoading,
+    SettingsUpdateAccountSuccess,
+    SettingsUpdateAccountFailure,
   ]);
 
   @override
@@ -56,7 +59,8 @@ class _PermissionsTableState extends State<PermissionsTable> {
               (previous, current) =>
                   states.skip(3).contains(current.runtimeType),
           listener: (context, state) {
-            if (state is SettingsDeleteAccountLoading) {
+            if (state is SettingsDeleteAccountLoading ||
+                state is SettingsUpdateAccountLoading) {
               showLoading(context);
             } else if (state is SettingsDeleteAccountSuccess) {
               context.pop();
@@ -65,10 +69,21 @@ class _PermissionsTableState extends State<PermissionsTable> {
                 message: state.message,
                 type: ToastificationType.success,
               );
-            } else if (state is SettingsDeleteAccountFailure) {
+            } else if (state is SettingsUpdateAccountSuccess) {
               context.pop();
+              context.read<SettingsCubit>().getAllAccounts();
               showToastification(
                 message: state.message,
+                type: ToastificationType.success,
+              );
+            } else if (state is SettingsDeleteAccountFailure ||
+                state is SettingsUpdateAccountFailure) {
+              context.pop();
+              showToastification(
+                message:
+                    (state is SettingsDeleteAccountFailure
+                        ? state.message
+                        : (state as SettingsUpdateAccountFailure).message),
                 type: ToastificationType.error,
               );
             }
@@ -142,7 +157,10 @@ class _PermissionsTableState extends State<PermissionsTable> {
                                     showDialog(
                                       context: context,
                                       builder:
-                                          (context) => const AddUserDialog(),
+                                          (context) => AddUserDialog(
+                                            isUpdate: true,
+                                            user: accounts[index],
+                                          ),
                                     );
                                   },
                                   icon: TableCustomIcon(

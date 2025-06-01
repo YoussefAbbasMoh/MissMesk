@@ -11,7 +11,7 @@ abstract class SettingsRemoteDataSource {
 
   Future addAccount({required UserAccount user});
 
-  Future resetUserPassword({required String newPassword});
+  Future updateAccount({required UserAccount user});
 
   Future deletAccount({required String id});
 }
@@ -65,11 +65,11 @@ class SettingsRemoteDataSourceImpl implements SettingsRemoteDataSource {
   }
 
   @override
-  Future resetUserPassword({required String newPassword}) async {
+  Future updateAccount({required UserAccount user}) async {
     try {
       return await _apiService.patch(
         path: EndPoints.resetPassword,
-        data: {'password': newPassword},
+        data: user.toJson(),
       );
     } on DioException catch (e) {
       throw ServerException(

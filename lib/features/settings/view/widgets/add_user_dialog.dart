@@ -13,7 +13,9 @@ import 'package:miss_misq/features/settings/view/cubit/settings_cubit.dart';
 import 'package:toastification/toastification.dart';
 
 class AddUserDialog extends StatefulWidget {
-  const AddUserDialog({super.key});
+  const AddUserDialog({super.key, this.isUpdate = false, this.user});
+  final bool isUpdate;
+  final UserAccount? user;
 
   @override
   State<AddUserDialog> createState() => _AddUserDialogState();
@@ -54,6 +56,22 @@ class _AddUserDialogState extends State<AddUserDialog> {
     emailController = TextEditingController();
     passwordController = TextEditingController();
     confirmPasswordController = TextEditingController();
+    if (widget.isUpdate) {
+      nameController.text = widget.user!.name ?? '';
+      emailController.text = widget.user!.email ?? '';
+      passwordController.text = widget.user!.password ?? '';
+      confirmPasswordController.text = widget.user!.confirmPassword ?? '';
+      permissions = {
+        'all': widget.user!.assets ?? false,
+        'assets': widget.user!.assets ?? false,
+        'inventory': widget.user!.inventory ?? false,
+        'production': widget.user!.production ?? false,
+        'clients': widget.user!.clients ?? false,
+        'suppliers': widget.user!.suppliers ?? false,
+        'daily': widget.user!.daily ?? false,
+        'settings': widget.user!.settings ?? false,
+      };
+    }
     super.initState();
   }
 
@@ -75,7 +93,7 @@ class _AddUserDialogState extends State<AddUserDialog> {
           return Form(
             key: formKey,
             child: AppCustomDialog(
-              title: 'إضافة مستخدم',
+              title: widget.isUpdate ? 'تحديث المستخدم' : 'إضافة مستخدم',
               onSave: () {
                 if (formKey.currentState!.validate()) {
                   if (!permissions.containsValue(true)) {
@@ -85,21 +103,36 @@ class _AddUserDialogState extends State<AddUserDialog> {
                     );
                     return;
                   }
-                  context.read<SettingsCubit>().addAccount(
-                    user: UserAccount(
-                      name: nameController.text,
-                      email: emailController.text,
-                      password: passwordController.text,
-                      confirmPassword: confirmPasswordController.text,
-                      assets: permissions['assets'] ?? false,
-                      inventory: permissions['inventory'] ?? false,
-                      production: permissions['production'] ?? false,
-                      clients: permissions['clients'] ?? false,
-                      suppliers: permissions['suppliers'] ?? false,
-                      daily: permissions['daily'] ?? false,
-                      settings: permissions['settings'] ?? false,
-                    ),
-                  );
+                  widget.isUpdate
+                      ? context.read<SettingsCubit>().updateAccount(
+                        user: UserAccount(
+                          id: widget.user!.id,
+                          password: passwordController.text,
+                          confirmPassword: confirmPasswordController.text,
+                          assets: permissions['assets'] ?? false,
+                          inventory: permissions['inventory'] ?? false,
+                          production: permissions['production'] ?? false,
+                          clients: permissions['clients'] ?? false,
+                          suppliers: permissions['suppliers'] ?? false,
+                          daily: permissions['daily'] ?? false,
+                          settings: permissions['settings'] ?? false,
+                        ),
+                      )
+                      : context.read<SettingsCubit>().addAccount(
+                        user: UserAccount(
+                          name: nameController.text,
+                          email: emailController.text,
+                          password: passwordController.text,
+                          confirmPassword: confirmPasswordController.text,
+                          assets: permissions['assets'] ?? false,
+                          inventory: permissions['inventory'] ?? false,
+                          production: permissions['production'] ?? false,
+                          clients: permissions['clients'] ?? false,
+                          suppliers: permissions['suppliers'] ?? false,
+                          daily: permissions['daily'] ?? false,
+                          settings: permissions['settings'] ?? false,
+                        ),
+                      );
                   context.pop();
                 }
               },
@@ -113,6 +146,8 @@ class _AddUserDialogState extends State<AddUserDialog> {
                   children: [
                     Flexible(
                       child: AppCustomTextField(
+                        isReadOnly: widget.isUpdate,
+                        isRequired: !widget.isUpdate,
                         titleFontSize: 14,
                         label: 'الإسم',
                         hintText: 'أضف أسم المستخدم',
@@ -127,6 +162,8 @@ class _AddUserDialogState extends State<AddUserDialog> {
                     ),
                     Flexible(
                       child: AppCustomTextField(
+                        isRequired: !widget.isUpdate,
+                        isReadOnly: widget.isUpdate,
                         label: 'البريد الإلكتروني',
                         titleFontSize: 14,
                         hintText: 'أضف البريد الإلكتروني',
@@ -149,6 +186,8 @@ class _AddUserDialogState extends State<AddUserDialog> {
                         controller: passwordController,
                         obscureText: true,
                         validator: (value) {
+                          if (widget.isUpdate) return null;
+
                           if (value!.length < 8) {
                             return 'الباسورد يجب ان يكون على الاقل 8 حروف';
                           }
@@ -164,6 +203,7 @@ class _AddUserDialogState extends State<AddUserDialog> {
                         obscureText: true,
                         controller: confirmPasswordController,
                         validator: (value) {
+                          if (widget.isUpdate) return null;
                           if (value == null || value.isEmpty) {
                             return 'ادخل تاكيد الباسورد';
                           }
@@ -194,22 +234,24 @@ class _AddUserDialogState extends State<AddUserDialog> {
                             title: entry.key,
                             value: permissions[entry.value] ?? false,
                             onChanged: (value) {
-                              setState(() {
-                                final key = entry.value;
+                              final key = entry.value;
 
+                              if (key == 'all') {
+                                permissions.updateAll((k, _) => value!);
+                              } else {
                                 permissions[key] = value!;
 
-                                if (key == 'all') {
-                                  permissions.updateAll((k, _) => value);
+                                if (!value) {
+                                  permissions['all'] = false;
                                 } else {
-                                  if (!value) permissions['all'] = false;
-
                                   final allChecked = permissions.entries
                                       .where((e) => e.key != 'all')
                                       .every((e) => e.value == true);
-
                                   permissions['all'] = allChecked;
                                 }
+                              }
+                              setState(() {
+                                permissions = {...permissions};
                               });
                             },
                           ),
