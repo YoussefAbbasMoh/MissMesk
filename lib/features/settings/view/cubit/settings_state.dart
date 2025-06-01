@@ -42,9 +42,7 @@ final class SettingsGetAllAccountsFailure extends SettingsState {
 final class SettingsAddAccountLoading extends SettingsState {}
 
 final class SettingsAddAccountSuccess extends SettingsState {
-  final UserAccount user;
 
-  SettingsAddAccountSuccess(this.user);
 }
 
 final class SettingsAddAccountFailure extends SettingsState {

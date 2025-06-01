@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:miss_misq/core/services/access_service.dart';
 import 'package:miss_misq/core/theming/app_pallete.dart';
 import 'package:miss_misq/core/utils/assets_manager.dart';
+import 'package:miss_misq/core/utils/show_toastification.dart';
 import 'package:miss_misq/core/widgets/side_menu_item.dart';
 import 'package:miss_misq/features/home/models/side_menu_item_model.dart';
+import 'package:toastification/toastification.dart';
 
 class SideMenu extends StatefulWidget {
   const SideMenu({super.key});
@@ -96,6 +99,13 @@ class _SideMenuState extends State<SideMenu> {
                 model: item,
                 isSelected: _selectedIndex == index,
                 onTap: () {
+                  if (!AccessService.getUserAccessablePages().contains(item)) {
+                    showToastification(
+                      message: 'غير مصرح بالدخول',
+                      type: ToastificationType.warning,
+                    );
+                    return;
+                  }
                   _handleMenuItemTap(index);
                   if (item.subItems?.isNotEmpty ?? false) {
                     context.go(

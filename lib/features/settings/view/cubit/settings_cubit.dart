@@ -9,8 +9,6 @@ class SettingsCubit extends Cubit<SettingsState> {
   final SettingsRepo _settingsRepo;
   SettingsCubit(this._settingsRepo) : super(SettingsInitial());
 
-  List<UserAccount> accounts = [];
-
   Future<void> logout() async {
     final result = await _settingsRepo.logout();
     if (result is Success) {
@@ -24,8 +22,7 @@ class SettingsCubit extends Cubit<SettingsState> {
     emit(SettingsGetAllAccountsLoading());
     final result = await _settingsRepo.getAllAccounts();
     if (result is Success<GetAllAccountsResponseModel>) {
-      accounts = result.data.users!;
-      emit(SettingsGetAllAccountsSuccess(accounts));
+      emit(SettingsGetAllAccountsSuccess(result.data.users!));
     } else if (result is Failure<GetAllAccountsResponseModel>) {
       emit(SettingsGetAllAccountsFailure(result.message));
     }
@@ -34,11 +31,9 @@ class SettingsCubit extends Cubit<SettingsState> {
   Future<void> addAccount({required UserAccount user}) async {
     emit(SettingsAddAccountLoading());
     final result = await _settingsRepo.addAccount(user: user);
-    if (result is Success<UserAccount>) {
-      accounts.add(result.data);
-      emit(SettingsAddAccountSuccess(result.data));
-      emit(SettingsGetAllAccountsSuccess(accounts));
-    } else if (result is Failure<UserAccount>) {
+    if (result is Success) {
+      emit(SettingsAddAccountSuccess());
+    } else if (result is Failure) {
       emit(SettingsAddAccountFailure(result.message));
     }
   }
@@ -59,9 +54,7 @@ class SettingsCubit extends Cubit<SettingsState> {
     emit(SettingsDeleteAccountLoading());
     final result = await _settingsRepo.deletAccount(id: id);
     if (result is Success) {
-      accounts.removeWhere((element) => element.id == id);
       emit(SettingsDeleteAccountSuccess(result.data));
-      emit(SettingsGetAllAccountsSuccess(accounts));
     } else if (result is Failure) {
       emit(SettingsDeleteAccountFailure(result.message));
     }

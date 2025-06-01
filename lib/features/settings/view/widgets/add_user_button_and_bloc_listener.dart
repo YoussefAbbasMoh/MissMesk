@@ -22,6 +22,7 @@ class AddUserButtonAndBlocListener extends StatelessWidget {
       listener: (context, state) {
         if (state is SettingsAddAccountSuccess) {
           context.pop();
+          context.read<SettingsCubit>().getAllAccounts();
           showToastification(
             message: 'تم اضافة المستخدم بنجاح',
             type: ToastificationType.success,

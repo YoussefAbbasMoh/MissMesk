@@ -9,7 +9,7 @@ abstract class SettingsRemoteDataSource {
 
   Future<GetAllAccountsResponseModel> getAllAccounts();
 
-  Future<UserAccount> addAccount({required UserAccount user});
+  Future addAccount({required UserAccount user});
 
   Future resetUserPassword({required String newPassword});
 
@@ -49,14 +49,12 @@ class SettingsRemoteDataSourceImpl implements SettingsRemoteDataSource {
   }
 
   @override
-  Future<UserAccount> addAccount({required UserAccount user}) async {
+  Future addAccount({required UserAccount user}) async {
     try {
-      final response = await _apiService.post(
+      return await _apiService.post(
         path: EndPoints.addAccount,
         data: user.toJson(),
       );
-
-      return UserAccount.fromJson(response.data['data']);
     } on DioException catch (e) {
       throw ServerException(
         e.response?.data['message'] ?? 'مشكلة في الاتصال بالسيرفر',

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:miss_misq/core/services/access_service.dart';
 import 'package:miss_misq/core/widgets/spacing.dart';
 import 'package:miss_misq/features/settings/view/widgets/add_user_button_and_bloc_listener.dart';
 import 'package:miss_misq/features/settings/view/widgets/company_settings.dart';
@@ -10,19 +11,21 @@ class SettingsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SingleChildScrollView(
-      padding: EdgeInsets.all(16),
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(16),
       child: Column(
         spacing: 20,
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          PersonalInfo(),
-          VerticalSpacing(20),
-          CompanySettings(),
-          VerticalSpacing(20),
-          PermissionsTable(),
-          AddUserButtonAndBlocListener(),
+          const PersonalInfo(),
+          if (AccessService.isAdmin()) ...[
+            const VerticalSpacing(20),
+            const CompanySettings(),
+            const VerticalSpacing(20),
+            const PermissionsTable(),
+            const AddUserButtonAndBlocListener(),
+          ],
         ],
       ),
     );

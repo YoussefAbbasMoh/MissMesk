@@ -6,12 +6,14 @@ class SideMenuButtonModel {
   final String iconPath;
   final List<SideMenuSubItemModel>? subItems;
   final String route;
+  final String? key;
 
   SideMenuButtonModel({
     required this.title,
     required this.iconPath,
     this.subItems,
     required this.route,
+    this.key,
   });
 }
 
@@ -32,6 +34,7 @@ List<SideMenuButtonModel> menuItems = [
   SideMenuButtonModel(
     title: 'إدارة المخزون والمنتجات',
     iconPath: AssetsManager.management,
+    key: 'inventory',
     route: AppRoutes.inventory,
     subItems: [
       SideMenuSubItemModel(title: 'المخزون', route: AppRoutes.inventory),
@@ -48,6 +51,7 @@ List<SideMenuButtonModel> menuItems = [
   ),
   SideMenuButtonModel(
     title: 'الأصول الثابتة',
+    key: 'assets',
     iconPath: AssetsManager.assets,
     route: AppRoutes.assetsGroups,
     subItems: [
@@ -59,6 +63,7 @@ List<SideMenuButtonModel> menuItems = [
     ],
   ),
   SideMenuButtonModel(
+    key: 'suppliers',
     title: 'سجل الموردين',
     iconPath: AssetsManager.supplieres,
     route: AppRoutes.providersAccounts,
@@ -70,6 +75,7 @@ List<SideMenuButtonModel> menuItems = [
     ],
   ),
   SideMenuButtonModel(
+    key: 'clients',
     title: 'سجل العملاء',
     iconPath: AssetsManager.clients,
     route: AppRoutes.clientsAccounts,
@@ -81,6 +87,7 @@ List<SideMenuButtonModel> menuItems = [
     ],
   ),
   SideMenuButtonModel(
+    key: 'production',
     title: 'متابعة الإنتاج',
     iconPath: AssetsManager.production,
     route: AppRoutes.jobOrdersHistory,
@@ -92,11 +99,13 @@ List<SideMenuButtonModel> menuItems = [
     ],
   ),
   SideMenuButtonModel(
+    key: 'daily',
     title: 'دفتر اليومية',
     iconPath: AssetsManager.daily,
     route: AppRoutes.dailyLog,
   ),
   SideMenuButtonModel(
+    key: 'setting',
     title: 'الإعدادات',
     iconPath: AssetsManager.settings,
     route: AppRoutes.settings,

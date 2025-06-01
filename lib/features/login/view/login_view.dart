@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:miss_misq/core/routing/routes.dart';
+import 'package:miss_misq/core/services/access_service.dart';
 import 'package:miss_misq/core/utils/assets_manager.dart';
 import 'package:miss_misq/core/utils/show_toastification.dart';
 import 'package:miss_misq/features/login/view/cubit/login_cubit.dart';
@@ -27,7 +27,7 @@ class LoginView extends StatelessWidget {
           child: BlocListener<LoginCubit, LoginState>(
             listenWhen:
                 (state, previous) => loginStates.contains(state.runtimeType),
-            listener: (context, state) {
+            listener: (context, state) async {
               if (state is LoginFailure) {
                 showToastification(
                   message: state.message,
@@ -37,7 +37,8 @@ class LoginView extends StatelessWidget {
                 while (GoRouter.of(context).canPop()) {
                   GoRouter.of(context).pop();
                 }
-                context.pushReplacement(AppRoutes.home);
+                final path = await AccessService.getFirstAccessablePage();
+                context.pushReplacement('${path.$1}?mainIndex=${path.$2}');
                 showToastification(
                   message: 'تم تسجيل الدخول بنجاح',
                   type: ToastificationType.success,

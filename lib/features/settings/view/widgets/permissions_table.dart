@@ -38,7 +38,7 @@ class _PermissionsTableState extends State<PermissionsTable> {
     SettingsGetAllAccountsLoading,
     SettingsDeleteAccountLoading,
     SettingsDeleteAccountSuccess,
-    SettingsDeleteAccountFailure
+    SettingsDeleteAccountFailure,
   ]);
 
   @override
@@ -53,12 +53,14 @@ class _PermissionsTableState extends State<PermissionsTable> {
         const VerticalSpacing(20),
         BlocConsumer<SettingsCubit, SettingsState>(
           listenWhen:
-              (previous, current) => states.skip(3).contains(current.runtimeType),
+              (previous, current) =>
+                  states.skip(3).contains(current.runtimeType),
           listener: (context, state) {
             if (state is SettingsDeleteAccountLoading) {
               showLoading(context);
             } else if (state is SettingsDeleteAccountSuccess) {
               context.pop();
+              context.read<SettingsCubit>().getAllAccounts();
               showToastification(
                 message: state.message,
                 type: ToastificationType.success,
@@ -71,7 +73,9 @@ class _PermissionsTableState extends State<PermissionsTable> {
               );
             }
           },
-          buildWhen: (previous, current) => states.take(3).contains(current.runtimeType),
+          buildWhen:
+              (previous, current) =>
+                  states.take(3).contains(current.runtimeType),
           builder: (context, state) {
             final isLoading = state is SettingsGetAllAccountsLoading;
             final hasData =
@@ -80,7 +84,7 @@ class _PermissionsTableState extends State<PermissionsTable> {
 
             final accounts =
                 hasData
-                    ? context.read<SettingsCubit>().accounts
+                    ? (state as SettingsGetAllAccountsSuccess).accounts
                     : List.filled(
                       3,
                       UserAccount(name: 'اسم المستخدم', email: 'user@email'),

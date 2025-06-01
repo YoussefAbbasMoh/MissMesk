@@ -7,7 +7,7 @@ import 'package:miss_misq/features/settings/data/models/get_all_accounts_respons
 abstract class SettingsRepo {
   Future<ApiResult> logout();
   Future<ApiResult<GetAllAccountsResponseModel>> getAllAccounts();
-  Future<ApiResult<UserAccount>> addAccount({required UserAccount user});
+  Future<ApiResult> addAccount({required UserAccount user});
   Future<ApiResult> resetUserPassword({required String newPassword});
   Future<ApiResult> deletAccount({required String id});
 }
@@ -41,7 +41,7 @@ class SettingsRepoImpl implements SettingsRepo {
   }
 
   @override
-  Future<ApiResult<UserAccount>> addAccount({required UserAccount user}) async {
+  Future<ApiResult> addAccount({required UserAccount user}) async {
     try {
       final response = await _settingsRemoteDataSource.addAccount(user: user);
       return ApiResult.success(response);
