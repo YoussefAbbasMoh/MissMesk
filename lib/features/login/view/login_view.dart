@@ -38,7 +38,7 @@ class LoginView extends StatelessWidget {
                   GoRouter.of(context).pop();
                 }
                 final path = await AccessService.getFirstAccessablePage();
-                context.pushReplacement('${path.$1}?mainIndex=${path.$2}');
+                context.go('${path.$1}?mainIndex=${path.$2}');
                 showToastification(
                   message: 'تم تسجيل الدخول بنجاح',
                   type: ToastificationType.success,

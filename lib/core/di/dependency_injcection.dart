@@ -4,6 +4,7 @@ import 'package:miss_misq/core/networking/api_service.dart';
 import 'package:miss_misq/core/networking/dio_factory.dart';
 import 'package:miss_misq/features/inventory/data/data_sources/inventory_remote_data_source.dart';
 import 'package:miss_misq/features/inventory/data/repos/inventory_repo.dart';
+import 'package:miss_misq/features/inventory/view/cubit/inventory/cubit/inventory_cubit.dart';
 import 'package:miss_misq/features/inventory/view/cubit/inventory_adjustments/inventory_adjustments_cubit.dart';
 import 'package:miss_misq/features/login/data/data_sources/login_remote_data_source.dart';
 import 'package:miss_misq/features/login/data/repos/login_repo.dart';
@@ -55,5 +56,8 @@ void _setupInventory() {
   );
   sl.registerLazySingleton<InventoryAdjustmentsCubit>(
     () => InventoryAdjustmentsCubit(sl<InventoryRepo>()),
+  );
+  sl.registerLazySingleton<InventoryCubit>(
+    () => InventoryCubit(sl<InventoryRepo>()),
   );
 }

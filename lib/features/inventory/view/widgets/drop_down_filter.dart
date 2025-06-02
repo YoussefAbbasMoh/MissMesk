@@ -7,11 +7,15 @@ class DropDownFilter extends StatelessWidget {
     required this.items,
     required this.title,
     this.dropDownWidth,
+    this.onChanged,
+    this.selected,
   });
 
   final String title;
-  final List<String> items;
+  final List<String>? items;
   final double? dropDownWidth;
+  final Function(String?)? onChanged;
+  final String? selected;
 
   @override
   Widget build(BuildContext context) {
@@ -22,10 +26,10 @@ class DropDownFilter extends StatelessWidget {
         children: [
           Text(title),
           CustomDropdownMenu(
-            items: items,
-            value: items[0],
+            items: items ?? [],
             width: dropDownWidth,
-            onChanged: (value) {},
+            value: selected,
+            onChanged: onChanged,
           ),
         ],
       ),

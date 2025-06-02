@@ -11,6 +11,7 @@ import 'package:miss_misq/features/clients/view/clients_accounts_view.dart';
 import 'package:miss_misq/features/clients/view/invoice_view.dart';
 
 import 'package:miss_misq/features/home/view/home_view.dart';
+import 'package:miss_misq/features/inventory/view/cubit/inventory/cubit/inventory_cubit.dart';
 import 'package:miss_misq/features/inventory/view/cubit/inventory_adjustments/inventory_adjustments_cubit.dart';
 import 'package:miss_misq/features/job_orders/view/job_order_details_view.dart';
 import 'package:miss_misq/features/job_orders/view/job_orders_history_view.dart';
@@ -72,7 +73,11 @@ class AppRouter {
             routes: [
               GoRoute(
                 path: AppRoutes.inventory,
-                builder: (context, state) => const InventoryView(),
+                builder:
+                    (context, state) => BlocProvider.value(
+                      value: sl<InventoryCubit>(),
+                      child: const InventoryView(),
+                    ),
               ),
               GoRoute(
                 path: AppRoutes.inventoryRecords,

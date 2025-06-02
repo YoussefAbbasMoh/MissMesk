@@ -10,7 +10,7 @@ import 'package:miss_misq/core/widgets/spacing.dart';
 import 'package:miss_misq/core/widgets/table_custom_icon.dart';
 import 'package:miss_misq/core/widgets/table_custom_text.dart';
 import 'package:miss_misq/features/inventory/view/widgets/add_item_dialog.dart';
-import 'package:miss_misq/features/inventory/view/widgets/drop_down_filter.dart';
+import 'package:miss_misq/features/inventory/view/widgets/inventory_filters_bloc_builder.dart';
 import 'package:miss_misq/features/inventory/view/widgets/products_filter.dart';
 
 class InventoryView extends StatelessWidget {
@@ -34,29 +34,7 @@ class InventoryView extends StatelessWidget {
             ],
           ),
           const VerticalSpacing(40),
-          const Wrap(
-            spacing: 40,
-            runSpacing: 20,
-            alignment: WrapAlignment.start,
-            children: [
-              DropDownFilter(
-                title: 'اسم المخزن',
-                items: ['مخزن السلام', 'مخزن مدينة نصر', 'مخزن التجمع'],
-              ),
-              DropDownFilter(
-                title: 'اسم المخزن',
-                items: ['مخزن السلام', 'مخزن مدينة نصر', 'مخزن التجمع'],
-              ),
-              DropDownFilter(
-                title: 'اسم المخزن',
-                items: ['مخزن السلام', 'مخزن مدينة نصر', 'مخزن التجمع'],
-              ),
-              DropDownFilter(
-                title: 'اسم المخزن',
-                items: ['مخزن السلام', 'مخزن مدينة نصر', 'مخزن التجمع'],
-              ),
-            ],
-          ),
+          const InventoryFilterWidget(),
           const VerticalSpacing(40),
           DynamicTable(
             rowData: List.generate(
@@ -78,7 +56,9 @@ class InventoryView extends StatelessWidget {
               },
             ),
           ),
+
           const VerticalSpacing(20),
+
           AppCustomButton(
             title: 'اضافة صنف',
             onPressed: () {

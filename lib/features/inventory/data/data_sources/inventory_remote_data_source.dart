@@ -3,9 +3,11 @@ import 'package:miss_misq/core/networking/api_service.dart';
 import 'package:miss_misq/core/networking/end_points.dart';
 import 'package:miss_misq/core/networking/exceptions.dart';
 import 'package:miss_misq/features/inventory/data/models/add_inventory_request_model.dart';
+import 'package:miss_misq/features/inventory/data/models/inventory_model.dart';
 
 abstract class InventoryRemoteDataSource {
   Future addInventory({required AddInventoryRequestModel model});
+  Future<List<InventoryModel>> getAllInventories();
 }
 
 class InventoryRemoteDataSourceImpl implements InventoryRemoteDataSource {
@@ -19,6 +21,22 @@ class InventoryRemoteDataSourceImpl implements InventoryRemoteDataSource {
         path: EndPoints.addInventory,
         data: model.toJson(),
       );
+    } on DioException catch (e) {
+      throw ServerException(
+        e.response?.data['message'] ?? 'مشكلة في الاتصال بالسيرفر',
+      );
+    } catch (e) {
+      throw ServerException('مشكلة في الإتصال بالسيرفر');
+    }
+  }
+
+  @override
+  Future<List<InventoryModel>> getAllInventories() async {
+    try {
+      final response = await _apiService.get(path: EndPoints.getAllInventories);
+      return (response.data['inventories'] as List)
+          .map((e) => InventoryModel.fromJson(e))
+          .toList();
     } on DioException catch (e) {
       throw ServerException(
         e.response?.data['message'] ?? 'مشكلة في الاتصال بالسيرفر',
