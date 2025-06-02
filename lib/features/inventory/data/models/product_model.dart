@@ -8,6 +8,7 @@ class ProductModel {
   final String? name;
   final String? productContainer;
   final int? minCount;
+  final int? quantity;
 
   ProductModel({
     this.id,
@@ -19,6 +20,7 @@ class ProductModel {
     this.name,
     this.productContainer,
     this.minCount,
+    this.quantity,
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
@@ -32,6 +34,7 @@ class ProductModel {
       name: json.containsKey('name') ? json['name'] : null,
       productContainer: json.containsKey('productContainer') ? json['productContainer'] : null,
       minCount: json.containsKey('minCount') ? json['minCount'] : null,
+      quantity: json.containsKey('quantity') ? json['quantity'] : null,
     );
   }
 }

@@ -32,10 +32,21 @@ class InventoryCubit extends Cubit<InventoryState> {
     );
     selectedRowName = null;
     emit(GetAllInvintoriesSuccess(inventories!));
+    getInventory(id: selectedInventory!.id!);
   }
 
   void selectRowName(String? rowName) {
     selectedRowName = rowName;
     emit(GetAllInvintoriesSuccess(inventories!));
+  }
+
+  Future<void> getInventory({required String id}) async {
+    emit(GetInventoryLoading());
+    final result = await _inventoryRepo.getInventory(id: id);
+    if (result is Success<InventoryModel>) {
+      emit(GetInventorySuccess(result.data));
+    } else if (result is Failure<InventoryModel>) {
+      emit(GetInventoryFailure(result.message));
+    }
   }
 }

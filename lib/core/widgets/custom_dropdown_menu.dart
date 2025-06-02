@@ -8,6 +8,7 @@ class CustomDropdownMenu extends StatelessWidget {
   final Function(String?)? onChanged;
   final String hintText;
   final double? width;
+  final bool isReadOnly;
 
   const CustomDropdownMenu({
     super.key,
@@ -16,6 +17,7 @@ class CustomDropdownMenu extends StatelessWidget {
     this.onChanged,
     this.hintText = 'اختر',
     this.width,
+    this.isReadOnly = false,
   });
 
   @override
@@ -53,11 +55,14 @@ class CustomDropdownMenu extends StatelessWidget {
               );
             }).toList(),
         underline: const SizedBox(),
-        icon: const Icon(
-          Icons.arrow_drop_down,
-          color: AppPallete.greyColor,
-          size: 24,
-        ),
+        icon:
+            !isReadOnly
+                ? const Icon(
+                  Icons.arrow_drop_down,
+                  color: AppPallete.greyColor,
+                  size: 24,
+                )
+                : const SizedBox.shrink(),
         isExpanded: false,
         dropdownColor: Colors.white,
         borderRadius: BorderRadius.circular(8),

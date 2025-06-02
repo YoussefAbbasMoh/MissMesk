@@ -12,6 +12,7 @@ class DynamicTable<T> extends StatelessWidget {
   final Color? headerColor;
   final Color? rowColor;
   final bool? isOutsideBorder;
+  final List<String> columnNames;
 
   DynamicTable({
     super.key,
@@ -22,41 +23,63 @@ class DynamicTable<T> extends StatelessWidget {
     this.rowColor,
     this.tableWidth,
     this.isOutsideBorder = false,
+    this.columnNames = const [],
   });
 
   double rowHeight = 60;
   double headerHeight = 70;
 
   double tableHeightCal() {
-    return rowData.length * rowHeight + headerHeight;
+    if (columnNames.isNotEmpty) {
+      return (rowData.isNotEmpty ? rowData.length : 1) * rowHeight + 10;
+    }
+    return (rowData.isNotEmpty ? rowData.length : 1) * rowHeight + headerHeight;
   }
 
   List<DataColumn> _buildColumns() {
-    return _getColumnsNames(rowData[0])
-        .map(
-          (name) => DataColumn2(
-            fixedWidth: name == null || name.trim().isEmpty ? 70 : null,
-            label: Text(
-              name,
-              style: AppTextStyles.font14WhiteSemiBold,
-              textAlign: TextAlign.center,
-              overflow: TextOverflow.visible,
-              softWrap: true,
-            ),
-            headingRowAlignment: MainAxisAlignment.center,
-          ),
-        )
-        .toList();
+    final names =
+        rowData.isNotEmpty && rowData[0] is Map
+            ? _getColumnsNames(rowData[0])
+            : columnNames;
+
+    return names.map((name) {
+      return DataColumn2(
+        fixedWidth: name.trim().isEmpty ? 70 : null,
+        label: Text(
+          name,
+          style: AppTextStyles.font14WhiteSemiBold,
+          textAlign: TextAlign.center,
+          overflow: TextOverflow.visible,
+          softWrap: true,
+        ),
+        headingRowAlignment: MainAxisAlignment.center,
+      );
+    }).toList();
   }
 
   List<DataRow> _buildRows() {
-    return rowData
-        .map(
-          (e) => DataRow2(
-            cells: [..._getFields(e).map((e) => DataCell(Center(child: e)))],
-          ),
-        )
-        .toList();
+    final columnsCount = _buildColumns().length;
+
+    if (rowData.isEmpty) {
+      return [];
+    }
+
+    return rowData.map((e) {
+      final fields = _getFields(e);
+
+      // Ensure the number of fields matches the number of columns
+      final adjustedFields = List.generate(
+        columnsCount,
+        (i) => i < fields.length ? fields[i] : const Text(''),
+      );
+
+      return DataRow2(
+        cells:
+            adjustedFields
+                .map((field) => DataCell(Center(child: field)))
+                .toList(),
+      );
+    }).toList();
   }
 
   List<dynamic> _getFields(T item) {
@@ -66,9 +89,9 @@ class DynamicTable<T> extends StatelessWidget {
     return [];
   }
 
-  List<dynamic> _getColumnsNames(T item) {
+  List<String> _getColumnsNames(T item) {
     if (item is Map) {
-      return item.keys.toList();
+      return item.keys.map((key) => key.toString()).toList();
     }
     return [];
   }

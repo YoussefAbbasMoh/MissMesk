@@ -26,6 +26,7 @@ class DropDownFilter extends StatelessWidget {
         children: [
           Text(title),
           CustomDropdownMenu(
+            isReadOnly: onChanged == null,
             items: items ?? [],
             width: dropDownWidth,
             value: selected,

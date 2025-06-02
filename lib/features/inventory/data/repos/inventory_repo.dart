@@ -7,6 +7,7 @@ import 'package:miss_misq/features/inventory/data/models/inventory_model.dart';
 abstract class InventoryRepo {
   Future<ApiResult> addInventory({required AddInventoryRequestModel inventory});
   Future<ApiResult<List<InventoryModel>>>getAllInventories();
+  Future<ApiResult<InventoryModel>> getInventory({required String id});
 }
 
 class InventoryRepoImpl implements InventoryRepo {
@@ -37,6 +38,18 @@ class InventoryRepoImpl implements InventoryRepo {
       return ApiResult.failure(e.message);
     } catch (e) {
       return ApiResult.failure('مشكلة في جلب المخازن');
+    }
+  }
+  
+  @override
+  Future<ApiResult<InventoryModel>> getInventory({required String id}) async{
+    try {
+      final response = await _inventoryRemoteDataSource.getInventory(id: id);
+      return ApiResult.success(response);
+    } on ServerException catch (e) {
+      return ApiResult.failure(e.message);
+    } catch (e) {
+      return ApiResult.failure('مشكلة في جلب المخزن');
     }
   }
 }

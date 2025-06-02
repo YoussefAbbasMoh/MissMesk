@@ -17,3 +17,15 @@ final class GetAllInvintoriesFailure extends InventoryState {
   final String message;
   GetAllInvintoriesFailure(this.message);
 }
+
+final class GetInventoryLoading extends InventoryState {}
+
+final class GetInventorySuccess extends InventoryState {
+  final InventoryModel inventory;
+  GetInventorySuccess(this.inventory);
+}
+
+final class GetInventoryFailure extends InventoryState {
+  final String message;
+  GetInventoryFailure(this.message);
+}
