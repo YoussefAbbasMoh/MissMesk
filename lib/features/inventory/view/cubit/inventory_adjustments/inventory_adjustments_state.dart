@@ -18,3 +18,17 @@ final class AddInventoryFailure extends InventoryAdjustmentsState {
 
   AddInventoryFailure(this.message);
 }
+
+final class AddUnitLoading extends InventoryAdjustmentsState {}
+
+final class AddUnitSuccess extends InventoryAdjustmentsState {
+  final String message;
+
+  AddUnitSuccess(this.message);
+}
+
+final class AddUnitFailure extends InventoryAdjustmentsState {
+  final String message;
+
+  AddUnitFailure(this.message);
+}

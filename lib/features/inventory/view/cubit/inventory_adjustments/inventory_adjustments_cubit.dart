@@ -21,4 +21,14 @@ class InventoryAdjustmentsCubit extends Cubit<InventoryAdjustmentsState> {
       emit(AddInventoryFailure(result.message));
     }
   }
+
+  Future<void> addUnit({required String unit}) async {
+    emit(AddUnitLoading());
+    final result = await _inventoryRepo.addUnit(unit: unit);
+    if (result is Success) {
+      emit(AddUnitSuccess(result.data));
+    } else if (result is Failure) {
+      emit(AddUnitFailure(result.message));
+    }
+  }
 }

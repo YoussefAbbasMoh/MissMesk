@@ -9,6 +9,7 @@ abstract class InventoryRemoteDataSource {
   Future addInventory({required AddInventoryRequestModel model});
   Future<List<InventoryModel>> getAllInventories();
   Future<InventoryModel> getInventory({required String id});
+  Future addUnit({required String unit});
 }
 
 class InventoryRemoteDataSourceImpl implements InventoryRemoteDataSource {
@@ -54,6 +55,19 @@ class InventoryRemoteDataSourceImpl implements InventoryRemoteDataSource {
         path: EndPoints.getInventoryById(id),
       );
       return InventoryModel.fromJson(response.data['inventory']);
+    } on DioException catch (e) {
+      throw ServerException(
+        e.response?.data['message'] ?? 'مشكلة في الاتصال بالسيرفر',
+      );
+    } catch (e) {
+      throw ServerException('مشكلة في الإتصال بالسيرفر');
+    }
+  }
+
+  @override
+  Future addUnit({required String unit}) async {
+    try {
+      await _apiService.post(path: EndPoints.addUnit, data: {'name': unit});
     } on DioException catch (e) {
       throw ServerException(
         e.response?.data['message'] ?? 'مشكلة في الاتصال بالسيرفر',

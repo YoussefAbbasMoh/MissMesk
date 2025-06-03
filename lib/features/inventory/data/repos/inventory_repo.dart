@@ -8,6 +8,7 @@ abstract class InventoryRepo {
   Future<ApiResult> addInventory({required AddInventoryRequestModel inventory});
   Future<ApiResult<List<InventoryModel>>> getAllInventories();
   Future<ApiResult<InventoryModel>> getInventory({required String id});
+  Future<ApiResult> addUnit({required String unit});
 }
 
 class InventoryRepoImpl implements InventoryRepo {
@@ -50,6 +51,18 @@ class InventoryRepoImpl implements InventoryRepo {
       return ApiResult.failure(e.message);
     } catch (e) {
       return ApiResult.failure('مشكلة في جلب المخزن');
+    }
+  }
+
+  @override
+  Future<ApiResult> addUnit({required String unit}) async {
+    try {
+      await _inventoryRemoteDataSource.addUnit(unit: unit);
+      return ApiResult.success('تم اضافة الوحدة بنجاح');
+    } on ServerException catch (e) {
+      return ApiResult.failure(e.message);
+    } catch (e) {
+      return ApiResult.failure('مشكلة في اضافة الوحدة');
     }
   }
 }
