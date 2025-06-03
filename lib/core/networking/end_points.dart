@@ -12,4 +12,5 @@ class EndPoints {
   static const String getAllInventories  = '/inventory';
   static String getInventoryById(String id) => '/inventory/$id';
   static const String addUnit = '/inventory/addItemUnit';
+  static const String getStorekeepers = '/inventory/getStorekeepers';
 }

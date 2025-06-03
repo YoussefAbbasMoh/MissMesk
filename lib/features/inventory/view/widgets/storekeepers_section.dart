@@ -1,70 +1,129 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:miss_misq/core/theming/app_text_styles.dart';
 import 'package:miss_misq/core/utils/assets_manager.dart';
 import 'package:miss_misq/core/utils/extensions.dart';
 import 'package:miss_misq/core/widgets/app_custom_button.dart';
 import 'package:miss_misq/core/widgets/dynamic_table.dart';
+import 'package:miss_misq/core/widgets/empty_data_table.dart';
 import 'package:miss_misq/core/widgets/spacing.dart';
 import 'package:miss_misq/core/widgets/table_custom_icon.dart';
 import 'package:miss_misq/core/widgets/table_custom_text.dart';
+import 'package:miss_misq/features/inventory/data/models/store_keeper_model.dart';
+import 'package:miss_misq/features/inventory/view/cubit/inventory_adjustments/inventory_adjustments_cubit.dart';
 import 'package:miss_misq/features/inventory/view/widgets/add_storekeeper_dialog.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
-class StorekeepersSection extends StatelessWidget {
-  const StorekeepersSection({
-    super.key,
-  });
+class StorekeepersSection extends StatefulWidget {
+  const StorekeepersSection({super.key});
+
+  @override
+  State<StorekeepersSection> createState() => _StorekeepersSectionState();
+}
+
+class _StorekeepersSectionState extends State<StorekeepersSection> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<InventoryAdjustmentsCubit>().getStoreKeepers();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: context.width * 0.5,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            'سجل أمناء المخازن',
-            style: AppTextStyles.font16BlackSemiBold,
-          ),
-          const VerticalSpacing(10),
-          DynamicTable(
-            rowData: List.generate(
-              4,
-              (index) => {
-                'الرقم التسلسلي': const TableCustomText('1'),
-                'اسم الأمين': const TableCustomText('اسم الأمين'),
-                'اسم المخزن': const TableCustomText('اسم المخزن'),
-                '': InkWell(
-                  child: TableCustomIcon(AssetsManager.edit),
-                  onTap: () {
-                    showDialog(
-                      context: context,
-                      builder: (context) => const AddStorekeeperDialog(),
-                    );
-                  },
+    return BlocConsumer<InventoryAdjustmentsCubit, InventoryAdjustmentsState>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        final isLoading = state is InventoryAdjustmentsGetStoreKeepersLoading;
+        final isError = state is InventoryAdjustmentsGetStoreKeepersFailure;
+        final List<StorekeeperModel> storekeppers =
+            state is InventoryAdjustmentsGetStoreKeepersSuccess
+                ? state.storekeepers
+                : [];
+
+        if (!isLoading && storekeppers.isEmpty) {
+          return const EmptyDataTable(
+            columnNames: [
+              'الرقم التسلسلي',
+              'اسم الأمين',
+              'رقم الهاتف',
+              'اسم المخزن',
+              '',
+            ],
+          );
+        }
+
+        return Skeletonizer(
+          enabled: isLoading,
+          child: SizedBox(
+            width: context.width * 0.5,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'سجل أمناء المخازن',
+                  style: AppTextStyles.font16BlackSemiBold,
                 ),
-                ' ': InkWell(
-                  child: TableCustomIcon(AssetsManager.delete),
-                  onTap: () {},
-                ),
-              },
+                const VerticalSpacing(10),
+                if (!isError) ...[
+                  DynamicTable(
+                    rowData: List.generate(
+                      isLoading ? 3 : storekeppers.length,
+                      (index) => {
+                        'الرقم التسلسلي':
+                            isLoading
+                                ? const TableCustomText('')
+                                : TableCustomText('${index + 1}'),
+                        'اسم الأمين':
+                            isLoading
+                                ? const TableCustomText('')
+                                : TableCustomText(
+                                  storekeppers[index].name ?? '',
+                                ),
+                        'رقم الهاتف':
+                            isLoading
+                                ? const TableCustomText('')
+                                : TableCustomText(
+                                  storekeppers[index].phoneNumber ?? '',
+                                ),
+                        'اسم المخزن':
+                            isLoading
+                                ? const TableCustomText('')
+                                : TableCustomText(
+                                  storekeppers[index].inventory?.name ?? '',
+                                ),
+                        '': InkWell(
+                          child: TableCustomIcon(AssetsManager.delete),
+                          onTap: () {},
+                        ),
+                      },
+                    ),
+                  ),
+                  const VerticalSpacing(10),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: AppCustomButton(
+                      title: 'إضافة أمين',
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) => const AddStorekeeperDialog(),
+                        );
+                      },
+                      icon: Icons.add,
+                    ),
+                  ),
+                ],
+                if (isError) ...[
+                  Text(
+                    (state).message,
+                    style: AppTextStyles.font16BlackSemiBold,
+                  ),
+                ],
+              ],
             ),
           ),
-          const VerticalSpacing(10),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: AppCustomButton(
-              title: 'إضافة أمين',
-              onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (context) => const AddStorekeeperDialog(),
-                );
-              },
-              icon: Icons.add,
-            ),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

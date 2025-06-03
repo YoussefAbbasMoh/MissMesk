@@ -103,7 +103,7 @@ class _InventoriesSectionState extends State<InventoriesSection> {
                     'الرقم التسلسلي':
                         isLoading
                             ? const TableCustomText('')
-                            : const TableCustomText('1'),
+                            : TableCustomText('${index + 1}'),
                     'رقم المخزن':
                         isLoading
                             ? const TableCustomText('')

@@ -48,3 +48,16 @@ final class AddUnitFailure extends InventoryAdjustmentsState {
   AddUnitFailure(this.message);
 }
 
+final class InventoryAdjustmentsGetStoreKeepersLoading extends InventoryAdjustmentsState {}
+
+final class InventoryAdjustmentsGetStoreKeepersSuccess extends InventoryAdjustmentsState {
+  final List<StorekeeperModel> storekeepers;
+
+  InventoryAdjustmentsGetStoreKeepersSuccess(this.storekeepers);
+}
+
+final class InventoryAdjustmentsGetStoreKeepersFailure extends InventoryAdjustmentsState {
+  final String message;
+
+  InventoryAdjustmentsGetStoreKeepersFailure(this.message);
+}

@@ -1,13 +1,34 @@
 class StorekeeperModel {
   final String? id;
   final String? name;
+  final String? phoneNumber;
+  final _Inventory? inventory;
 
-  StorekeeperModel({this.id, this.name});
+  StorekeeperModel({this.id, this.name, this.inventory, this.phoneNumber});
 
   factory StorekeeperModel.fromJson(Map<String, dynamic> json) {
     return StorekeeperModel(
-      id: json.containsKey('_id') ? json['_id'] : null,
-      name: json.containsKey('name') ? json['name'] : null,
+      id: json.containsKey('_id') ? json['_id'] : '',
+      name: json.containsKey('name') ? json['name'] : '',
+      phoneNumber: json.containsKey('phoneNumber') ? json['phoneNumber'] : '',
+      inventory:
+          json.containsKey('inventory')
+              ? _Inventory.fromJson(json['inventory'] ?? {})
+              : _Inventory(),
+    );
+  }
+}
+
+class _Inventory {
+  final String? id;
+  final String? name;
+
+  _Inventory({this.id, this.name});
+
+  factory _Inventory.fromJson(Map<String, dynamic> json) {
+    return _Inventory(
+      id: json.containsKey('_id') ? json['_id'] : '',
+      name: json.containsKey('name') ? json['name'] : '',
     );
   }
 }

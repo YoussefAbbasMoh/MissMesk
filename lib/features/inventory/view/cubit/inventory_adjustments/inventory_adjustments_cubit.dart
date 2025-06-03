@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:miss_misq/core/networking/api_result.dart';
 import 'package:miss_misq/features/inventory/data/models/add_inventory_request_model.dart';
 import 'package:miss_misq/features/inventory/data/models/inventory_model.dart';
+import 'package:miss_misq/features/inventory/data/models/store_keeper_model.dart';
 import 'package:miss_misq/features/inventory/data/repos/inventory_repo.dart';
 part 'inventory_adjustments_state.dart';
 
@@ -44,5 +45,13 @@ class InventoryAdjustmentsCubit extends Cubit<InventoryAdjustmentsState> {
     }
   }
 
-  
+  Future<void> getStoreKeepers() async {
+    emit(InventoryAdjustmentsGetStoreKeepersLoading());
+    final result = await _inventoryRepo.getStoreKeepers();
+    if (result is Success<List<StorekeeperModel>>) {
+      emit(InventoryAdjustmentsGetStoreKeepersSuccess(result.data));
+    } else if (result is Failure<List<StorekeeperModel>>) {
+      emit(InventoryAdjustmentsGetStoreKeepersFailure(result.message));
+    }
+  }
 }
