@@ -29,19 +29,22 @@ class InventoryModel {
       number: json.containsKey('number') ? json['number'] : null,
       address: json.containsKey('address') ? json['address'] : null,
       rowsNumber: json.containsKey('rowsNumber') ? json['rowsNumber'] : null,
-      rowsName: json.containsKey('rowsName')
-          ? List<String>.from(json['rowsName'])
-          : [],
-      product: json.containsKey('product')
-          ? (json['product'] as List)
-              .map((e) => ProductModel.fromJson(e))
-              .toList()
-          : [],
-      storekeeper: json.containsKey('storekeeper')
-          ? (json['storekeeper'] as List)
-              .map((e) => StorekeeperModel.fromJson(e))
-              .toList()
-          : [],
+      rowsName:
+          json.containsKey('rowsName')
+              ? List<String>.from(json['rowsName'])
+              : [],
+      product:
+          json.containsKey('product')
+              ? (json['product'] as List)
+                  .map((e) => ProductModel.fromJson(e))
+                  .toList()
+              : [],
+      storekeeper:
+          json.containsKey('storekeeper')
+              ? (json['storekeeper'] as List)
+                  .map((e) => StorekeeperModel.fromJson(e))
+                  .toList()
+              : [],
     );
   }
 }

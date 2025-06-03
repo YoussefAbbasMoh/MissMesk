@@ -9,6 +9,7 @@ class DropDownFilter extends StatelessWidget {
     this.dropDownWidth,
     this.onChanged,
     this.selected,
+    this.hintText,
   });
 
   final String title;
@@ -16,6 +17,7 @@ class DropDownFilter extends StatelessWidget {
   final double? dropDownWidth;
   final Function(String?)? onChanged;
   final String? selected;
+  final String? hintText;
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +33,7 @@ class DropDownFilter extends StatelessWidget {
             width: dropDownWidth,
             value: selected,
             onChanged: onChanged,
+            hintText: hintText ?? 'اختر',
           ),
         ],
       ),

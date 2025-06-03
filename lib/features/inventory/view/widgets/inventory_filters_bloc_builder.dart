@@ -25,14 +25,29 @@ class _InventoryFilterWidgetState extends State<InventoryFilterWidget> {
           (previous, current) =>
               current is GetAllInvintoriesSuccess ||
               current is GetAllInvintoriesLoading ||
-              current is GetAllInvintoriesFailure,
+              current is GetAllInvintoriesFailure ||
+              current is InventorySelectionState,
+
       builder: (context, state) {
-        if (state is GetAllInvintoriesSuccess) {
+        if (state is GetAllInvintoriesSuccess ||
+            state is InventorySelectionState) {
+          final inventoryList =
+              state is GetAllInvintoriesSuccess
+                  ? state.inventories
+                  : (state as InventorySelectionState).inventories;
+
           final selectedInventory =
-              context.read<InventoryCubit>().selectedInventory;
+              state is InventorySelectionState
+                  ? state.selectedInventory
+                  : context.read<InventoryCubit>().selectedInventory;
+
+          final selectedRowName =
+              state is InventorySelectionState
+                  ? state.selectedRowName
+                  : context.read<InventoryCubit>().selectedRowName;
 
           final inventoryNames =
-              state.inventories
+              inventoryList
                   .map((e) => e.name ?? '')
                   .where((name) => name.isNotEmpty)
                   .toList();
@@ -67,12 +82,13 @@ class _InventoryFilterWidgetState extends State<InventoryFilterWidget> {
                         : [],
                 selected: selectedInventory?.address,
                 onChanged: null,
+                hintText: 'عنوان المخزن',
               ),
 
               DropDownFilter(
                 title: 'اسم الرف',
                 items: rowNames,
-                selected: context.read<InventoryCubit>().selectedRowName,
+                selected: selectedRowName,
                 onChanged: (selected) {
                   context.read<InventoryCubit>().selectRowName(selected);
                 },
@@ -80,6 +96,7 @@ class _InventoryFilterWidgetState extends State<InventoryFilterWidget> {
 
               DropDownFilter(
                 title: 'اسم أمين المخزن',
+                hintText: 'اسم أمين المخزن',
                 items:
                     selectedInventory?.storekeeper != null
                         ? selectedInventory!.storekeeper!

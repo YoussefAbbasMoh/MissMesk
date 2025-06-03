@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:miss_misq/core/theming/app_pallete.dart';
 import 'package:miss_misq/core/theming/app_text_styles.dart';
+import 'package:miss_misq/features/inventory/view/cubit/inventory/cubit/inventory_cubit.dart';
 
 class ProductsFilter extends StatefulWidget {
   final List<String> filters;
@@ -41,6 +43,13 @@ class _ProductsFilterState extends State<ProductsFilter> {
                   if (widget.onFilterSelected != null) {
                     widget.onFilterSelected!(filter);
                   }
+                  context.read<InventoryCubit>().selectProductType(
+                    filter == 'المواد الخام'
+                        ? 'raw'
+                        : filter == 'المنتجات المكتملة'
+                        ? 'finished'
+                        : null,
+                  );
                 },
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(40, 73),

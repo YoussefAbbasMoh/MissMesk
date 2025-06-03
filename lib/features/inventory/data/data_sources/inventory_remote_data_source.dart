@@ -46,11 +46,13 @@ class InventoryRemoteDataSourceImpl implements InventoryRemoteDataSource {
       throw ServerException('مشكلة في الإتصال بالسيرفر');
     }
   }
-  
+
   @override
-  Future<InventoryModel> getInventory({required String id}) async{
+  Future<InventoryModel> getInventory({required String id}) async {
     try {
-      final response = await _apiService.get(path: EndPoints.getInventoryById(id));
+      final response = await _apiService.get(
+        path: EndPoints.getInventoryById(id),
+      );
       return InventoryModel.fromJson(response.data['inventory']);
     } on DioException catch (e) {
       throw ServerException(
