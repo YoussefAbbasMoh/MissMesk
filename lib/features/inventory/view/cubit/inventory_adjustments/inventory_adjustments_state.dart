@@ -61,3 +61,17 @@ final class InventoryAdjustmentsGetStoreKeepersFailure extends InventoryAdjustme
 
   InventoryAdjustmentsGetStoreKeepersFailure(this.message);
 }
+
+final class AddStoreKeeperLoading extends InventoryAdjustmentsState {}
+
+final class AddStoreKeeperSuccess extends InventoryAdjustmentsState {
+  final String message;
+
+  AddStoreKeeperSuccess(this.message);
+}
+
+final class AddStoreKeeperFailure extends InventoryAdjustmentsState {
+  final String message;
+
+  AddStoreKeeperFailure(this.message);
+}

@@ -11,6 +11,11 @@ abstract class InventoryRepo {
   Future<ApiResult<InventoryModel>> getInventory({required String id});
   Future<ApiResult> addUnit({required String unit});
   Future<ApiResult<List<StorekeeperModel>>> getStoreKeepers();
+  Future<ApiResult> addStoreKeeper({
+    required String name,
+    required String phoneNumber,
+    required String inventoryId,
+  });
 }
 
 class InventoryRepoImpl implements InventoryRepo {
@@ -77,6 +82,26 @@ class InventoryRepoImpl implements InventoryRepo {
       return ApiResult.failure(e.message);
     } catch (e) {
       return ApiResult.failure('مشكلة في جلب أمناء المخازن');
+    }
+  }
+
+  @override
+  Future<ApiResult> addStoreKeeper({
+    required String name,
+    required String phoneNumber,
+    required String inventoryId,
+  }) async {
+    try {
+      await _inventoryRemoteDataSource.addStoreKeeper(
+        name: name,
+        phoneNumber: phoneNumber,
+        inventoryId: inventoryId,
+      );
+      return ApiResult.success('تم اضافة أمين المخزن بنجاح');
+    } on ServerException catch (e) {
+      return ApiResult.failure(e.message);
+    } catch (e) {
+      return ApiResult.failure('مشكلة في اضافة أمين المخزن');
     }
   }
 }

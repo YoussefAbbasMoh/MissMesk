@@ -12,12 +12,17 @@ class InventoryAdjustmentsCubit extends Cubit<InventoryAdjustmentsState> {
   InventoryAdjustmentsCubit(this._inventoryRepo)
     : super(InventoryAdjustmentsInitial());
 
+  List<InventoryModel> _inventories = [];
+
+  List<InventoryModel> get inventories => _inventories;
+
   Future<void> getAllInventories() async {
     emit(InventoryAdjustmentsGetAllInventoriesLoading());
 
     final result = await _inventoryRepo.getAllInventories();
     if (result is Success<List<InventoryModel>>) {
-      emit(InventoryAdjustmentsGetAllInventoriesSuccess(result.data));
+      _inventories = result.data;
+      emit(InventoryAdjustmentsGetAllInventoriesSuccess(_inventories));
     } else if (result is Failure<List<InventoryModel>>) {
       emit(InventoryAdjustmentsGetAllInventoriesFailure(result.message));
     }
@@ -52,6 +57,24 @@ class InventoryAdjustmentsCubit extends Cubit<InventoryAdjustmentsState> {
       emit(InventoryAdjustmentsGetStoreKeepersSuccess(result.data));
     } else if (result is Failure<List<StorekeeperModel>>) {
       emit(InventoryAdjustmentsGetStoreKeepersFailure(result.message));
+    }
+  }
+
+  Future<void> addStoreKeeper({
+    required String inventoryId,
+    required String name,
+    required String phoneNumber,
+  }) async {
+    emit(AddStoreKeeperLoading());
+    final result = await _inventoryRepo.addStoreKeeper(
+      name: name,
+      phoneNumber: phoneNumber,
+      inventoryId: inventoryId,
+    );
+    if (result is Success) {
+      emit(AddStoreKeeperSuccess(result.data));
+    } else if (result is Failure) {
+      emit(AddStoreKeeperFailure(result.message));
     }
   }
 }

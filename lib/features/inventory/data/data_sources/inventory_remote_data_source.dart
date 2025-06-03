@@ -12,6 +12,11 @@ abstract class InventoryRemoteDataSource {
   Future<InventoryModel> getInventory({required String id});
   Future addUnit({required String unit});
   Future<List<StorekeeperModel>> getStoreKeepers();
+  Future addStoreKeeper({
+    required String name,
+    required String phoneNumber,
+    required String inventoryId,
+  });
 }
 
 class InventoryRemoteDataSourceImpl implements InventoryRemoteDataSource {
@@ -87,12 +92,34 @@ class InventoryRemoteDataSourceImpl implements InventoryRemoteDataSource {
           .map((e) => StorekeeperModel.fromJson(e))
           .toList();
     } on DioException catch (e) {
-      print(e);
       throw ServerException(
         e.response?.data['message'] ?? 'مشكلة في الاتصال بالسيرفر',
       );
     } catch (e) {
-      print(e);
+      throw ServerException('مشكلة في الإتصال بالسيرفر');
+    }
+  }
+
+  @override
+  Future addStoreKeeper({
+    required String name,
+    required String phoneNumber,
+    required String inventoryId,
+  }) async {
+    try {
+      await _apiService.post(
+        path: EndPoints.addStorekeeper,
+        data: {
+          'name': name,
+          'phoneNumber': phoneNumber,
+          'inventoryId': inventoryId,
+        },
+      );
+    } on DioException catch (e) {
+      throw ServerException(
+        e.response?.data['message'] ?? 'مشكلة في الاتصال بالسيرفر',
+      );
+    } catch (e) {
       throw ServerException('مشكلة في الإتصال بالسيرفر');
     }
   }

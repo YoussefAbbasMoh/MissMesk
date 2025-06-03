@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:miss_misq/core/theming/app_text_styles.dart';
 import 'package:miss_misq/core/utils/assets_manager.dart';
 import 'package:miss_misq/core/utils/extensions.dart';
+import 'package:miss_misq/core/utils/show_loading.dart';
+import 'package:miss_misq/core/utils/show_toastification.dart';
 import 'package:miss_misq/core/widgets/app_custom_button.dart';
 import 'package:miss_misq/core/widgets/dynamic_table.dart';
 import 'package:miss_misq/core/widgets/empty_data_table.dart';
@@ -13,6 +16,7 @@ import 'package:miss_misq/features/inventory/data/models/store_keeper_model.dart
 import 'package:miss_misq/features/inventory/view/cubit/inventory_adjustments/inventory_adjustments_cubit.dart';
 import 'package:miss_misq/features/inventory/view/widgets/add_storekeeper_dialog.dart';
 import 'package:skeletonizer/skeletonizer.dart';
+import 'package:toastification/toastification.dart';
 
 class StorekeepersSection extends StatefulWidget {
   const StorekeepersSection({super.key});
@@ -28,19 +32,51 @@ class _StorekeepersSectionState extends State<StorekeepersSection> {
     context.read<InventoryAdjustmentsCubit>().getStoreKeepers();
   }
 
+  final List storekeeperStates = List.unmodifiable([
+    InventoryAdjustmentsGetStoreKeepersLoading,
+    InventoryAdjustmentsGetStoreKeepersSuccess,
+    InventoryAdjustmentsGetStoreKeepersFailure,
+    AddStoreKeeperLoading,
+    AddStoreKeeperSuccess,
+    AddStoreKeeperFailure,
+  ]);
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<InventoryAdjustmentsCubit, InventoryAdjustmentsState>(
-      listener: (context, state) {},
+      listenWhen:
+          (previous, current) =>
+              storekeeperStates.skip(3).contains(current.runtimeType),
+      buildWhen:
+          (previous, current) =>
+              storekeeperStates.take(3).contains(current.runtimeType),
+      listener: (context, state) {
+        if (state is AddStoreKeeperSuccess) {
+          context.pop();
+          showToastification(
+            message: state.message,
+            type: ToastificationType.success,
+          );
+          context.read<InventoryAdjustmentsCubit>().getStoreKeepers();
+        } else if (state is AddStoreKeeperFailure) {
+          context.pop();
+          showToastification(
+            message: state.message,
+            type: ToastificationType.error,
+          );
+        } else if (state is AddStoreKeeperLoading) {
+          showLoading(context);
+        }
+      },
       builder: (context, state) {
         final isLoading = state is InventoryAdjustmentsGetStoreKeepersLoading;
         final isError = state is InventoryAdjustmentsGetStoreKeepersFailure;
-        final List<StorekeeperModel> storekeppers =
-            state is InventoryAdjustmentsGetStoreKeepersSuccess
-                ? state.storekeepers
-                : [];
+        final List<StorekeeperModel>? storekeepers = switch (state) {
+          InventoryAdjustmentsGetStoreKeepersSuccess s => s.storekeepers,
+          _ => null,
+        };
 
-        if (!isLoading && storekeppers.isEmpty) {
+        if (!isLoading && (storekeepers == null || storekeepers.isEmpty)) {
           return const EmptyDataTable(
             columnNames: [
               'الرقم التسلسلي',
@@ -67,7 +103,7 @@ class _StorekeepersSectionState extends State<StorekeepersSection> {
                 if (!isError) ...[
                   DynamicTable(
                     rowData: List.generate(
-                      isLoading ? 3 : storekeppers.length,
+                      isLoading ? 3 : storekeepers!.length,
                       (index) => {
                         'الرقم التسلسلي':
                             isLoading
@@ -77,19 +113,19 @@ class _StorekeepersSectionState extends State<StorekeepersSection> {
                             isLoading
                                 ? const TableCustomText('')
                                 : TableCustomText(
-                                  storekeppers[index].name ?? '',
+                                  storekeepers![index].name ?? '',
                                 ),
                         'رقم الهاتف':
                             isLoading
                                 ? const TableCustomText('')
                                 : TableCustomText(
-                                  storekeppers[index].phoneNumber ?? '',
+                                  storekeepers![index].phoneNumber ?? '',
                                 ),
                         'اسم المخزن':
                             isLoading
                                 ? const TableCustomText('')
                                 : TableCustomText(
-                                  storekeppers[index].inventory?.name ?? '',
+                                  storekeepers![index].inventory?.name ?? '',
                                 ),
                         '': InkWell(
                           child: TableCustomIcon(AssetsManager.delete),
