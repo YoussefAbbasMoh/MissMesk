@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:miss_misq/core/networking/api_result.dart';
 import 'package:miss_misq/features/inventory/data/models/add_inventory_request_model.dart';
+import 'package:miss_misq/features/inventory/data/models/inventory_model.dart';
 import 'package:miss_misq/features/inventory/data/repos/inventory_repo.dart';
 part 'inventory_adjustments_state.dart';
 
@@ -9,6 +10,17 @@ class InventoryAdjustmentsCubit extends Cubit<InventoryAdjustmentsState> {
   final InventoryRepo _inventoryRepo;
   InventoryAdjustmentsCubit(this._inventoryRepo)
     : super(InventoryAdjustmentsInitial());
+
+  Future<void> getAllInventories() async {
+    emit(InventoryAdjustmentsGetAllInventoriesLoading());
+
+    final result = await _inventoryRepo.getAllInventories();
+    if (result is Success<List<InventoryModel>>) {
+      emit(InventoryAdjustmentsGetAllInventoriesSuccess(result.data));
+    } else if (result is Failure<List<InventoryModel>>) {
+      emit(InventoryAdjustmentsGetAllInventoriesFailure(result.message));
+    }
+  }
 
   Future<void> addInventory({
     required AddInventoryRequestModel inventory,
@@ -31,4 +43,6 @@ class InventoryAdjustmentsCubit extends Cubit<InventoryAdjustmentsState> {
       emit(AddUnitFailure(result.message));
     }
   }
+
+  
 }

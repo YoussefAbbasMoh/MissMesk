@@ -5,6 +5,21 @@ sealed class InventoryAdjustmentsState {}
 
 final class InventoryAdjustmentsInitial extends InventoryAdjustmentsState {}
 
+final class InventoryAdjustmentsGetAllInventoriesLoading extends InventoryAdjustmentsState {}
+
+final class InventoryAdjustmentsGetAllInventoriesSuccess extends InventoryAdjustmentsState {
+  final List<InventoryModel> inventories;
+
+  InventoryAdjustmentsGetAllInventoriesSuccess(this.inventories);
+}
+
+final class InventoryAdjustmentsGetAllInventoriesFailure extends InventoryAdjustmentsState {
+  final String message;
+
+  InventoryAdjustmentsGetAllInventoriesFailure(this.message);
+}
+
+
 final class AddInventoryLoading extends InventoryAdjustmentsState {}
 
 final class AddInventorySuccess extends InventoryAdjustmentsState {
@@ -32,3 +47,4 @@ final class AddUnitFailure extends InventoryAdjustmentsState {
 
   AddUnitFailure(this.message);
 }
+
