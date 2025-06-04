@@ -5,6 +5,7 @@ import 'package:miss_misq/core/networking/exceptions.dart';
 import 'package:miss_misq/features/inventory/data/models/add_inventory_request_model.dart';
 import 'package:miss_misq/features/inventory/data/models/inventory_model.dart';
 import 'package:miss_misq/features/inventory/data/models/item_unit_model.dart';
+import 'package:miss_misq/features/inventory/data/models/product_details_model.dart';
 import 'package:miss_misq/features/inventory/data/models/store_keeper_model.dart';
 
 abstract class InventoryRemoteDataSource {
@@ -24,6 +25,7 @@ abstract class InventoryRemoteDataSource {
     required AddInventoryRequestModel model,
     required String inventoryId,
   });
+  Future<ProductDetailsModel> getProductDetails({required String id});
 }
 
 class InventoryRemoteDataSourceImpl implements InventoryRemoteDataSource {
@@ -175,6 +177,24 @@ class InventoryRemoteDataSourceImpl implements InventoryRemoteDataSource {
         e.response?.data['message'] ?? 'مشكلة في الاتصال بالسيرفر',
       );
     } catch (e) {
+      throw ServerException('مشكلة في الإتصال بالسيرفر');
+    }
+  }
+
+  @override
+  Future<ProductDetailsModel> getProductDetails({required String id}) async {
+    try {
+      final response = await _apiService.get(
+        path: EndPoints.getProductDetails(id),
+      );
+      return ProductDetailsModel.fromJson(response.data['product']);
+    } on DioException catch (e) {
+      print(e);
+      throw ServerException(
+        e.response?.data['message'] ?? 'مشكلة في الاتصال بالسيرفر',
+      );
+    } catch (e) {
+      print(e);
       throw ServerException('مشكلة في الإتصال بالسيرفر');
     }
   }

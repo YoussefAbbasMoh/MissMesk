@@ -102,8 +102,12 @@ class AppRouter {
               GoRoute(
                 path: AppRoutes.itemCardBase,
                 builder: (context, state) {
-                  final id = state.pathParameters['itemId'] ?? '';
-                  return ItemCardView(itemId: id);
+                  final id =
+                      state.pathParameters['itemId'] ?? state.extra as String;
+                  return BlocProvider.value(
+                    value: sl<InventoryCubit>(),
+                    child: ItemCardView(itemId: id),
+                  );
                 },
               ),
               GoRoute(

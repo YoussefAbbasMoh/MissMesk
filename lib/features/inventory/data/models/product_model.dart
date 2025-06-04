@@ -32,7 +32,10 @@ class ProductModel {
       inventoryId: json.containsKey('inventoryId') ? json['inventoryId'] : null,
       rowName: json.containsKey('rowName') ? json['rowName'] : null,
       name: json.containsKey('name') ? json['name'] : null,
-      productContainer: json.containsKey('productContainer') ? json['productContainer'] : null,
+      productContainer:
+          json.containsKey('productContainer')
+              ? json['productContainer']
+              : null,
       minCount: json.containsKey('minCount') ? json['minCount'] : null,
       quantity: json.containsKey('quantity') ? json['quantity'] : null,
     );

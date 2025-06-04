@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:miss_misq/core/networking/api_result.dart';
 import 'package:miss_misq/features/inventory/data/models/inventory_model.dart';
+import 'package:miss_misq/features/inventory/data/models/product_details_model.dart';
 import 'package:miss_misq/features/inventory/data/models/product_model.dart';
 import 'package:miss_misq/features/inventory/data/repos/inventory_repo.dart';
 
@@ -151,6 +152,18 @@ class InventoryCubit extends Cubit<InventoryState> {
       );
     } else if (result is Failure<InventoryModel>) {
       emit(GetInventoryFailure(result.message));
+    }
+  }
+
+  Future<void> getProductDetails({required String id}) async {
+    emit(InventoryGetProductDetailsLoading());
+
+    final result = await _inventoryRepo.getProductDetails(id: id);
+
+    if (result is Success<ProductDetailsModel>) {
+      emit(InventoryGetProductDetailsSuccess(result.data));
+    } else if (result is Failure<ProductDetailsModel>) {
+      emit(InventoryGetProductDetailsFailure(result.message));
     }
   }
 }

@@ -44,3 +44,15 @@ final class GetInventoryFailure extends InventoryState {
   final String message;
   GetInventoryFailure(this.message);
 }
+
+final class InventoryGetProductDetailsLoading extends InventoryState {}
+
+final class InventoryGetProductDetailsSuccess extends InventoryState {
+  final ProductDetailsModel productDetails;
+  InventoryGetProductDetailsSuccess(this.productDetails);
+}
+
+final class InventoryGetProductDetailsFailure extends InventoryState {
+  final String message;
+  InventoryGetProductDetailsFailure(this.message);
+}

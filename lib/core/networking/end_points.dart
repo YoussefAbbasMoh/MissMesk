@@ -9,7 +9,7 @@ class EndPoints {
 
   // Inventory
   static const String addInventory = '/inventory/addInventory';
-  static const String getAllInventories  = '/inventory';
+  static const String getAllInventories = '/inventory';
   static String getInventoryById(String id) => '/inventory/$id';
   static const String addUnit = '/inventory/addItemUnit';
   static const String getStorekeepers = '/inventory/getStorekeepers';
@@ -17,5 +17,7 @@ class EndPoints {
   static String deleteStorekeeper(String storekeeperId) =>
       '/inventory/deleteStorekeeper/$storekeeperId';
   static const String getAllUnits = '/inventory/getItemUnits';
-  static  String updateInventory(String inventoryId) => '/inventory/updateInventory/$inventoryId';
+  static String updateInventory(String inventoryId) =>
+      '/inventory/updateInventory/$inventoryId';
+  static String getProductDetails(String productId) => '/product/$productId';
 }

@@ -4,6 +4,7 @@ import 'package:miss_misq/features/inventory/data/data_sources/inventory_remote_
 import 'package:miss_misq/features/inventory/data/models/add_inventory_request_model.dart';
 import 'package:miss_misq/features/inventory/data/models/inventory_model.dart';
 import 'package:miss_misq/features/inventory/data/models/item_unit_model.dart';
+import 'package:miss_misq/features/inventory/data/models/product_details_model.dart';
 import 'package:miss_misq/features/inventory/data/models/store_keeper_model.dart';
 
 abstract class InventoryRepo {
@@ -22,6 +23,9 @@ abstract class InventoryRepo {
   Future<ApiResult> updateInventory({
     required AddInventoryRequestModel model,
     required String inventoryId,
+  });
+  Future<ApiResult<ProductDetailsModel>> getProductDetails({
+    required String id,
   });
 }
 
@@ -111,9 +115,9 @@ class InventoryRepoImpl implements InventoryRepo {
       return ApiResult.failure('مشكلة في اضافة أمين المخزن');
     }
   }
-  
+
   @override
-  Future<ApiResult> deleteStoreKeeper({required String id}) async{
+  Future<ApiResult> deleteStoreKeeper({required String id}) async {
     try {
       await _inventoryRemoteDataSource.deleteStoreKeeper(id: id);
       return ApiResult.success('تم حذف أمين المخزن بنجاح');
@@ -123,9 +127,9 @@ class InventoryRepoImpl implements InventoryRepo {
       return ApiResult.failure('مشكلة في حذف أمين المخزن');
     }
   }
-  
+
   @override
-  Future<ApiResult<List<ItemUnitModel>>> getAllUnits() async{
+  Future<ApiResult<List<ItemUnitModel>>> getAllUnits() async {
     try {
       final response = await _inventoryRemoteDataSource.getAllUnits();
       return ApiResult.success(response);
@@ -135,16 +139,38 @@ class InventoryRepoImpl implements InventoryRepo {
       return ApiResult.failure('مشكلة في جلب الوحدات');
     }
   }
-  
+
   @override
-  Future<ApiResult> updateInventory({required AddInventoryRequestModel model, required String inventoryId}) async{
+  Future<ApiResult> updateInventory({
+    required AddInventoryRequestModel model,
+    required String inventoryId,
+  }) async {
     try {
-      await _inventoryRemoteDataSource.updateInventory(model: model, inventoryId: inventoryId);
+      await _inventoryRemoteDataSource.updateInventory(
+        model: model,
+        inventoryId: inventoryId,
+      );
       return ApiResult.success('تم تحديث المخزن بنجاح');
     } on ServerException catch (e) {
       return ApiResult.failure(e.message);
     } catch (e) {
       return ApiResult.failure('مشكلة في تحديث المخزن');
+    }
+  }
+
+  @override
+  Future<ApiResult<ProductDetailsModel>> getProductDetails({
+    required String id,
+  }) async {
+    try {
+      final response = await _inventoryRemoteDataSource.getProductDetails(
+        id: id,
+      );
+      return ApiResult.success(response);
+    } on ServerException catch (e) {
+      return ApiResult.failure(e.message);
+    } catch (e) {
+      return ApiResult.failure('مشكلة في جلب بيانات المنتج');
     }
   }
 }
