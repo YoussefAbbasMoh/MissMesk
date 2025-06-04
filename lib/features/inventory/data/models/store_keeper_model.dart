@@ -17,6 +17,13 @@ class StorekeeperModel {
               : _Inventory(),
     );
   }
+
+  Map<String, dynamic> toJson() => {
+    '_id': id,
+    'name': name,
+    'phoneNumber': phoneNumber,
+    'inventory': inventory?.toJson(),
+  };
 }
 
 class _Inventory {
@@ -31,4 +38,6 @@ class _Inventory {
       name: json.containsKey('name') ? json['name'] : '',
     );
   }
+
+  Map<String, dynamic> toJson() => {'_id': id, 'name': name};
 }

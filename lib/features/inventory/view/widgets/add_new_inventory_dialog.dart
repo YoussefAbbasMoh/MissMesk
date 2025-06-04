@@ -8,10 +8,17 @@ import 'package:miss_misq/core/utils/extensions.dart';
 import 'package:miss_misq/core/widgets/app_custom_dialog.dart';
 import 'package:miss_misq/core/widgets/app_custom_text_field.dart';
 import 'package:miss_misq/features/inventory/data/models/add_inventory_request_model.dart';
+import 'package:miss_misq/features/inventory/data/models/inventory_model.dart';
 import 'package:miss_misq/features/inventory/view/cubit/inventory_adjustments/inventory_adjustments_cubit.dart';
 
 class AddNewInventoryDialog extends StatefulWidget {
-  const AddNewInventoryDialog({super.key});
+  const AddNewInventoryDialog({
+    super.key,
+    this.isUpdating = false,
+    this.inventory,
+  });
+  final bool isUpdating;
+  final InventoryModel? inventory;
 
   @override
   State<AddNewInventoryDialog> createState() => _AddNewInventoryDialogState();
@@ -38,6 +45,11 @@ class _AddNewInventoryDialogState extends State<AddNewInventoryDialog> {
     shelfNameController = TextEditingController();
     inventoryNameController = TextEditingController();
     inventoryAddressController = TextEditingController();
+    if (widget.isUpdating) {
+      inventoryNameController.text = widget.inventory!.name ?? '';
+      inventoryAddressController.text = widget.inventory!.address ?? '';
+      shelfNames = widget.inventory!.rowsName ?? [];
+    }
     super.initState();
   }
 
@@ -61,16 +73,27 @@ class _AddNewInventoryDialogState extends State<AddNewInventoryDialog> {
               onSave: () {
                 if (_formKey.currentState!.validate()) {
                   context.pop();
-                  context.read<InventoryAdjustmentsCubit>().addInventory(
-                    inventory: AddInventoryRequestModel(
-                      name: inventoryNameController.text,
-                      address: inventoryAddressController.text,
-                      rowsName: shelfNames,
-                    ),
-                  );
+                  widget.isUpdating
+                      ? context
+                          .read<InventoryAdjustmentsCubit>()
+                          .updateInventory(
+                            inventory: AddInventoryRequestModel(
+                              name: inventoryNameController.text,
+                              address: inventoryAddressController.text,
+                              rowsName: shelfNames,
+                            ),
+                            inventoryId: widget.inventory?.id ?? '',
+                          )
+                      : context.read<InventoryAdjustmentsCubit>().addInventory(
+                        inventory: AddInventoryRequestModel(
+                          name: inventoryNameController.text,
+                          address: inventoryAddressController.text,
+                          rowsName: shelfNames,
+                        ),
+                      );
                 }
               },
-              title: 'إضافة مخزن',
+              title: widget.isUpdating ? 'تعديل المخزن' : 'إضافة مخزن',
               children: [
                 const Text(
                   'بيانات المخزن',

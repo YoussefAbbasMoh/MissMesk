@@ -4,6 +4,7 @@ import 'package:miss_misq/core/networking/end_points.dart';
 import 'package:miss_misq/core/networking/exceptions.dart';
 import 'package:miss_misq/features/inventory/data/models/add_inventory_request_model.dart';
 import 'package:miss_misq/features/inventory/data/models/inventory_model.dart';
+import 'package:miss_misq/features/inventory/data/models/item_unit_model.dart';
 import 'package:miss_misq/features/inventory/data/models/store_keeper_model.dart';
 
 abstract class InventoryRemoteDataSource {
@@ -15,6 +16,12 @@ abstract class InventoryRemoteDataSource {
   Future addStoreKeeper({
     required String name,
     required String phoneNumber,
+    required String inventoryId,
+  });
+  Future deleteStoreKeeper({required String id});
+  Future<List<ItemUnitModel>> getAllUnits();
+  Future updateInventory({
+    required AddInventoryRequestModel model,
     required String inventoryId,
   });
 }
@@ -114,6 +121,54 @@ class InventoryRemoteDataSourceImpl implements InventoryRemoteDataSource {
           'phoneNumber': phoneNumber,
           'inventoryId': inventoryId,
         },
+      );
+    } on DioException catch (e) {
+      throw ServerException(
+        e.response?.data['message'] ?? 'مشكلة في الاتصال بالسيرفر',
+      );
+    } catch (e) {
+      throw ServerException('مشكلة في الإتصال بالسيرفر');
+    }
+  }
+
+  @override
+  Future deleteStoreKeeper({required String id}) async {
+    try {
+      await _apiService.delete(path: EndPoints.deleteStorekeeper(id));
+    } on DioException catch (e) {
+      throw ServerException(
+        e.response?.data['message'] ?? 'مشكلة في الاتصال بالسيرفر',
+      );
+    } catch (e) {
+      throw ServerException('مشكلة في الإتصال بالسيرفر');
+    }
+  }
+
+  @override
+  Future<List<ItemUnitModel>> getAllUnits() async {
+    try {
+      final response = await _apiService.get(path: EndPoints.getAllUnits);
+      return (response.data['itemUnits'] as List)
+          .map((e) => ItemUnitModel.fromJson(e))
+          .toList();
+    } on DioException catch (e) {
+      throw ServerException(
+        e.response?.data['message'] ?? 'مشكلة في الاتصال بالسيرفر',
+      );
+    } catch (e) {
+      throw ServerException('مشكلة في الإتصال بالسيرفر');
+    }
+  }
+
+  @override
+  Future updateInventory({
+    required AddInventoryRequestModel model,
+    required String inventoryId,
+  }) async {
+    try {
+      await _apiService.patch(
+        path: EndPoints.updateInventory(inventoryId),
+        data: model.toJson(),
       );
     } on DioException catch (e) {
       throw ServerException(

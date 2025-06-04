@@ -37,4 +37,19 @@ class ProductModel {
       quantity: json.containsKey('quantity') ? json['quantity'] : null,
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      '_id': id,
+      'code': code,
+      'productType': productType,
+      'description': description,
+      'inventoryId': inventoryId,
+      'rowName': rowName,
+      'name': name,
+      'productContainer': productContainer,
+      'minCount': minCount,
+      'quantity': quantity,
+    };
+  }
 }

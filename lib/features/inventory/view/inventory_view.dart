@@ -35,10 +35,9 @@ class InventoryView extends StatelessWidget {
           const InventoryTableBlocBuilder(),
           const VerticalSpacing(20),
           BlocBuilder<InventoryCubit, InventoryState>(
-            buildWhen: (previous, current) => current is GetInventorySuccess,
             builder: (context, state) {
-              if (state is! GetInventorySuccess ||
-                  state.inventory.product == null) {
+              if (context.read<InventoryCubit>().selectedInventory?.product ==
+                  null) {
                 return const SizedBox.shrink();
               }
               return AppCustomButton(

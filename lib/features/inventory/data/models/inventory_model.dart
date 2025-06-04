@@ -47,4 +47,21 @@ class InventoryModel {
               : [],
     );
   }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = {};
+    if (id != null && id != '') data['_id'] = id;
+    if (name != null && name != '') data['name'] = name;
+    if (number != null) data['number'] = number;
+    if (address != null && address != '') data['address'] = address;
+    if (rowsNumber != null) data['rowsNumber'] = rowsNumber;
+    if (rowsName != null && rowsName!.isNotEmpty) data['rowsName'] = rowsName;
+    if (product != null && product!.isNotEmpty) {
+      data['product'] = product!.map((e) => e.toJson()).toList();
+    }
+    if (storekeeper != null && storekeeper!.isNotEmpty) {
+      data['storekeeper'] = storekeeper!.map((e) => e.toJson()).toList();
+    }
+    return data;
+  }
 }

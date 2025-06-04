@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:miss_misq/core/di/dependency_injcection.dart';
 import 'package:miss_misq/core/theming/app_text_styles.dart';
 import 'package:miss_misq/core/utils/assets_manager.dart';
 import 'package:miss_misq/core/utils/extensions.dart';
 import 'package:miss_misq/core/utils/show_loading.dart';
 import 'package:miss_misq/core/utils/show_toastification.dart';
 import 'package:miss_misq/core/widgets/app_custom_button.dart';
+import 'package:miss_misq/core/widgets/are_you_sure_dialog.dart';
 import 'package:miss_misq/core/widgets/dynamic_table.dart';
 import 'package:miss_misq/core/widgets/empty_data_table.dart';
 import 'package:miss_misq/core/widgets/spacing.dart';
@@ -39,6 +41,9 @@ class _StorekeepersSectionState extends State<StorekeepersSection> {
     AddStoreKeeperLoading,
     AddStoreKeeperSuccess,
     AddStoreKeeperFailure,
+    DeleteStoreKeeperLoading,
+    DeleteStoreKeeperSuccess,
+    DeleteStoreKeeperFailure,
   ]);
 
   @override
@@ -51,20 +56,23 @@ class _StorekeepersSectionState extends State<StorekeepersSection> {
           (previous, current) =>
               storekeeperStates.take(3).contains(current.runtimeType),
       listener: (context, state) {
-        if (state is AddStoreKeeperSuccess) {
+        if (state is AddStoreKeeperSuccess ||
+            state is DeleteStoreKeeperSuccess) {
           context.pop();
           showToastification(
-            message: state.message,
+            message: (state as dynamic).message,
             type: ToastificationType.success,
           );
           context.read<InventoryAdjustmentsCubit>().getStoreKeepers();
-        } else if (state is AddStoreKeeperFailure) {
+        } else if (state is AddStoreKeeperFailure ||
+            state is DeleteStoreKeeperFailure) {
           context.pop();
           showToastification(
-            message: state.message,
+            message: (state as dynamic).message,
             type: ToastificationType.error,
           );
-        } else if (state is AddStoreKeeperLoading) {
+        } else if (state is AddStoreKeeperLoading ||
+            state is DeleteStoreKeeperLoading) {
           showLoading(context);
         }
       },
@@ -128,8 +136,25 @@ class _StorekeepersSectionState extends State<StorekeepersSection> {
                                   storekeepers![index].inventory?.name ?? '',
                                 ),
                         '': InkWell(
-                          child: TableCustomIcon(AssetsManager.delete),
-                          onTap: () {},
+                          child: Skeleton.shade(
+                            child: TableCustomIcon(AssetsManager.delete),
+                          ),
+                          onTap: () {
+                            final cubit = sl<InventoryAdjustmentsCubit>();
+                            showDialog(
+                              context: context,
+                              builder:
+                                  (context) => AreYouSureDialog(
+                                    title: 'هل أنت متأكد أنك تريد إتمام الحذف',
+                                    cubit: cubit,
+                                    onConfirm: () async {
+                                      await cubit.deleteStoreKeeper(
+                                        id: storekeepers![index].id!,
+                                      );
+                                    },
+                                  ),
+                            );
+                          },
                         ),
                       },
                     ),

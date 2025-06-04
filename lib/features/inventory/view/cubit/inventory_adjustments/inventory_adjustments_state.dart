@@ -75,3 +75,45 @@ final class AddStoreKeeperFailure extends InventoryAdjustmentsState {
 
   AddStoreKeeperFailure(this.message);
 }
+
+final class DeleteStoreKeeperLoading extends InventoryAdjustmentsState {}
+
+final class DeleteStoreKeeperSuccess extends InventoryAdjustmentsState {
+  final String message;
+
+  DeleteStoreKeeperSuccess(this.message);
+}
+
+final class DeleteStoreKeeperFailure extends InventoryAdjustmentsState {
+  final String message;
+
+  DeleteStoreKeeperFailure(this.message);
+}
+
+final class InventoryAdjustmentsGetAllUnitsLoading extends InventoryAdjustmentsState {}
+
+final class InventoryAdjustmentsGetAllUnitsSuccess extends InventoryAdjustmentsState {
+  final List<ItemUnitModel> units;
+
+  InventoryAdjustmentsGetAllUnitsSuccess(this.units);
+}
+
+final class InventoryAdjustmentsGetAllUnitsFailure extends InventoryAdjustmentsState {
+  final String message;
+
+  InventoryAdjustmentsGetAllUnitsFailure(this.message);
+}
+
+final class UpdateInventoryLoading extends InventoryAdjustmentsState {}
+
+final class UpdateInventorySuccess extends InventoryAdjustmentsState {
+  final String message;
+
+  UpdateInventorySuccess(this.message);
+}
+
+final class UpdateInventoryFailure extends InventoryAdjustmentsState {
+  final String message;
+
+  UpdateInventoryFailure(this.message);
+}

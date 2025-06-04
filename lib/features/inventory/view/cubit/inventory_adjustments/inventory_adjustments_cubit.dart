@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:miss_misq/core/networking/api_result.dart';
 import 'package:miss_misq/features/inventory/data/models/add_inventory_request_model.dart';
 import 'package:miss_misq/features/inventory/data/models/inventory_model.dart';
+import 'package:miss_misq/features/inventory/data/models/item_unit_model.dart';
 import 'package:miss_misq/features/inventory/data/models/store_keeper_model.dart';
 import 'package:miss_misq/features/inventory/data/repos/inventory_repo.dart';
 part 'inventory_adjustments_state.dart';
@@ -75,6 +76,42 @@ class InventoryAdjustmentsCubit extends Cubit<InventoryAdjustmentsState> {
       emit(AddStoreKeeperSuccess(result.data));
     } else if (result is Failure) {
       emit(AddStoreKeeperFailure(result.message));
+    }
+  }
+
+  Future<void> deleteStoreKeeper({required String id}) async {
+    emit(DeleteStoreKeeperLoading());
+    final result = await _inventoryRepo.deleteStoreKeeper(id: id);
+    if (result is Success) {
+      emit(DeleteStoreKeeperSuccess(result.data));
+    } else if (result is Failure) {
+      emit(DeleteStoreKeeperFailure(result.message));
+    }
+  }
+
+  Future<void> getAllUnits() async {
+    emit(InventoryAdjustmentsGetAllUnitsLoading());
+    final result = await _inventoryRepo.getAllUnits();
+    if (result is Success<List<ItemUnitModel>>) {
+      emit(InventoryAdjustmentsGetAllUnitsSuccess(result.data));
+    } else if (result is Failure<List<ItemUnitModel>>) {
+      emit(InventoryAdjustmentsGetAllUnitsFailure(result.message));
+    }
+  }
+
+  Future<void> updateInventory({
+    required AddInventoryRequestModel inventory,
+    required String inventoryId,
+  }) async {
+    emit(UpdateInventoryLoading());
+    final result = await _inventoryRepo.updateInventory(
+      inventoryId: inventoryId,
+      model: inventory,
+    );
+    if (result is Success) {
+      emit(UpdateInventorySuccess(result.data));
+    } else if (result is Failure) {
+      emit(UpdateInventoryFailure(result.message));
     }
   }
 }

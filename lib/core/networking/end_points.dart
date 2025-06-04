@@ -14,4 +14,8 @@ class EndPoints {
   static const String addUnit = '/inventory/addItemUnit';
   static const String getStorekeepers = '/inventory/getStorekeepers';
   static const String addStorekeeper = '/inventory/addStorekeeper';
+  static String deleteStorekeeper(String storekeeperId) =>
+      '/inventory/deleteStorekeeper/$storekeeperId';
+  static const String getAllUnits = '/inventory/getItemUnits';
+  static  String updateInventory(String inventoryId) => '/inventory/updateInventory/$inventoryId';
 }

@@ -37,6 +37,9 @@ class _InventoriesSectionState extends State<InventoriesSection> {
     AddInventorySuccess,
     AddInventoryFailure,
     AddInventoryLoading,
+    UpdateInventoryLoading,
+    UpdateInventorySuccess,
+    UpdateInventoryFailure,
   ]);
 
   @override
@@ -49,20 +52,22 @@ class _InventoriesSectionState extends State<InventoriesSection> {
           (previous, current) =>
               inventoriesStates.skip(3).contains(current.runtimeType),
       listener: (context, state) {
-        if (state is AddInventorySuccess) {
+        if (state is AddInventorySuccess || state is UpdateInventorySuccess) {
           context.pop();
           showToastification(
-            message: state.message,
+            message: (state as dynamic).message,
             type: ToastificationType.success,
           );
           context.read<InventoryAdjustmentsCubit>().getAllInventories();
-        } else if (state is AddInventoryFailure) {
+        } else if (state is AddInventoryFailure ||
+            state is UpdateInventoryFailure) {
           context.pop();
           showToastification(
-            message: state.message,
+            message: (state as dynamic).message,
             type: ToastificationType.error,
           );
-        } else if (state is AddInventoryLoading) {
+        } else if (state is AddInventoryLoading ||
+            state is UpdateInventoryLoading) {
           showLoading(context);
         }
       },
@@ -131,15 +136,13 @@ class _InventoriesSectionState extends State<InventoriesSection> {
                       onTap: () {
                         showDialog(
                           context: context,
-                          builder: (context) => const AddNewInventoryDialog(),
+                          builder:
+                              (context) => AddNewInventoryDialog(
+                                isUpdating: true,
+                                inventory: inventories[index],
+                              ),
                         );
                       },
-                    ),
-                    ' ': InkWell(
-                      child: Skeleton.shade(
-                        child: TableCustomIcon(AssetsManager.delete),
-                      ),
-                      onTap: () {},
                     ),
                   },
                 ),
