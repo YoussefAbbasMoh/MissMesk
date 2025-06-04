@@ -5,9 +5,18 @@ void showLoading(BuildContext context) {
   showDialog(
     context: context,
     barrierDismissible: false,
-    builder: 
-        (context) => const Center(
-          child: CircularProgressIndicator(color: AppPallete.primaryColor),
-        ),
+    builder: (context) => const Center(child: Loading()),
   );
+}
+
+class Loading extends StatelessWidget {
+  const Loading({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const CircularProgressIndicator(
+      backgroundColor: AppPallete.lightBrownColor,
+      valueColor: AlwaysStoppedAnimation<Color>(AppPallete.primaryColor),
+    );
+  }
 }

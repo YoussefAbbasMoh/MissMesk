@@ -4,10 +4,10 @@ import 'package:miss_misq/core/widgets/app_custom_button.dart';
 import 'package:miss_misq/core/widgets/search_with_actions.dart';
 import 'package:miss_misq/core/widgets/spacing.dart';
 import 'package:miss_misq/features/inventory/view/cubit/inventory/cubit/inventory_cubit.dart';
-import 'package:miss_misq/features/inventory/view/widgets/add_item_dialog.dart';
-import 'package:miss_misq/features/inventory/view/widgets/inventory_filters_bloc_builder.dart';
-import 'package:miss_misq/features/inventory/view/widgets/inventory_table_bloc_builder.dart';
-import 'package:miss_misq/features/inventory/view/widgets/products_filter.dart';
+import 'package:miss_misq/features/inventory/view/widgets/inventory/add_item_dialog.dart';
+import 'package:miss_misq/features/inventory/view/widgets/inventory/inventory_table_bloc_builder.dart';
+import 'package:miss_misq/features/inventory/view/widgets/inventory/inventory_filters_bloc_builder.dart';
+import 'package:miss_misq/features/inventory/view/widgets/inventory/products_filter.dart';
 
 class InventoryView extends StatelessWidget {
   const InventoryView({super.key});

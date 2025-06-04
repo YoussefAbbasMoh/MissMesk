@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:miss_misq/core/theming/app_pallete.dart';
 import 'package:miss_misq/core/theming/app_text_styles.dart';
+import 'package:miss_misq/core/utils/show_loading.dart';
 
 class AppCustomButton extends StatelessWidget {
   const AppCustomButton({
@@ -10,7 +11,7 @@ class AppCustomButton extends StatelessWidget {
     this.borderColor,
     this.color,
     this.titleColor,
-    this.icon,  
+    this.icon,
     this.borderRadius,
     this.fontSize,
     this.width,
@@ -31,10 +32,7 @@ class AppCustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (isLoading!) {
-      return const CircularProgressIndicator(
-        backgroundColor: AppPallete.lightBrownColor,
-        valueColor: AlwaysStoppedAnimation<Color>(AppPallete.primaryColor),
-      );
+      return Loading();
     }
     return SizedBox(
       width: width,

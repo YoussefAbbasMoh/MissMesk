@@ -97,6 +97,7 @@ class InventoryTableBlocBuilder extends StatelessWidget {
                       final querySub = context.queryParam('subIndex');
                       context.go(
                         '${AppRoutes.itemCardBase}?itemId=بطاقة مخزون صنف ${products![index].code}&mainIndex=$queryMain&subIndex=$querySub',
+                        extra: products[index].id.toString(),
                       );
                     }
                   },

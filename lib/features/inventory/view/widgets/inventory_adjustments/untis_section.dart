@@ -14,7 +14,7 @@ import 'package:miss_misq/core/widgets/table_custom_icon.dart';
 import 'package:miss_misq/core/widgets/table_custom_text.dart';
 import 'package:miss_misq/features/inventory/data/models/item_unit_model.dart';
 import 'package:miss_misq/features/inventory/view/cubit/inventory_adjustments/inventory_adjustments_cubit.dart';
-import 'package:miss_misq/features/inventory/view/widgets/add_unit_dialog.dart';
+import 'package:miss_misq/features/inventory/view/widgets/inventory_adjustments/add_unit_dialog.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:toastification/toastification.dart';
 

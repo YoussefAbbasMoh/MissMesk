@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:miss_misq/core/theming/app_text_styles.dart';
 import 'package:miss_misq/core/widgets/app_custom_button.dart';
 import 'package:miss_misq/core/widgets/spacing.dart';
-import 'package:miss_misq/features/inventory/view/widgets/inventories_section.dart';
-import 'package:miss_misq/features/inventory/view/widgets/storekeepers_section.dart';
-import 'package:miss_misq/features/inventory/view/widgets/untis_section.dart';
-import 'package:miss_misq/features/inventory/view/widgets/upload_new_products_dialog.dart';
+import 'package:miss_misq/features/inventory/view/widgets/inventory_adjustments/inventories_section.dart';
+import 'package:miss_misq/features/inventory/view/widgets/inventory_adjustments/storekeepers_section.dart';
+import 'package:miss_misq/features/inventory/view/widgets/inventory_adjustments/untis_section.dart';
+import 'package:miss_misq/features/inventory/view/widgets/inventory_adjustments/upload_new_products_dialog.dart';
 
 class InventoryAdjustmentsView extends StatelessWidget {
   const InventoryAdjustmentsView({super.key});
